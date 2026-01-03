@@ -1,0 +1,730 @@
+{
+    "$schema": "src/lib/import/schemas.ts#RaceSchema",
+    "$table": "races",
+    "$description": "D&D 5e 2024 species (32 total including subraces). 2024 rules: size and speed in modifiers.",
+    "data": [
+        {
+            "id": "aasimar-heavenly",
+            "name": "Aasimar (Heavenly Wings)",
+            "description": "Celestial-touched with radiant power.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Celestial Resistance",
+                "Darkvision",
+                "Healing Hands",
+                "Light Bearer",
+                "Celestial Revelation",
+                "Heavenly Wings"
+            ]
+        },
+        {
+            "id": "aasimar-radiance",
+            "name": "Aasimar (Inner Radiance)",
+            "description": "Celestial-touched with radiant aura.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Celestial Resistance",
+                "Darkvision",
+                "Healing Hands",
+                "Light Bearer",
+                "Celestial Revelation",
+                "Inner Radiance"
+            ]
+        },
+        {
+            "id": "aasimar-necrotic",
+            "name": "Aasimar (Necrotic Shroud)",
+            "description": "Celestial-touched with dark power.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Celestial Resistance",
+                "Darkvision",
+                "Healing Hands",
+                "Light Bearer",
+                "Celestial Revelation",
+                "Necrotic Shroud"
+            ]
+        },
+        {
+            "id": "dragonborn-black",
+            "name": "Dragonborn (Black)",
+            "description": "Draconic ancestry - Acid.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-blue",
+            "name": "Dragonborn (Blue)",
+            "description": "Draconic ancestry - Lightning.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-brass",
+            "name": "Dragonborn (Brass)",
+            "description": "Draconic ancestry - Fire.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-bronze",
+            "name": "Dragonborn (Bronze)",
+            "description": "Draconic ancestry - Lightning.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-copper",
+            "name": "Dragonborn (Copper)",
+            "description": "Draconic ancestry - Acid.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-gold",
+            "name": "Dragonborn (Gold)",
+            "description": "Draconic ancestry - Fire.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-green",
+            "name": "Dragonborn (Green)",
+            "description": "Draconic ancestry - Poison.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-red",
+            "name": "Dragonborn (Red)",
+            "description": "Draconic ancestry - Fire.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-silver",
+            "name": "Dragonborn (Silver)",
+            "description": "Draconic ancestry - Cold.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dragonborn-white",
+            "name": "Dragonborn (White)",
+            "description": "Draconic ancestry - Cold.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Draconic Ancestry",
+                "Breath Weapon",
+                "Damage Resistance",
+                "Darkvision",
+                "Draconic Flight"
+            ]
+        },
+        {
+            "id": "dwarf",
+            "name": "Dwarf",
+            "description": "Bold and hardy, known for resilience.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Darkvision",
+                "Dwarven Resilience",
+                "Dwarven Toughness",
+                "Stonecunning"
+            ]
+        },
+        {
+            "id": "elf-drow",
+            "name": "Elf (Drow)",
+            "description": "Subterranean elves with dark magic.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Darkvision (120ft)",
+                "Fey Ancestry",
+                "Trance",
+                "Drow Lineage"
+            ]
+        },
+        {
+            "id": "elf-high",
+            "name": "Elf (High)",
+            "description": "Magical and long-lived with arcane training.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Darkvision",
+                "Fey Ancestry",
+                "Trance",
+                "High Elf Lineage"
+            ]
+        },
+        {
+            "id": "elf-wood",
+            "name": "Elf (Wood)",
+            "description": "Swift and stealthy forest dwellers.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 35
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Darkvision",
+                "Fey Ancestry",
+                "Trance",
+                "Wood Elf Lineage"
+            ]
+        },
+        {
+            "id": "gnome-forest",
+            "name": "Gnome (Forest)",
+            "description": "Cunning and magical forest gnomes.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Small"
+                }
+            ],
+            "trait_options": [
+                "Gnomish Cunning",
+                "Gnomish Lineage (Forest)"
+            ]
+        },
+        {
+            "id": "gnome-rock",
+            "name": "Gnome (Rock)",
+            "description": "Inventive and energetic rock gnomes.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Small"
+                }
+            ],
+            "trait_options": [
+                "Gnomish Cunning",
+                "Gnomish Lineage (Rock)"
+            ]
+        },
+        {
+            "id": "goliath-cloud",
+            "name": "Goliath (Cloud Giant)",
+            "description": "Giant-blooded with cloud magic.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 35
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Giant Ancestry",
+                "Large Form",
+                "Powerful Build",
+                "Cloud's Jaunt"
+            ]
+        },
+        {
+            "id": "goliath-fire",
+            "name": "Goliath (Fire Giant)",
+            "description": "Giant-blooded with fire power.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 35
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Giant Ancestry",
+                "Large Form",
+                "Powerful Build",
+                "Fire's Burn"
+            ]
+        },
+        {
+            "id": "goliath-frost",
+            "name": "Goliath (Frost Giant)",
+            "description": "Giant-blooded with frost power.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 35
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Giant Ancestry",
+                "Large Form",
+                "Powerful Build",
+                "Frost's Chill"
+            ]
+        },
+        {
+            "id": "goliath-hill",
+            "name": "Goliath (Hill Giant)",
+            "description": "Giant-blooded with earth power.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 35
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Giant Ancestry",
+                "Large Form",
+                "Powerful Build",
+                "Hill's Tumble"
+            ]
+        },
+        {
+            "id": "goliath-stone",
+            "name": "Goliath (Stone Giant)",
+            "description": "Giant-blooded with stone endurance.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 35
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Giant Ancestry",
+                "Large Form",
+                "Powerful Build",
+                "Stone's Endurance"
+            ]
+        },
+        {
+            "id": "goliath-storm",
+            "name": "Goliath (Storm Giant)",
+            "description": "Giant-blooded with storm power.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 35
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Giant Ancestry",
+                "Large Form",
+                "Powerful Build",
+                "Storm's Thunder"
+            ]
+        },
+        {
+            "id": "halfling",
+            "name": "Halfling",
+            "description": "Small, practical, and lucky.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Small"
+                }
+            ],
+            "trait_options": [
+                "Brave",
+                "Halfling Nimbleness",
+                "Luck",
+                "Naturally Stealthy"
+            ]
+        },
+        {
+            "id": "human",
+            "name": "Human",
+            "description": "Versatile and ambitious.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Resourceful",
+                "Skillful",
+                "Versatile"
+            ]
+        },
+        {
+            "id": "orc",
+            "name": "Orc",
+            "description": "Strong and fierce warriors.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Adrenaline Rush",
+                "Darkvision",
+                "Relentless Endurance"
+            ]
+        },
+        {
+            "id": "tiefling-abyssal",
+            "name": "Tiefling (Abyssal)",
+            "description": "Infernal heritage - Abyssal.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Darkvision",
+                "Fiendish Legacy",
+                "Otherworldly Presence",
+                "Poison Resistance"
+            ]
+        },
+        {
+            "id": "tiefling-chthonic",
+            "name": "Tiefling (Chthonic)",
+            "description": "Infernal heritage - Chthonic.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Darkvision",
+                "Fiendish Legacy",
+                "Otherworldly Presence",
+                "Necrotic Resistance"
+            ]
+        },
+        {
+            "id": "tiefling-infernal",
+            "name": "Tiefling (Infernal)",
+            "description": "Infernal heritage - Infernal.",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "set",
+                    "target": "size",
+                    "value": "Medium"
+                }
+            ],
+            "trait_options": [
+                "Darkvision",
+                "Fiendish Legacy",
+                "Otherworldly Presence",
+                "Fire Resistance"
+            ]
+        }
+    ]
+}

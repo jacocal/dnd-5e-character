@@ -1,0 +1,297 @@
+{
+    "$schema": "src/lib/import/schemas.ts#SubclassSchema",
+    "$table": "subclasses",
+    "$description": "D&D 5e 2024 subclasses (4 per class = 48 total).",
+    "data": [
+        {
+            "id": "barbarian-berserker",
+            "class_id": "barbarian",
+            "name": "Path of the Berserker",
+            "description": "Features: Frenzy, Mindless Rage, Retaliation, Intimidating Presence"
+        },
+        {
+            "id": "barbarian-wildheart",
+            "class_id": "barbarian",
+            "name": "Path of the Wild Heart",
+            "description": "Features: Animal Speaker, Rage of the Wilds, Aspect of the Wilds, Nature Speaker, Power of the Wilds"
+        },
+        {
+            "id": "barbarian-worldtree",
+            "class_id": "barbarian",
+            "name": "Path of the World Tree",
+            "description": "Features: Vitality of the Tree, Branches of the Tree, Battering Roots, Travel Along the Tree"
+        },
+        {
+            "id": "barbarian-zealot",
+            "class_id": "barbarian",
+            "name": "Path of the Zealot",
+            "description": "Features: Divine Fury, Warrior of the Gods, Fanatical Focus, Zealous Presence, Rage of the Gods"
+        },
+        {
+            "id": "bard-dance",
+            "class_id": "bard",
+            "name": "College of Dance",
+            "description": "Features: Dazzling Footwork, Inspiring Movement, Tandem Footwork, Leading Evasion"
+        },
+        {
+            "id": "bard-glamour",
+            "class_id": "bard",
+            "name": "College of Glamour",
+            "description": "Features: Beguiling Magic, Mantle of Inspiration, Mantle of Majesty, Unbreakable Majesty"
+        },
+        {
+            "id": "bard-lore",
+            "class_id": "bard",
+            "name": "College of Lore",
+            "description": "Features: Bonus Proficiencies, Cutting Words, Magical Discoveries, Peerless Skill"
+        },
+        {
+            "id": "bard-valor",
+            "class_id": "bard",
+            "name": "College of Valor",
+            "description": "Features: Combat Inspiration, Martial Training, Extra Attack, Battle Magic"
+        },
+        {
+            "id": "cleric-life",
+            "class_id": "cleric",
+            "name": "Life Domain",
+            "description": "Features: Disciple of Life, Life Domain Spells, Preserve Life, Blessed Healer, Supreme Healing"
+        },
+        {
+            "id": "cleric-light",
+            "class_id": "cleric",
+            "name": "Light Domain",
+            "description": "Features: Light Domain Spells, Radiance of the Dawn, Warding Flare, Improved Warding Flare, Corona of Light"
+        },
+        {
+            "id": "cleric-trickery",
+            "class_id": "cleric",
+            "name": "Trickery Domain",
+            "description": "Features: Blessing of the Trickster, Invoke Duplicity, Trickery Domain Spells, Trickster's Transposition, Improved Duplicity"
+        },
+        {
+            "id": "cleric-war",
+            "class_id": "cleric",
+            "name": "War Domain",
+            "description": "Features: Guided Strike, War Domain Spells, War Priest, War God's Blessing, Avatar of Battle"
+        },
+        {
+            "id": "druid-land",
+            "class_id": "druid",
+            "name": "Circle of the Land",
+            "description": "Features: Circle of the Land Spells, Land's Aid, Natural Recovery, Nature's Ward, Nature's Sanctuary"
+        },
+        {
+            "id": "druid-moon",
+            "class_id": "druid",
+            "name": "Circle of the Moon",
+            "description": "Features: Circle Forms, Circle of the Moon Spells, Improved Circle Forms, Moonlight Step, Lunar Form"
+        },
+        {
+            "id": "druid-sea",
+            "class_id": "druid",
+            "name": "Circle of the Sea",
+            "description": "Features: Circle of the Sea Spells, Wrath of the Sea, Aquatic Affinity, Stormborn, Oceanic Gift"
+        },
+        {
+            "id": "druid-stars",
+            "class_id": "druid",
+            "name": "Circle of the Stars",
+            "description": "Features: Star Map, Starry Form, Cosmic Omen, Twinkling Constellations, Full of Stars"
+        },
+        {
+            "id": "fighter-battlemaster",
+            "class_id": "fighter",
+            "name": "Battle Master",
+            "description": "Features: Combat Superiority, Student of War, Know Your Enemy, Improved Combat Superiority, Relentless"
+        },
+        {
+            "id": "fighter-champion",
+            "class_id": "fighter",
+            "name": "Champion",
+            "description": "Features: Improved Critical, Remarkable Athlete, Additional Fighting Style, Superior Critical, Survivor"
+        },
+        {
+            "id": "fighter-eldritch",
+            "class_id": "fighter",
+            "name": "Eldritch Knight",
+            "description": "Features: Spellcasting, Weapon Bond, War Magic, Eldritch Strike, Arcane Charge, Improved War Magic",
+            "spellcasting_type": "third"
+        },
+        {
+            "id": "fighter-psi",
+            "class_id": "fighter",
+            "name": "Psi Warrior",
+            "description": "Features: Psionic Power, Protective Field, Psionic Strike, Telekinetic Movement, Telekinetic Bulwark, Guarded Mind"
+        },
+        {
+            "id": "monk-mercy",
+            "class_id": "monk",
+            "name": "Warrior of Mercy",
+            "description": "Features: Hand of Harm, Hand of Healing, Implements of Mercy, Physician's Touch, Flurry of Healing and Harm"
+        },
+        {
+            "id": "monk-shadow",
+            "class_id": "monk",
+            "name": "Warrior of Shadow",
+            "description": "Features: Shadow Arts, Shadow Step, Improved Shadow Step, Cloak of Shadows"
+        },
+        {
+            "id": "monk-elements",
+            "class_id": "monk",
+            "name": "Warrior of the Elements",
+            "description": "Features: Elemental Attunement, Manipulate Elements, Elemental Burst, Stride of the Elements, Elemental Epitome"
+        },
+        {
+            "id": "monk-openhand",
+            "class_id": "monk",
+            "name": "Warrior of the Open Hand",
+            "description": "Features: Open Hand Technique, Wholeness of Body, Fleet Step, Quivering Palm"
+        },
+        {
+            "id": "paladin-devotion",
+            "class_id": "paladin",
+            "name": "Oath of Devotion",
+            "description": "Features: Oath of Devotion Spells, Sacred Weapon, Aura of Devotion, Smite of Protection, Holy Nimbus"
+        },
+        {
+            "id": "paladin-glory",
+            "class_id": "paladin",
+            "name": "Oath of Glory",
+            "description": "Features: Oath of Glory Spells, Peerless Athlete, Aura of Alacrity, Glorious Defense, Living Legend"
+        },
+        {
+            "id": "paladin-ancients",
+            "class_id": "paladin",
+            "name": "Oath of the Ancients",
+            "description": "Features: Oath of the Ancients Spells, Nature's Wrath, Aura of Warding, Undying Sentinel, Elder Champion"
+        },
+        {
+            "id": "paladin-vengeance",
+            "class_id": "paladin",
+            "name": "Oath of Vengeance",
+            "description": "Features: Oath of Vengeance Spells, Vow of Enmity, Relentless Avenger, Soul of Vengeance, Avenging Angel"
+        },
+        {
+            "id": "ranger-beast",
+            "class_id": "ranger",
+            "name": "Beast Master",
+            "description": "Features: Primal Companion, Exceptional Training, Bestial Fury, Share Spells"
+        },
+        {
+            "id": "ranger-fey",
+            "class_id": "ranger",
+            "name": "Fey Wanderer",
+            "description": "Features: Dreadful Strikes, Fey Wanderer Spells, Otherworldly Glamour, Beguiling Twist, Fey Reinforcements"
+        },
+        {
+            "id": "ranger-gloom",
+            "class_id": "ranger",
+            "name": "Gloom Stalker",
+            "description": "Features: Dread Ambusher, Gloom Stalker Spells, Umbral Sight, Iron Mind, Stalker's Flurry"
+        },
+        {
+            "id": "ranger-hunter",
+            "class_id": "ranger",
+            "name": "Hunter",
+            "description": "Features: Hunter's Lore, Hunter's Prey, Defensive Tactics, Superior Hunter's Prey, Superior Hunter's Defense"
+        },
+        {
+            "id": "rogue-trickster",
+            "class_id": "rogue",
+            "name": "Arcane Trickster",
+            "description": "Features: Spellcasting, Mage Hand Legerdemain, Magical Ambush, Versatile Trickster, Spell Thief",
+            "spellcasting_type": "third"
+        },
+        {
+            "id": "rogue-assassin",
+            "class_id": "rogue",
+            "name": "Assassin",
+            "description": "Features: Assassinate, Assassin's Tools, Infiltration Expertise, Envenom Weapons, Death Strike"
+        },
+        {
+            "id": "rogue-soulknife",
+            "class_id": "rogue",
+            "name": "Soulknife",
+            "description": "Features: Psionic Power, Psychic Blades, Soul Blades, Psychic Veil, Rend Mind"
+        },
+        {
+            "id": "rogue-thief",
+            "class_id": "rogue",
+            "name": "Thief",
+            "description": "Features: Fast Hands, Second-Story Work, Supreme Sneak, Use Magic Device, Thief's Reflexes"
+        },
+        {
+            "id": "sorcerer-aberrant",
+            "class_id": "sorcerer",
+            "name": "Aberrant Sorcery",
+            "description": "Features: Psionic Spells, Telepathic Speech, Psionic Sorcery, Psychic Defenses, Revelation in Flesh"
+        },
+        {
+            "id": "sorcerer-clockwork",
+            "class_id": "sorcerer",
+            "name": "Clockwork Sorcery",
+            "description": "Features: Clockwork Spells, Restore Balance, Bastion of Law, Trance of Order, Clockwork Cavalcade"
+        },
+        {
+            "id": "sorcerer-draconic",
+            "class_id": "sorcerer",
+            "name": "Draconic Sorcery",
+            "description": "Features: Draconic Resilience, Draconic Spells, Elemental Affinity, Dragon Wings, Dragon Companion"
+        },
+        {
+            "id": "sorcerer-wild",
+            "class_id": "sorcerer",
+            "name": "Wild Magic Sorcery",
+            "description": "Features: Wild Magic Surge, Bend Luck, Controlled Chaos, Tamed Surge"
+        },
+        {
+            "id": "warlock-archfey",
+            "class_id": "warlock",
+            "name": "Archfey Patron",
+            "description": "Features: Archfey Spells, Steps of the Fey, Misty Escape, Beguiling Defenses, Bewitching Magic"
+        },
+        {
+            "id": "warlock-celestial",
+            "class_id": "warlock",
+            "name": "Celestial Patron",
+            "description": "Features: Celestial Spells, Healing Light, Radiant Soul, Celestial Resilience, Searing Vengeance"
+        },
+        {
+            "id": "warlock-fiend",
+            "class_id": "warlock",
+            "name": "Fiend Patron",
+            "description": "Features: Fiend Spells, Dark One's Blessing, Dark One's Own Luck, Fiendish Resilience, Hurl Through Hell"
+        },
+        {
+            "id": "warlock-greatoldone",
+            "class_id": "warlock",
+            "name": "Great Old One Patron",
+            "description": "Features: Great Old One Spells, Awakened Mind, Clairvoyant Combatant, Eldritch Hex, Thought Shield, Create Thrall"
+        },
+        {
+            "id": "wizard-abjurer",
+            "class_id": "wizard",
+            "name": "Abjurer",
+            "description": "Features: Abjuration Savant, Arcane Ward, Projected Ward, Spell Breaker, Spell Resistance"
+        },
+        {
+            "id": "wizard-diviner",
+            "class_id": "wizard",
+            "name": "Diviner",
+            "description": "Features: Divination Savant, Portent, Expert Divination, The Third Eye, Greater Portent"
+        },
+        {
+            "id": "wizard-evoker",
+            "class_id": "wizard",
+            "name": "Evoker",
+            "description": "Features: Evocation Savant, Potent Cantrip, Sculpt Spells, Empowered Evocation, Overchannel"
+        },
+        {
+            "id": "wizard-illusionist",
+            "class_id": "wizard",
+            "name": "Illusionist",
+            "description": "Features: Illusion Savant, Improved Illusions, Phantasmal Creatures, Illusory Self, Illusory Reality"
+        }
+    ]
+}

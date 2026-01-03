@@ -1,0 +1,82 @@
+{
+    "$schema": "src/lib/import/schemas.ts#ConditionSchema",
+    "$table": "conditions",
+    "$description": "D&D 5e conditions (SRD 5.2). Status effects that apply to creatures.",
+    "data": [
+        {
+            "id": "blinded",
+            "name": "Blinded",
+            "description": "Can't see, fail check needing sight. Attacks vs you Adv, your attacks Dis."
+        },
+        {
+            "id": "charmed",
+            "name": "Charmed",
+            "description": "Can't attack charmer. Charmer has Adv on social checks."
+        },
+        {
+            "id": "deafened",
+            "name": "Deafened",
+            "description": "Can't hear, fail checks needing hearing."
+        },
+        {
+            "id": "exhaustion",
+            "name": "Exhaustion",
+            "description": "Levels 1-6 with cumulative penalties."
+        },
+        {
+            "id": "frightened",
+            "name": "Frightened",
+            "description": "Dis on checks/attacks while source in sight. Can't move closer."
+        },
+        {
+            "id": "grappled",
+            "name": "Grappled",
+            "description": "Speed 0."
+        },
+        {
+            "id": "incapacitated",
+            "name": "Incapacitated",
+            "description": "Can't take actions or reactions."
+        },
+        {
+            "id": "invisible",
+            "name": "Invisible",
+            "description": "Heavily obscured. Attackers Dis, your attacks Adv."
+        },
+        {
+            "id": "paralyzed",
+            "name": "Paralyzed",
+            "description": "Incapacitated. Can't move/speak. Fail Str/Dex saves. Attacks vs you Adv + Auto-crit if within 5ft."
+        },
+        {
+            "id": "petrified",
+            "name": "Petrified",
+            "description": "Transformed to stone. Incapacitated. Wt x10. Res to all damage."
+        },
+        {
+            "id": "poisoned",
+            "name": "Poisoned",
+            "description": "Dis on attacks and ability checks."
+        },
+        {
+            "id": "prone",
+            "name": "Prone",
+            "description": "Crawl only. Dis on attacks. Attacks vs you Adv (within 5ft) or Dis (outside)."
+        },
+        {
+            "id": "restrained",
+            "name": "Restrained",
+            "description": "Speed 0. Dis on Dex saves. Attackers Adv, your attacks Dis."
+        },
+        {
+            "id": "stunned",
+            "name": "Stunned",
+            "description": "Incapacitated. Can't move/speak. Fail Str/Dex saves. Attacks vs you Adv."
+        },
+        {
+            "id": "unconscious",
+            "name": "Unconscious",
+            "description": "Incapacitated. Drop everything. Fail Str/Dex saves. Attacks vs you Adv + Auto-crit."
+        }
+    ]
+}

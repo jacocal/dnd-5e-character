@@ -1,0 +1,114 @@
+{
+    "$schema": "src/lib/import/schemas.ts#ClassResourceSchema",
+    "$table": "class_resources",
+    "$description": "D&D 5e 2024 class resources (Rage, Ki, Wild Shape, etc.)",
+    "data": [
+        {
+            "id": "rage",
+            "class_id": "barbarian",
+            "name": "Rage",
+            "description": "Enter a rage as a Bonus Action, gaining benefits for 10 rounds or until incapacitated.",
+            "max_formula": "proficiency",
+            "recharge_on": "long",
+            "unlock_level": 1
+        },
+        {
+            "id": "bardic-inspiration",
+            "class_id": "bard",
+            "name": "Bardic Inspiration",
+            "description": "As a Bonus Action, give an ally a Bardic Inspiration die (d6 to d12 based on level).",
+            "max_formula": "cha_mod",
+            "recharge_on": "long",
+            "unlock_level": 1
+        },
+        {
+            "id": "channel-divinity-cleric",
+            "class_id": "cleric",
+            "name": "Channel Divinity",
+            "description": "Channel divine energy through your holy symbol to fuel magical effects.",
+            "max_formula": "1",
+            "recharge_on": "short",
+            "unlock_level": 2
+        },
+        {
+            "id": "wild-shape",
+            "class_id": "druid",
+            "name": "Wild Shape",
+            "description": "Magically transform into a beast you have seen.",
+            "max_formula": "2",
+            "recharge_on": "short",
+            "unlock_level": 2,
+            "onUse": [
+                {
+                    "type": "grant_hp",
+                    "mode": "bonus",
+                    "formula": "3 * level",
+                    "duration": "long_rest"
+                }
+            ]
+        },
+        {
+            "id": "action-surge",
+            "class_id": "fighter",
+            "name": "Action Surge",
+            "description": "Take one additional action on your turn.",
+            "max_formula": "1",
+            "recharge_on": "short",
+            "unlock_level": 2
+        },
+        {
+            "id": "second-wind",
+            "class_id": "fighter",
+            "name": "Second Wind",
+            "description": "As a Bonus Action, regain HP equal to 1d10 + your Fighter level.",
+            "max_formula": "1",
+            "recharge_on": "short",
+            "unlock_level": 1
+        },
+        {
+            "id": "ki-points",
+            "class_id": "monk",
+            "name": "Ki Points",
+            "description": "Harness the mystic energy of ki to fuel special abilities.",
+            "max_formula": "level",
+            "recharge_on": "short",
+            "unlock_level": 2
+        },
+        {
+            "id": "channel-divinity-paladin",
+            "class_id": "paladin",
+            "name": "Channel Divinity",
+            "description": "Channel divine energy to fuel magical effects granted by your oath.",
+            "max_formula": "1",
+            "recharge_on": "long",
+            "unlock_level": 3
+        },
+        {
+            "id": "lay-on-hands",
+            "class_id": "paladin",
+            "name": "Lay on Hands",
+            "description": "A pool of healing power that can restore HP or cure disease/poison.",
+            "max_formula": "level_x5",
+            "recharge_on": "long",
+            "unlock_level": 1
+        },
+        {
+            "id": "sorcery-points",
+            "class_id": "sorcerer",
+            "name": "Sorcery Points",
+            "description": "A pool of magical energy used for Metamagic and spell slot conversion.",
+            "max_formula": "level",
+            "recharge_on": "long",
+            "unlock_level": 2
+        },
+        {
+            "id": "arcane-recovery",
+            "class_id": "wizard",
+            "name": "Arcane Recovery",
+            "description": "Once per day during a short rest, recover spell slots with combined level up to half your wizard level.",
+            "max_formula": "1",
+            "recharge_on": "long",
+            "unlock_level": 1
+        }
+    ]
+}

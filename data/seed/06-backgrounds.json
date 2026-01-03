@@ -1,0 +1,753 @@
+{
+    "$schema": "src/lib/import/schemas.ts#BackgroundSchema",
+    "$table": "backgrounds",
+    "$description": "D&D 5e backgrounds (2024 PHB). Source of ASIs, Origin Feat, tool proficiencies, and starting equipment per 2024 rules.",
+    "data": [
+        {
+            "id": "acolyte",
+            "name": "Acolyte",
+            "description": "You spent your early days in a religious community.",
+            "ability_options": [
+                "INT",
+                "WIS",
+                "CHA"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "insight",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "religion",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "magic-initiate",
+            "origin_feat_class": "cleric",
+            "tool_proficiencies": {
+                "fixed": [
+                    "calligraphers-supplies"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "calligraphers-supplies",
+                        "book",
+                        "holy-symbol-amulet",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "robe"
+                    ],
+                    "gp": 8
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "artisan",
+            "name": "Artisan",
+            "description": "You learned a trade from a skilled craftsperson.",
+            "ability_options": [
+                "STR",
+                "DEX",
+                "INT"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "investigation",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "persuasion",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "crafter",
+            "tool_proficiencies": {
+                "choice": {
+                    "count": 1,
+                    "category": "artisans_tools"
+                }
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "pouch",
+                        "pouch",
+                        "travelers-clothes"
+                    ],
+                    "gp": 3
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "charlatan",
+            "name": "Charlatan",
+            "description": "You learned to manipulate others through deception.",
+            "ability_options": [
+                "DEX",
+                "CON",
+                "CHA"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "deception",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "sleight_of_hand",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "skilled",
+            "tool_proficiencies": {
+                "fixed": [
+                    "forgery-kit"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "forgery-kit",
+                        "costume",
+                        "fine-clothes"
+                    ],
+                    "gp": 15
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "criminal",
+            "name": "Criminal",
+            "description": "You had an early career outside the law.",
+            "ability_options": [
+                "DEX",
+                "CON",
+                "INT"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "sleight_of_hand",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "stealth",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "alert",
+            "tool_proficiencies": {
+                "fixed": [
+                    "thieves-tools"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "dagger",
+                        "dagger",
+                        "thieves-tools",
+                        "crowbar",
+                        "pouch",
+                        "pouch",
+                        "travelers-clothes"
+                    ],
+                    "gp": 16
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "entertainer",
+            "name": "Entertainer",
+            "description": "You spent your formative years as a performer.",
+            "ability_options": [
+                "STR",
+                "DEX",
+                "CHA"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "acrobatics",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "performance",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "musician",
+            "tool_proficiencies": {
+                "choice": {
+                    "count": 1,
+                    "category": "musical_instruments"
+                }
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "costume",
+                        "costume",
+                        "mirror",
+                        "perfume",
+                        "travelers-clothes"
+                    ],
+                    "gp": 11
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "farmer",
+            "name": "Farmer",
+            "description": "You worked the land before adventuring.",
+            "ability_options": [
+                "STR",
+                "CON",
+                "WIS"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "animal_handling",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "nature",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "tough",
+            "tool_proficiencies": {
+                "fixed": [
+                    "carpenters-tools"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "sickle",
+                        "carpenters-tools",
+                        "healers-kit",
+                        "iron-pot",
+                        "shovel",
+                        "travelers-clothes"
+                    ],
+                    "gp": 30
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "guard",
+            "name": "Guard",
+            "description": "You served as a guard protecting others.",
+            "ability_options": [
+                "STR",
+                "INT",
+                "WIS"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "athletics",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "perception",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "alert",
+            "tool_proficiencies": {
+                "choice": {
+                    "count": 1,
+                    "category": "gaming_sets"
+                }
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "spear",
+                        "light-crossbow",
+                        "bolts",
+                        "lantern-hooded",
+                        "manacles",
+                        "quiver",
+                        "travelers-clothes"
+                    ],
+                    "gp": 12
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "guide",
+            "name": "Guide",
+            "description": "You led travelers through dangerous lands.",
+            "ability_options": [
+                "DEX",
+                "CON",
+                "WIS"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "stealth",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "survival",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "magic-initiate",
+            "origin_feat_class": "druid",
+            "tool_proficiencies": {
+                "fixed": [
+                    "cartographers-tools"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "shortbow",
+                        "arrows",
+                        "cartographers-tools",
+                        "bedroll",
+                        "quiver",
+                        "tent",
+                        "travelers-clothes"
+                    ],
+                    "gp": 3
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "hermit",
+            "name": "Hermit",
+            "description": "You spent years in isolation and reflection.",
+            "ability_options": [
+                "CON",
+                "WIS",
+                "CHA"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "medicine",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "religion",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "healer",
+            "tool_proficiencies": {
+                "fixed": [
+                    "herbalism-kit"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "quarterstaff",
+                        "herbalism-kit",
+                        "bedroll",
+                        "book",
+                        "lamp",
+                        "oil-flask",
+                        "oil-flask",
+                        "oil-flask",
+                        "travelers-clothes"
+                    ],
+                    "gp": 16
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "merchant",
+            "name": "Merchant",
+            "description": "You conducted commerce and trade.",
+            "ability_options": [
+                "CON",
+                "INT",
+                "CHA"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "animal_handling",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "persuasion",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "lucky",
+            "tool_proficiencies": {
+                "fixed": [
+                    "navigators-tools"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "navigators-tools",
+                        "pouch",
+                        "pouch",
+                        "travelers-clothes"
+                    ],
+                    "gp": 22
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "noble",
+            "name": "Noble",
+            "description": "You were born into privilege and power.",
+            "ability_options": [
+                "STR",
+                "INT",
+                "CHA"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "history",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "persuasion",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "skilled",
+            "tool_proficiencies": {
+                "choice": {
+                    "count": 1,
+                    "category": "gaming_sets"
+                }
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "fine-clothes",
+                        "perfume"
+                    ],
+                    "gp": 29
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "sage",
+            "name": "Sage",
+            "description": "You devoted yourself to academic study.",
+            "ability_options": [
+                "CON",
+                "INT",
+                "WIS"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "arcana",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "history",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "magic-initiate",
+            "origin_feat_class": "wizard",
+            "tool_proficiencies": {
+                "fixed": [
+                    "calligraphers-supplies"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "quarterstaff",
+                        "calligraphers-supplies",
+                        "book",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "robe"
+                    ],
+                    "gp": 8
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "sailor",
+            "name": "Sailor",
+            "description": "You sailed the seas and learned maritime ways.",
+            "ability_options": [
+                "STR",
+                "DEX",
+                "WIS"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "acrobatics",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "perception",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "tavern-brawler",
+            "tool_proficiencies": {
+                "fixed": [
+                    "navigators-tools"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "dagger",
+                        "navigators-tools",
+                        "rope",
+                        "travelers-clothes"
+                    ],
+                    "gp": 20
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "scribe",
+            "name": "Scribe",
+            "description": "You worked as a recorder of knowledge.",
+            "ability_options": [
+                "DEX",
+                "INT",
+                "WIS"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "investigation",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "perception",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "skilled",
+            "tool_proficiencies": {
+                "fixed": [
+                    "calligraphers-supplies"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "calligraphers-supplies",
+                        "fine-clothes",
+                        "lamp",
+                        "oil-flask",
+                        "oil-flask",
+                        "oil-flask",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment",
+                        "parchment"
+                    ],
+                    "gp": 23
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "soldier",
+            "name": "Soldier",
+            "description": "You trained and fought as a warrior.",
+            "ability_options": [
+                "STR",
+                "DEX",
+                "CON"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "athletics",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "intimidation",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "savage-attacker",
+            "tool_proficiencies": {
+                "choice": {
+                    "count": 1,
+                    "category": "gaming_sets"
+                }
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "spear",
+                        "shortbow",
+                        "arrows",
+                        "healers-kit",
+                        "quiver",
+                        "travelers-clothes"
+                    ],
+                    "gp": 14
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "wayfarer",
+            "name": "Wayfarer",
+            "description": "You wandered the world seeking your path.",
+            "ability_options": [
+                "DEX",
+                "WIS",
+                "CHA"
+            ],
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "insight",
+                    "value": true
+                },
+                {
+                    "type": "skill_proficiency",
+                    "target": "stealth",
+                    "value": true
+                }
+            ],
+            "origin_feat_id": "lucky",
+            "tool_proficiencies": {
+                "fixed": [
+                    "thieves-tools"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "dagger",
+                        "dagger",
+                        "thieves-tools",
+                        "bedroll",
+                        "pouch",
+                        "pouch",
+                        "travelers-clothes"
+                    ],
+                    "gp": 16
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        }
+    ]
+}

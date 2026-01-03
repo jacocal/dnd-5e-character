@@ -1,0 +1,1409 @@
+{
+    "$schema": "src/lib/import/schemas.ts#ItemSchema",
+    "$table": "items",
+    "$description": "D&D 5e items (SRD 5.2). Weapons, armor, magic items, treasure, and gear.",
+    "data": [
+        {
+            "id": "club",
+            "name": "Club",
+            "type": "Simple Melee Weapon",
+            "cost": "0.1 gp",
+            "weight": "2 lb.",
+            "description": "Light"
+        },
+        {
+            "id": "dagger",
+            "name": "Dagger",
+            "type": "Simple Melee Weapon",
+            "cost": "2 gp",
+            "weight": "1 lb.",
+            "description": "Finesse, light, thrown (range 20/60)"
+        },
+        {
+            "id": "greatclub",
+            "name": "Greatclub",
+            "type": "Simple Melee Weapon",
+            "cost": "0.2 gp",
+            "weight": "10 lb.",
+            "description": "Two-handed"
+        },
+        {
+            "id": "handaxe",
+            "name": "Handaxe",
+            "type": "Simple Melee Weapon",
+            "cost": "5 gp",
+            "weight": "2 lb.",
+            "description": "Light, thrown (range 20/60)"
+        },
+        {
+            "id": "javelin",
+            "name": "Javelin",
+            "type": "Simple Melee Weapon",
+            "cost": "0.5 gp",
+            "weight": "2 lb.",
+            "description": "Thrown (range 30/120)"
+        },
+        {
+            "id": "light-hammer",
+            "name": "Light Hammer",
+            "type": "Simple Melee Weapon",
+            "cost": "2 gp",
+            "weight": "2 lb.",
+            "description": "Light, thrown (range 20/60)"
+        },
+        {
+            "id": "mace",
+            "name": "Mace",
+            "type": "Simple Melee Weapon",
+            "cost": "5 gp",
+            "weight": "4 lb.",
+            "description": ""
+        },
+        {
+            "id": "quarterstaff",
+            "name": "Quarterstaff",
+            "type": "Simple Melee Weapon",
+            "cost": "0.2 gp",
+            "weight": "4 lb.",
+            "description": "Versatile (1d8)"
+        },
+        {
+            "id": "sickle",
+            "name": "Sickle",
+            "type": "Simple Melee Weapon",
+            "cost": "1 gp",
+            "weight": "2 lb.",
+            "description": "Light"
+        },
+        {
+            "id": "spear",
+            "name": "Spear",
+            "type": "Simple Melee Weapon",
+            "cost": "1 gp",
+            "weight": "3 lb.",
+            "description": "Thrown (range 20/60), versatile (1d8)"
+        },
+        {
+            "id": "dart",
+            "name": "Dart",
+            "type": "Simple Ranged Weapon",
+            "cost": "0.05 gp",
+            "weight": "0.25 lb.",
+            "description": "Finesse, thrown (range 20/60)"
+        },
+        {
+            "id": "light-crossbow",
+            "name": "Light Crossbow",
+            "type": "Simple Ranged Weapon",
+            "cost": "25 gp",
+            "weight": "5 lb.",
+            "description": "Ammunition (range 80/320), loading, two-handed"
+        },
+        {
+            "id": "shortbow",
+            "name": "Shortbow",
+            "type": "Simple Ranged Weapon",
+            "cost": "25 gp",
+            "weight": "2 lb.",
+            "description": "Ammunition (range 80/320), two-handed"
+        },
+        {
+            "id": "sling",
+            "name": "Sling",
+            "type": "Simple Ranged Weapon",
+            "cost": "0.1 gp",
+            "weight": "0 lb.",
+            "description": "Ammunition (range 30/120)"
+        },
+        {
+            "id": "battleaxe",
+            "name": "Battleaxe",
+            "type": "Martial Melee Weapon",
+            "cost": "10 gp",
+            "weight": "4 lb.",
+            "description": "Versatile (1d10)"
+        },
+        {
+            "id": "flail",
+            "name": "Flail",
+            "type": "Martial Melee Weapon",
+            "cost": "10 gp",
+            "weight": "2 lb.",
+            "description": ""
+        },
+        {
+            "id": "glaive",
+            "name": "Glaive",
+            "type": "Martial Melee Weapon",
+            "cost": "20 gp",
+            "weight": "6 lb.",
+            "description": "Heavy, reach, two-handed"
+        },
+        {
+            "id": "greataxe",
+            "name": "Greataxe",
+            "type": "Martial Melee Weapon",
+            "cost": "30 gp",
+            "weight": "7 lb.",
+            "description": "Heavy, two-handed"
+        },
+        {
+            "id": "greatsword",
+            "name": "Greatsword",
+            "type": "Martial Melee Weapon",
+            "cost": "50 gp",
+            "weight": "6 lb.",
+            "description": "Heavy, two-handed"
+        },
+        {
+            "id": "halberd",
+            "name": "Halberd",
+            "type": "Martial Melee Weapon",
+            "cost": "20 gp",
+            "weight": "6 lb.",
+            "description": "Heavy, reach, two-handed"
+        },
+        {
+            "id": "lance",
+            "name": "Lance",
+            "type": "Martial Melee Weapon",
+            "cost": "10 gp",
+            "weight": "6 lb.",
+            "description": "Reach, special"
+        },
+        {
+            "id": "longsword",
+            "name": "Longsword",
+            "type": "Martial Melee Weapon",
+            "cost": "15 gp",
+            "weight": "3 lb.",
+            "description": "Versatile (1d10)"
+        },
+        {
+            "id": "maul",
+            "name": "Maul",
+            "type": "Martial Melee Weapon",
+            "cost": "10 gp",
+            "weight": "10 lb.",
+            "description": "Heavy, two-handed"
+        },
+        {
+            "id": "morningstar",
+            "name": "Morningstar",
+            "type": "Martial Melee Weapon",
+            "cost": "15 gp",
+            "weight": "4 lb.",
+            "description": ""
+        },
+        {
+            "id": "pike",
+            "name": "Pike",
+            "type": "Martial Melee Weapon",
+            "cost": "5 gp",
+            "weight": "18 lb.",
+            "description": "Heavy, reach, two-handed"
+        },
+        {
+            "id": "rapier",
+            "name": "Rapier",
+            "type": "Martial Melee Weapon",
+            "cost": "25 gp",
+            "weight": "2 lb.",
+            "description": "Finesse"
+        },
+        {
+            "id": "scimitar",
+            "name": "Scimitar",
+            "type": "Martial Melee Weapon",
+            "cost": "25 gp",
+            "weight": "3 lb.",
+            "description": "Finesse, light"
+        },
+        {
+            "id": "shortsword",
+            "name": "Shortsword",
+            "type": "Martial Melee Weapon",
+            "cost": "10 gp",
+            "weight": "2 lb.",
+            "description": "Finesse, light"
+        },
+        {
+            "id": "trident",
+            "name": "Trident",
+            "type": "Martial Melee Weapon",
+            "cost": "5 gp",
+            "weight": "4 lb.",
+            "description": "Thrown (range 20/60), versatile (1d8)"
+        },
+        {
+            "id": "war-pick",
+            "name": "War Pick",
+            "type": "Martial Melee Weapon",
+            "cost": "5 gp",
+            "weight": "2 lb.",
+            "description": ""
+        },
+        {
+            "id": "warhammer",
+            "name": "Warhammer",
+            "type": "Martial Melee Weapon",
+            "cost": "15 gp",
+            "weight": "5 lb.",
+            "description": "Versatile (1d10)"
+        },
+        {
+            "id": "whip",
+            "name": "Whip",
+            "type": "Martial Melee Weapon",
+            "cost": "2 gp",
+            "weight": "3 lb.",
+            "description": "Finesse, reach"
+        },
+        {
+            "id": "blowgun",
+            "name": "Blowgun",
+            "type": "Martial Ranged Weapon",
+            "cost": "10 gp",
+            "weight": "1 lb.",
+            "description": "Ammunition (range 25/100), loading"
+        },
+        {
+            "id": "hand-crossbow",
+            "name": "Hand Crossbow",
+            "type": "Martial Ranged Weapon",
+            "cost": "75 gp",
+            "weight": "3 lb.",
+            "description": "Ammunition (range 30/120), light, loading"
+        },
+        {
+            "id": "heavy-crossbow",
+            "name": "Heavy Crossbow",
+            "type": "Martial Ranged Weapon",
+            "cost": "50 gp",
+            "weight": "18 lb.",
+            "description": "Ammunition (range 100/400), heavy, loading, two-handed"
+        },
+        {
+            "id": "longbow",
+            "name": "Longbow",
+            "type": "Martial Ranged Weapon",
+            "cost": "50 gp",
+            "weight": "2 lb.",
+            "description": "Ammunition (range 150/600), heavy, two-handed"
+        },
+        {
+            "id": "musket",
+            "name": "Musket",
+            "type": "Martial Ranged Weapon",
+            "cost": "500 gp",
+            "weight": "10 lb.",
+            "description": "Ammunition (range 40/120), loading, two-handed"
+        },
+        {
+            "id": "pistol",
+            "name": "Pistol",
+            "type": "Martial Ranged Weapon",
+            "cost": "250 gp",
+            "weight": "3 lb.",
+            "description": "Ammunition (range 30/90), loading"
+        },
+        {
+            "id": "shield",
+            "name": "Shield",
+            "type": "Shield",
+            "cost": "10 gp",
+            "weight": "6 lb.",
+            "description": "AC +2. A shield is made from wood or metal and is carried in one hand."
+        },
+        {
+            "id": "padded-armor",
+            "name": "Padded Armor",
+            "type": "Light Armor",
+            "cost": "5 gp",
+            "weight": "8 lb.",
+            "description": "AC 11 + Dex modifier. Disadvantage on Stealth."
+        },
+        {
+            "id": "leather-armor",
+            "name": "Leather Armor",
+            "type": "Light Armor",
+            "cost": "10 gp",
+            "weight": "10 lb.",
+            "description": "AC 11 + Dex modifier."
+        },
+        {
+            "id": "studded-leather",
+            "name": "Studded Leather Armor",
+            "type": "Light Armor",
+            "cost": "45 gp",
+            "weight": "13 lb.",
+            "description": "AC 12 + Dex modifier."
+        },
+        {
+            "id": "hide-armor",
+            "name": "Hide Armor",
+            "type": "Medium Armor",
+            "cost": "10 gp",
+            "weight": "12 lb.",
+            "description": "AC 12 + Dex modifier (max 2)."
+        },
+        {
+            "id": "chain-shirt",
+            "name": "Chain Shirt",
+            "type": "Medium Armor",
+            "cost": "50 gp",
+            "weight": "20 lb.",
+            "description": "AC 13 + Dex modifier (max 2)."
+        },
+        {
+            "id": "scale-mail",
+            "name": "Scale Mail",
+            "type": "Medium Armor",
+            "cost": "50 gp",
+            "weight": "45 lb.",
+            "description": "AC 14 + Dex modifier (max 2). Disadvantage on Stealth."
+        },
+        {
+            "id": "breastplate",
+            "name": "Breastplate",
+            "type": "Medium Armor",
+            "cost": "400 gp",
+            "weight": "20 lb.",
+            "description": "AC 14 + Dex modifier (max 2)."
+        },
+        {
+            "id": "half-plate",
+            "name": "Half Plate Armor",
+            "type": "Medium Armor",
+            "cost": "750 gp",
+            "weight": "40 lb.",
+            "description": "AC 15 + Dex modifier (max 2). Disadvantage on Stealth."
+        },
+        {
+            "id": "ring-mail",
+            "name": "Ring Mail",
+            "type": "Heavy Armor",
+            "cost": "30 gp",
+            "weight": "40 lb.",
+            "description": "AC 14. Disadvantage on Stealth."
+        },
+        {
+            "id": "chain-mail",
+            "name": "Chain Mail",
+            "type": "Heavy Armor",
+            "cost": "75 gp",
+            "weight": "55 lb.",
+            "description": "AC 16. Str 13 required. Disadvantage on Stealth."
+        },
+        {
+            "id": "splint-armor",
+            "name": "Splint Armor",
+            "type": "Heavy Armor",
+            "cost": "200 gp",
+            "weight": "60 lb.",
+            "description": "AC 17. Str 15 required. Disadvantage on Stealth."
+        },
+        {
+            "id": "plate-armor",
+            "name": "Plate Armor",
+            "type": "Heavy Armor",
+            "cost": "1500 gp",
+            "weight": "65 lb.",
+            "description": "AC 18. Str 15 required. Disadvantage on Stealth."
+        },
+        {
+            "id": "backpack",
+            "name": "Backpack",
+            "type": "Gear",
+            "cost": "2 gp",
+            "weight": "5 lb.",
+            "description": "A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack."
+        },
+        {
+            "id": "bedroll",
+            "name": "Bedroll",
+            "type": "Gear",
+            "cost": "1 gp",
+            "weight": "7 lb.",
+            "description": ""
+        },
+        {
+            "id": "lantern-hooded",
+            "name": "Lantern, Hooded",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "2 lb.",
+            "description": "Casts bright light in a 30-foot radius and dim light for an additional 30 feet."
+        },
+        {
+            "id": "oil-flask",
+            "name": "Oil (flask)",
+            "type": "Gear",
+            "cost": "0.1 gp",
+            "weight": "1 lb.",
+            "description": "Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact."
+        },
+        {
+            "id": "rations",
+            "name": "Rations (1 day)",
+            "type": "Consumable",
+            "cost": "0.5 gp",
+            "weight": "2 lb.",
+            "description": "Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts."
+        },
+        {
+            "id": "rope-hempen",
+            "name": "Rope, Hempen (50 feet)",
+            "type": "Gear",
+            "cost": "1 gp",
+            "weight": "10 lb.",
+            "description": "Rope, has 2 hit points and can be burst with a DC 17 Strength check."
+        },
+        {
+            "id": "tinderbox",
+            "name": "Tinderbox",
+            "type": "Gear",
+            "cost": "0.5 gp",
+            "weight": "1 lb.",
+            "description": "This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire."
+        },
+        {
+            "id": "torch",
+            "name": "Torch",
+            "type": "Gear",
+            "cost": "0.01 gp",
+            "weight": "1 lb.",
+            "description": "A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet."
+        },
+        {
+            "id": "waterskin",
+            "name": "Waterskin",
+            "type": "Gear",
+            "cost": "0.2 gp",
+            "weight": "5 lb.",
+            "description": "A waterskin can hold 4 pints of liquid."
+        },
+        {
+            "id": "arrows",
+            "name": "Arrows (20)",
+            "type": "Ammunition",
+            "cost": "1 gp",
+            "weight": "1 lb.",
+            "fixed_weight": true,
+            "description": "Arrows are used with a weapon that has the ammunition property to make a ranged attack. The weight listed includes both the ammunition and the storage container (Quiver)."
+        },
+        {
+            "id": "bolts",
+            "name": "Bolts (20)",
+            "type": "Ammunition",
+            "cost": "1 gp",
+            "weight": "1.5 lb.",
+            "fixed_weight": true,
+            "description": "Crossbow bolts are used with a crossbow. The weight listed includes both the ammunition and the storage container (Case)."
+        },
+        {
+            "id": "bullets-sling",
+            "name": "Bullets (Sling) (20)",
+            "type": "Ammunition",
+            "cost": "0.04 gp",
+            "weight": "1.5 lb.",
+            "fixed_weight": true,
+            "description": "Sling bullets are used with a sling. The weight listed includes both the ammunition and the storage container (Pouch)."
+        },
+        {
+            "id": "bullets-firearm",
+            "name": "Bullets (Firearm) (10)",
+            "type": "Ammunition",
+            "cost": "3 gp",
+            "weight": "2 lb.",
+            "fixed_weight": true,
+            "description": "Firearm bullets are used with a firearm. The weight listed includes both the ammunition and the storage container (Pouch)."
+        },
+        {
+            "id": "needles",
+            "name": "Needles (50)",
+            "type": "Ammunition",
+            "cost": "1 gp",
+            "weight": "1 lb.",
+            "fixed_weight": true,
+            "description": "Blowgun needles are used with a blowgun. The weight listed includes both the ammunition and the storage container (Pouch)."
+        },
+        {
+            "id": "alchemists-supplies",
+            "name": "Alchemist's Supplies",
+            "type": "Artisan's Tools",
+            "cost": "50 gp",
+            "weight": "8 lb.",
+            "description": "These supplies allow you to produce useful concoctions, such as potions and oils."
+        },
+        {
+            "id": "thieves-tools",
+            "name": "Thieves' Tools",
+            "type": "Tools",
+            "cost": "25 gp",
+            "weight": "1 lb.",
+            "description": "This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers."
+        },
+        {
+            "id": "herbalism-kit",
+            "name": "Herbalism Kit",
+            "type": "Tools",
+            "cost": "5 gp",
+            "weight": "3 lb.",
+            "description": "This kit contains a variety of instruments such as clippers, mortar and pestle, and pouches and vials used by herbalists to create remedies and potions."
+        },
+        {
+            "id": "broken-bottle",
+            "name": "Broken Bottle",
+            "type": "Improvised Weapon",
+            "cost": "0 cp",
+            "weight": "1 lb.",
+            "description": "Sharp glass."
+        },
+        {
+            "id": "gauntlets-ogre",
+            "name": "Gauntlets of Ogre Power",
+            "type": "Wondrous Item",
+            "cost": "500 gp",
+            "weight": "0 lb.",
+            "description": "Your Strength score is 19 while you wear these gauntlets.",
+            "requires_attunement": true,
+            "slot": "hands",
+            "is_magical": true,
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "str",
+                    "value": 19
+                }
+            ]
+        },
+        {
+            "id": "ring-protection",
+            "name": "Ring of Protection",
+            "type": "Ring",
+            "cost": "350 gp",
+            "weight": "0 lb.",
+            "description": "You have +1 to AC and Saving Throws.",
+            "requires_attunement": true,
+            "slot": "ring",
+            "is_magical": true,
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "ac",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "shield-plus-1",
+            "name": "+1 Shield",
+            "type": "Shield",
+            "cost": "500 gp",
+            "weight": "6 lb.",
+            "description": "AC +3. A magic shield that provides additional protection.",
+            "is_magical": true,
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "ac",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "plate-plus-1",
+            "name": "+1 Plate Armor",
+            "type": "Heavy Armor",
+            "cost": "2500 gp",
+            "weight": "65 lb.",
+            "description": "AC 18 + 1 bonus. Magic plate armor. Str 15 required, Stealth disadvantage.",
+            "is_magical": true,
+            "requires_attunement": true,
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "ac",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "potion-healing",
+            "name": "Potion of Healing",
+            "type": "Potion",
+            "cost": "50 gp",
+            "weight": "0.5 lb.",
+            "description": "You regain 2d4 + 2 hit points when you drink this potion."
+        },
+        {
+            "id": "potion-greater-healing",
+            "name": "Potion of Greater Healing",
+            "type": "Potion",
+            "cost": "150 gp",
+            "weight": "0.5 lb.",
+            "description": "You regain 4d4 + 4 hit points when you drink this potion.",
+            "is_magical": true
+        },
+        {
+            "id": "scroll-identify",
+            "name": "Scroll of Identify",
+            "type": "Scroll",
+            "cost": "25 gp",
+            "weight": "0 lb.",
+            "description": "Cast Identify. The spell scroll disintegrates after use.",
+            "is_magical": true
+        },
+        {
+            "id": "wand-magic-missiles",
+            "name": "Wand of Magic Missiles",
+            "type": "Wondrous Item",
+            "cost": "800 gp",
+            "weight": "1 lb.",
+            "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 or more charges to cast the magic missile spell from it.",
+            "is_magical": true,
+            "requires_attunement": true,
+            "uses": 7,
+            "uses_max": 7
+        },
+        {
+            "id": "armor-vulnerability",
+            "name": "Ornate Plate Armor",
+            "type": "Heavy Armor",
+            "cost": "2000 gp",
+            "weight": "65 lb.",
+            "description": "This beautifully crafted armor appears to be magical.",
+            "is_magical": true,
+            "is_cursed": true,
+            "true_name": "Armor of Vulnerability",
+            "shown_effect": "The armor appears to grant resistance to damage.",
+            "true_effect": "While wearing this armor, you have vulnerability to bludgeoning, piercing, and slashing damage. The armor is cursed and cannot be removed until the curse is broken.",
+            "requires_attunement": true
+        },
+        {
+            "id": "bag-devouring",
+            "name": "Bag of Holding",
+            "type": "Wondrous Item",
+            "cost": "400 gp",
+            "weight": "15 lb.",
+            "description": "This bag has an interior space considerably larger than its outside dimensions.",
+            "is_magical": true,
+            "is_cursed": true,
+            "true_name": "Bag of Devouring",
+            "shown_effect": "The bag can hold up to 500 pounds of material.",
+            "true_effect": "This bag is actually a creature's mouth. Living creatures placed inside are devoured. Items have a 50% chance of being lost when retrieved."
+        },
+        {
+            "id": "gem-ruby",
+            "name": "Ruby",
+            "type": "Treasure (Gem)",
+            "cost": "5000 gp",
+            "weight": "0.01 lb.",
+            "description": "A deep red, transparent precious stone."
+        },
+        {
+            "id": "gem-emerald",
+            "name": "Emerald",
+            "type": "Treasure (Gem)",
+            "cost": "1000 gp",
+            "weight": "0.01 lb.",
+            "description": "A brilliant green transparent gemstone."
+        },
+        {
+            "id": "art-painting",
+            "name": "Gold Elf Statue",
+            "type": "Treasure (Art Object)",
+            "cost": "750 gp",
+            "weight": "2 lb.",
+            "description": "A finely crafted statuette of an elf crafted from solid gold."
+        },
+        {
+            "id": "key-dungeon",
+            "name": "Ornate Iron Key",
+            "type": "Treasure",
+            "cost": "0 gp",
+            "weight": "0.1 lb.",
+            "description": "An ornate iron key with mysterious markings. Quest item."
+        },
+        {
+            "id": "amulet-proof-detection",
+            "name": "Plain Silver Amulet",
+            "type": "Wondrous Item",
+            "cost": "500 gp",
+            "weight": "0.5 lb.",
+            "description": "A plain silver amulet on a chain.",
+            "is_magical": true,
+            "true_name": "Amulet of Proof Against Detection",
+            "shown_effect": "A decorative piece of jewelry.",
+            "true_effect": "While wearing this amulet, you are hidden from divination magic. You can't be targeted by such magic or perceived through magical scrying sensors.",
+            "requires_attunement": true
+        },
+        {
+            "id": "cloak-elvenkind",
+            "name": "Silvery Green Cloak",
+            "type": "Wondrous Item",
+            "cost": "500 gp",
+            "weight": "1 lb.",
+            "description": "A silvery-green cloak with a hood.",
+            "slot": "cloak",
+            "is_magical": true,
+            "true_name": "Cloak of Elvenkind",
+            "shown_effect": "A finely made traveling cloak.",
+            "true_effect": "While you wear this cloak with its hood up, Wisdom (Perception) checks made to see you have disadvantage, and you have advantage on Dexterity (Stealth) checks made to hide.",
+            "requires_attunement": true,
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "stealth",
+                    "value": 5,
+                    "condition": "while hood is up"
+                }
+            ]
+        },
+        {
+            "id": "eyes-of-the-eagle",
+            "name": "Crystal Lenses",
+            "type": "Wondrous Item",
+            "cost": "250 gp",
+            "weight": "0 lb.",
+            "description": "A pair of crystal lenses set in a simple frame.",
+            "slot": "head",
+            "is_magical": true,
+            "true_name": "Eyes of the Eagle",
+            "shown_effect": "A set of reading spectacles.",
+            "true_effect": "These crystal lenses fit over the eyes. While wearing them, you have advantage on Wisdom (Perception) checks that rely on sight.",
+            "requires_attunement": true,
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "perception",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "bracers-archery",
+            "name": "Etched Leather Bracers",
+            "type": "Wondrous Item",
+            "cost": "500 gp",
+            "weight": "0.5 lb.",
+            "description": "Leather bracers with etched runes.",
+            "slot": "hands",
+            "is_magical": true,
+            "true_name": "Bracers of Archery",
+            "shown_effect": "Simple leather bracers with decorative etchings.",
+            "true_effect": "While wearing these bracers, you have proficiency with the longbow and shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made with such weapons.",
+            "requires_attunement": true,
+            "modifiers": [
+                {
+                    "type": "weapon_proficiency",
+                    "target": "longbow",
+                    "value": true
+                },
+                {
+                    "type": "weapon_proficiency",
+                    "target": "shortbow",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "headband-intellect",
+            "name": "Leather Headband",
+            "type": "Wondrous Item",
+            "cost": "1000 gp",
+            "weight": "0 lb.",
+            "description": "A plain leather headband.",
+            "slot": "head",
+            "is_magical": true,
+            "true_name": "Headband of Intellect",
+            "shown_effect": "A simple leather headband.",
+            "true_effect": "Your Intelligence score is 19 while you wear this headband. It has no effect on you if your Intelligence is already 19 or higher.",
+            "requires_attunement": true,
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "int",
+                    "value": 19
+                }
+            ]
+        },
+        {
+            "id": "travelers-clothes",
+            "name": "Traveler's Clothes",
+            "type": "Gear",
+            "cost": "2 gp",
+            "weight": "4 lb.",
+            "description": "Sturdy clothing suited for travel."
+        },
+        {
+            "id": "fine-clothes",
+            "name": "Fine Clothes",
+            "type": "Gear",
+            "cost": "15 gp",
+            "weight": "6 lb.",
+            "description": "Fancy garments for formal occasions."
+        },
+        {
+            "id": "costume",
+            "name": "Costume",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "4 lb.",
+            "description": "A costume for performances or disguises."
+        },
+        {
+            "id": "robe",
+            "name": "Robe",
+            "type": "Gear",
+            "cost": "1 gp",
+            "weight": "4 lb.",
+            "description": "A simple robe."
+        },
+        {
+            "id": "pouch",
+            "name": "Pouch",
+            "type": "Gear",
+            "cost": "0.5 gp",
+            "weight": "1 lb.",
+            "description": "A cloth or leather pouch that can hold up to 20 sling bullets or 6 pounds of gear."
+        },
+        {
+            "id": "book",
+            "name": "Book",
+            "type": "Gear",
+            "cost": "25 gp",
+            "weight": "5 lb.",
+            "description": "A book containing text or blank pages for writing."
+        },
+        {
+            "id": "parchment",
+            "name": "Parchment (1 sheet)",
+            "type": "Gear",
+            "cost": "0.1 gp",
+            "weight": "0 lb.",
+            "description": "A single sheet of parchment for writing."
+        },
+        {
+            "id": "holy-symbol-amulet",
+            "name": "Holy Symbol (Amulet)",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "1 lb.",
+            "description": "A holy symbol worn as an amulet. Used as a spellcasting focus for divine magic."
+        },
+        {
+            "id": "holy-symbol-emblem",
+            "name": "Holy Symbol (Emblem)",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "0 lb.",
+            "description": "A holy symbol emblazoned on a shield or worn as decoration. Used as a spellcasting focus."
+        },
+        {
+            "id": "holy-symbol-reliquary",
+            "name": "Holy Symbol (Reliquary)",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "2 lb.",
+            "description": "A holy symbol contained in a tiny reliquary. Used as a spellcasting focus."
+        },
+        {
+            "id": "mirror",
+            "name": "Mirror, Steel",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "0.5 lb.",
+            "description": "A steel mirror useful for looking around corners."
+        },
+        {
+            "id": "iron-pot",
+            "name": "Pot, Iron",
+            "type": "Gear",
+            "cost": "2 gp",
+            "weight": "10 lb.",
+            "description": "An iron pot for cooking."
+        },
+        {
+            "id": "shovel",
+            "name": "Shovel",
+            "type": "Gear",
+            "cost": "2 gp",
+            "weight": "5 lb.",
+            "description": "A shovel for digging."
+        },
+        {
+            "id": "crowbar",
+            "name": "Crowbar",
+            "type": "Gear",
+            "cost": "2 gp",
+            "weight": "5 lb.",
+            "description": "Grants advantage on Strength checks where leverage can be applied."
+        },
+        {
+            "id": "manacles",
+            "name": "Manacles",
+            "type": "Gear",
+            "cost": "2 gp",
+            "weight": "6 lb.",
+            "description": "Metal restraints that can bind a creature. Escaping requires DC 20 Dexterity check or DC 25 to break."
+        },
+        {
+            "id": "tent",
+            "name": "Tent",
+            "type": "Gear",
+            "cost": "2 gp",
+            "weight": "20 lb.",
+            "description": "A simple two-person tent."
+        },
+        {
+            "id": "rope",
+            "name": "Rope, Hempen (50 feet)",
+            "type": "Gear",
+            "cost": "1 gp",
+            "weight": "5 lb.",
+            "description": "Hempen rope has 2 hit points and can be burst with a DC 17 Strength check."
+        },
+        {
+            "id": "lamp",
+            "name": "Lamp",
+            "type": "Gear",
+            "cost": "0.5 gp",
+            "weight": "1 lb.",
+            "description": "Casts bright light in a 15-foot radius and dim light for an additional 30 feet."
+        },
+        {
+            "id": "perfume",
+            "name": "Perfume (vial)",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "0 lb.",
+            "description": "A small vial of perfume."
+        },
+        {
+            "id": "spellbook",
+            "name": "Spellbook",
+            "type": "Gear",
+            "cost": "50 gp",
+            "weight": "3 lb.",
+            "description": "Essential for wizards. Has 100 pages for recording spells."
+        },
+        {
+            "id": "quiver",
+            "name": "Quiver",
+            "type": "Gear",
+            "cost": "1 gp",
+            "weight": "1 lb.",
+            "description": "A quiver can hold up to 20 arrows."
+        },
+        {
+            "id": "arcane-focus-crystal",
+            "name": "Arcane Focus (Crystal)",
+            "type": "Gear",
+            "cost": "10 gp",
+            "weight": "1 lb.",
+            "description": "A crystal used as an arcane spellcasting focus."
+        },
+        {
+            "id": "arcane-focus-orb",
+            "name": "Arcane Focus (Orb)",
+            "type": "Gear",
+            "cost": "20 gp",
+            "weight": "3 lb.",
+            "description": "An orb used as an arcane spellcasting focus."
+        },
+        {
+            "id": "arcane-focus-rod",
+            "name": "Arcane Focus (Rod)",
+            "type": "Gear",
+            "cost": "10 gp",
+            "weight": "2 lb.",
+            "description": "A rod used as an arcane spellcasting focus."
+        },
+        {
+            "id": "arcane-focus-staff",
+            "name": "Arcane Focus (Staff)",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "4 lb.",
+            "description": "A staff used as an arcane spellcasting focus."
+        },
+        {
+            "id": "arcane-focus-wand",
+            "name": "Arcane Focus (Wand)",
+            "type": "Gear",
+            "cost": "10 gp",
+            "weight": "1 lb.",
+            "description": "A wand used as an arcane spellcasting focus."
+        },
+        {
+            "id": "druidic-focus-mistletoe",
+            "name": "Druidic Focus (Mistletoe)",
+            "type": "Gear",
+            "cost": "1 gp",
+            "weight": "0 lb.",
+            "description": "A sprig of mistletoe used as a druidic spellcasting focus."
+        },
+        {
+            "id": "druidic-focus-staff",
+            "name": "Druidic Focus (Wooden Staff)",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "4 lb.",
+            "description": "A wooden staff used as a druidic spellcasting focus."
+        },
+        {
+            "id": "druidic-focus-wand",
+            "name": "Druidic Focus (Yew Wand)",
+            "type": "Gear",
+            "cost": "10 gp",
+            "weight": "1 lb.",
+            "description": "A yew wand used as a druidic spellcasting focus."
+        },
+        {
+            "id": "brewers-supplies",
+            "name": "Brewer's Supplies",
+            "type": "Artisan's Tools",
+            "cost": "20 gp",
+            "weight": "9 lb.",
+            "description": "Artisan's tools for brewing beverages."
+        },
+        {
+            "id": "calligraphers-supplies",
+            "name": "Calligrapher's Supplies",
+            "type": "Artisan's Tools",
+            "cost": "10 gp",
+            "weight": "5 lb.",
+            "description": "Artisan's tools for calligraphy and fine writing."
+        },
+        {
+            "id": "carpenters-tools",
+            "name": "Carpenter's Tools",
+            "type": "Artisan's Tools",
+            "cost": "8 gp",
+            "weight": "6 lb.",
+            "description": "Artisan's tools for carpentry and woodworking."
+        },
+        {
+            "id": "cartographers-tools",
+            "name": "Cartographer's Tools",
+            "type": "Artisan's Tools",
+            "cost": "15 gp",
+            "weight": "6 lb.",
+            "description": "Artisan's tools for mapmaking."
+        },
+        {
+            "id": "cobblers-tools",
+            "name": "Cobbler's Tools",
+            "type": "Artisan's Tools",
+            "cost": "5 gp",
+            "weight": "5 lb.",
+            "description": "Artisan's tools for shoemaking and leather work."
+        },
+        {
+            "id": "cooks-utensils",
+            "name": "Cook's Utensils",
+            "type": "Artisan's Tools",
+            "cost": "1 gp",
+            "weight": "8 lb.",
+            "description": "Artisan's tools for cooking."
+        },
+        {
+            "id": "glassblowers-tools",
+            "name": "Glassblower's Tools",
+            "type": "Artisan's Tools",
+            "cost": "30 gp",
+            "weight": "5 lb.",
+            "description": "Artisan's tools for glassblowing."
+        },
+        {
+            "id": "jewelers-tools",
+            "name": "Jeweler's Tools",
+            "type": "Artisan's Tools",
+            "cost": "25 gp",
+            "weight": "2 lb.",
+            "description": "Artisan's tools for jewelry making."
+        },
+        {
+            "id": "leatherworkers-tools",
+            "name": "Leatherworker's Tools",
+            "type": "Artisan's Tools",
+            "cost": "5 gp",
+            "weight": "5 lb.",
+            "description": "Artisan's tools for working with leather."
+        },
+        {
+            "id": "masons-tools",
+            "name": "Mason's Tools",
+            "type": "Artisan's Tools",
+            "cost": "10 gp",
+            "weight": "8 lb.",
+            "description": "Artisan's tools for stonework and masonry."
+        },
+        {
+            "id": "painters-supplies",
+            "name": "Painter's Supplies",
+            "type": "Artisan's Tools",
+            "cost": "10 gp",
+            "weight": "5 lb.",
+            "description": "Artisan's tools for painting."
+        },
+        {
+            "id": "potters-tools",
+            "name": "Potter's Tools",
+            "type": "Artisan's Tools",
+            "cost": "10 gp",
+            "weight": "3 lb.",
+            "description": "Artisan's tools for pottery."
+        },
+        {
+            "id": "smiths-tools",
+            "name": "Smith's Tools",
+            "type": "Artisan's Tools",
+            "cost": "20 gp",
+            "weight": "8 lb.",
+            "description": "Artisan's tools for metalwork and smithing."
+        },
+        {
+            "id": "tinkers-tools",
+            "name": "Tinker's Tools",
+            "type": "Artisan's Tools",
+            "cost": "50 gp",
+            "weight": "10 lb.",
+            "description": "Artisan's tools for repairing and tinkering with objects."
+        },
+        {
+            "id": "weavers-tools",
+            "name": "Weaver's Tools",
+            "type": "Artisan's Tools",
+            "cost": "1 gp",
+            "weight": "5 lb.",
+            "description": "Artisan's tools for weaving cloth."
+        },
+        {
+            "id": "woodcarvers-tools",
+            "name": "Woodcarver's Tools",
+            "type": "Artisan's Tools",
+            "cost": "1 gp",
+            "weight": "5 lb.",
+            "description": "Artisan's tools for carving wood."
+        },
+        {
+            "id": "disguise-kit",
+            "name": "Disguise Kit",
+            "type": "Tools",
+            "cost": "25 gp",
+            "weight": "3 lb.",
+            "description": "A kit for creating disguises. Includes makeup, hair dye, and small props."
+        },
+        {
+            "id": "forgery-kit",
+            "name": "Forgery Kit",
+            "type": "Tools",
+            "cost": "15 gp",
+            "weight": "5 lb.",
+            "description": "A kit for creating forged documents."
+        },
+        {
+            "id": "navigators-tools",
+            "name": "Navigator's Tools",
+            "type": "Tools",
+            "cost": "25 gp",
+            "weight": "2 lb.",
+            "description": "Tools for navigation including a compass, calipers, and charts."
+        },
+        {
+            "id": "poisoners-kit",
+            "name": "Poisoner's Kit",
+            "type": "Tools",
+            "cost": "50 gp",
+            "weight": "2 lb.",
+            "description": "A kit for creating and applying poisons."
+        },
+        {
+            "id": "gaming-set-dice",
+            "name": "Gaming Set (Dice)",
+            "type": "Tools",
+            "cost": "0.1 gp",
+            "weight": "0 lb.",
+            "description": "A set of dice for gaming."
+        },
+        {
+            "id": "gaming-set-dragonchess",
+            "name": "Gaming Set (Dragonchess)",
+            "type": "Tools",
+            "cost": "1 gp",
+            "weight": "0.5 lb.",
+            "description": "A Dragonchess set for the popular strategy game."
+        },
+        {
+            "id": "gaming-set-cards",
+            "name": "Gaming Set (Playing Cards)",
+            "type": "Tools",
+            "cost": "0.5 gp",
+            "weight": "0 lb.",
+            "description": "A deck of playing cards."
+        },
+        {
+            "id": "gaming-set-three-dragon",
+            "name": "Gaming Set (Three-Dragon Ante)",
+            "type": "Tools",
+            "cost": "1 gp",
+            "weight": "0 lb.",
+            "description": "A deck for the Three-Dragon Ante card game."
+        },
+        {
+            "id": "musical-instrument-bagpipes",
+            "name": "Musical Instrument (Bagpipes)",
+            "type": "Tools",
+            "cost": "30 gp",
+            "weight": "6 lb.",
+            "description": "A set of bagpipes."
+        },
+        {
+            "id": "musical-instrument-drum",
+            "name": "Musical Instrument (Drum)",
+            "type": "Tools",
+            "cost": "6 gp",
+            "weight": "3 lb.",
+            "description": "A drum for making music."
+        },
+        {
+            "id": "musical-instrument-dulcimer",
+            "name": "Musical Instrument (Dulcimer)",
+            "type": "Tools",
+            "cost": "25 gp",
+            "weight": "10 lb.",
+            "description": "A dulcimer for making music."
+        },
+        {
+            "id": "musical-instrument-flute",
+            "name": "Musical Instrument (Flute)",
+            "type": "Tools",
+            "cost": "2 gp",
+            "weight": "1 lb.",
+            "description": "A flute for making music."
+        },
+        {
+            "id": "musical-instrument-horn",
+            "name": "Musical Instrument (Horn)",
+            "type": "Tools",
+            "cost": "3 gp",
+            "weight": "2 lb.",
+            "description": "A horn for making music."
+        },
+        {
+            "id": "musical-instrument-lute",
+            "name": "Musical Instrument (Lute)",
+            "type": "Tools",
+            "cost": "35 gp",
+            "weight": "2 lb.",
+            "description": "A lute for making music."
+        },
+        {
+            "id": "musical-instrument-lyre",
+            "name": "Musical Instrument (Lyre)",
+            "type": "Tools",
+            "cost": "30 gp",
+            "weight": "2 lb.",
+            "description": "A lyre for making music."
+        },
+        {
+            "id": "musical-instrument-panflute",
+            "name": "Musical Instrument (Pan Flute)",
+            "type": "Tools",
+            "cost": "12 gp",
+            "weight": "2 lb.",
+            "description": "A pan flute for making music."
+        },
+        {
+            "id": "musical-instrument-shawm",
+            "name": "Musical Instrument (Shawm)",
+            "type": "Tools",
+            "cost": "2 gp",
+            "weight": "1 lb.",
+            "description": "A shawm, an early form of oboe."
+        },
+        {
+            "id": "musical-instrument-viol",
+            "name": "Musical Instrument (Viol)",
+            "type": "Tools",
+            "cost": "30 gp",
+            "weight": "1 lb.",
+            "description": "A viol, similar to a violin."
+        },
+        {
+            "id": "burglars-pack",
+            "name": "Burglar's Pack",
+            "type": "Gear",
+            "cost": "16 gp",
+            "weight": "42 lb.",
+            "description": "Includes a backpack, 1,000 ball bearings, 10 feet of string, a bell, 5 candles, a crowbar, a hammer, 10 pitons, a hooded lantern, 2 flasks of oil, 5 days rations, a tinderbox, and a waterskin."
+        },
+        {
+            "id": "diplomats-pack",
+            "name": "Diplomat's Pack",
+            "type": "Gear",
+            "cost": "39 gp",
+            "weight": "39 lb.",
+            "description": "Includes a chest, 2 cases for maps and scrolls, a set of fine clothes, a bottle of ink, an ink pen, a lamp, 2 flasks of oil, 5 sheets of paper, a vial of perfume, sealing wax, and soap."
+        },
+        {
+            "id": "dungeoneers-pack",
+            "name": "Dungeoneer's Pack",
+            "type": "Gear",
+            "cost": "12 gp",
+            "weight": "55 lb.",
+            "description": "Includes a backpack, a crowbar, a hammer, 10 pitons, 10 torches, a tinderbox, 10 days of rations, and a waterskin."
+        },
+        {
+            "id": "entertainers-pack",
+            "name": "Entertainer's Pack",
+            "type": "Gear",
+            "cost": "40 gp",
+            "weight": "58.5 lb.",
+            "description": "Includes a backpack, a bedroll, 2 costumes, 5 candles, 5 days of rations, a waterskin, and a disguise kit."
+        },
+        {
+            "id": "explorers-pack",
+            "name": "Explorer's Pack",
+            "type": "Gear",
+            "cost": "10 gp",
+            "weight": "55 lb.",
+            "description": "Includes a backpack, a bedroll, a mess kit, a tinderbox, 10 torches, 10 days of rations, and a waterskin."
+        },
+        {
+            "id": "priests-pack",
+            "name": "Priest's Pack",
+            "type": "Gear",
+            "cost": "33 gp",
+            "weight": "29 lb.",
+            "description": "Includes a backpack, a blanket, 10 candles, a tinderbox, an alms box, 2 blocks of incense, a censer, vestments, 2 days of rations, and a waterskin."
+        },
+        {
+            "id": "scholars-pack",
+            "name": "Scholar's Pack",
+            "type": "Gear",
+            "cost": "40 gp",
+            "weight": "22 lb.",
+            "description": "Includes a backpack, a book of lore, a bottle of ink, an ink pen, 10 sheets of parchment, a little bag of sand, and a small knife."
+        },
+        {
+            "id": "healers-kit",
+            "name": "Healer's Kit",
+            "type": "Gear",
+            "cost": "5 gp",
+            "weight": "3 lb.",
+            "description": "This kit has 10 uses. You can use an action to expend one use to stabilize a creature with 0 hit points."
+        },
+        {
+            "id": "component-pouch",
+            "name": "Component Pouch",
+            "type": "Gear",
+            "cost": "25 gp",
+            "weight": "2 lb.",
+            "description": "A small, watertight leather belt pouch containing material components for casting spells."
+        }
+    ]
+}
