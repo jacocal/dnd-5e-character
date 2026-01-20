@@ -16,19 +16,13 @@ export const CastingTimeEnumSchema = z.enum([
     "8 Hours",
     "24 Hours",
 ]);
-<<<<<<< HEAD
 export const SpellcastingTypeEnumSchema = z.enum(["full", "half", "artificer", "third", "pact", "none"]);
-=======
->>>>>>> 9666f57 (feat: base app layout and functionality)
 
 export const SubclassSchema = z.object({
     id: z.string(),
     name: z.string(),
     description: z.string(),
-<<<<<<< HEAD
     spellcasting_type: SpellcastingTypeEnumSchema.optional(), // For third-casters like Arcane Trickster
-=======
->>>>>>> 9666f57 (feat: base app layout and functionality)
 });
 
 export const ClassSchema = z.object({
@@ -36,7 +30,6 @@ export const ClassSchema = z.object({
     name: z.string(),
     hit_die: z.number().int().min(4).max(12),
     saving_throws: z.array(AbilityEnumSchema),
-<<<<<<< HEAD
     proficiencies: z.record(z.string(), z.any()).optional(), // { armor: [], weapons: [] }
     spellcasting_ability: AbilityEnumSchema.optional(),
     spellcasting_type: SpellcastingTypeEnumSchema.optional(), // Multiclass slot calculation type
@@ -56,11 +49,6 @@ export const SpellDurationSchema = z.object({
     unit: z.enum(["round", "minute", "hour", "day"]).optional(),
 });
 
-=======
-    subclasses: z.array(SubclassSchema).optional(),
-});
-
->>>>>>> 9666f57 (feat: base app layout and functionality)
 export const SpellSchema = z.object({
     id: z.string(),
     name: z.string(),
@@ -68,7 +56,6 @@ export const SpellSchema = z.object({
     school: z.string(),
     casting_time: CastingTimeEnumSchema,
     range: z.string(),
-<<<<<<< HEAD
     // Allow string input for backward compatibility during parse transform
     components: z.union([z.string(), SpellComponentsSchema]),
     duration: z.union([z.string(), SpellDurationSchema]),
@@ -212,17 +199,6 @@ export const SrdDataSchema = z.object({
     languages: z.array(LanguageSchema).optional().default([]),
     conditions: z.array(ConditionSchema).optional().default([]),
     backgrounds: z.array(BackgroundSchema).optional().default([]),
-=======
-    components: z.string(),
-    duration: z.string(),
-    description: z.string(),
-    classes: z.array(z.string()),
-});
-
-export const SrdDataSchema = z.object({
-    classes: z.array(ClassSchema),
-    spells: z.array(SpellSchema),
->>>>>>> 9666f57 (feat: base app layout and functionality)
 });
 
 export type SrdData = z.infer<typeof SrdDataSchema>;

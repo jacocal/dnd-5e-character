@@ -1,23 +1,16 @@
 import { SrdData, SrdDataSchema } from "./schemas";
-<<<<<<< HEAD
 import { classes, subclasses, spells, items, races, feats, traits, backgrounds } from "../../db/schema";
-=======
-import { classes, subclasses, spells } from "../../db/schema";
->>>>>>> 9666f57 (feat: base app layout and functionality)
 import { InferInsertModel } from "drizzle-orm";
 
 // Types derived from Drizzle Schema
 type ClassInsert = InferInsertModel<typeof classes>;
 type SubclassInsert = InferInsertModel<typeof subclasses>;
 type SpellInsert = InferInsertModel<typeof spells>;
-<<<<<<< HEAD
 type ItemInsert = InferInsertModel<typeof items>;
 type RaceInsert = InferInsertModel<typeof races>;
 type TraitInsert = InferInsertModel<typeof traits>;
 type FeatInsert = InferInsertModel<typeof feats>;
 type BackgroundInsert = InferInsertModel<typeof backgrounds>;
-=======
->>>>>>> 9666f57 (feat: base app layout and functionality)
 
 export function parseSrdData(rawData: unknown) {
     // 1. Validate JSON against Zod Schema
@@ -39,12 +32,9 @@ export function parseSrdData(rawData: unknown) {
             name: c.name,
             hitDie: c.hit_die,
             savingThrows: c.saving_throws,
-<<<<<<< HEAD
             proficiencies: c.proficiencies,
             spellcastingAbility: c.spellcasting_ability,
             spellcastingType: c.spellcasting_type || 'none',
-=======
->>>>>>> 9666f57 (feat: base app layout and functionality)
         });
 
         if (c.subclasses) {
@@ -54,11 +44,8 @@ export function parseSrdData(rawData: unknown) {
                     classId: c.id, // Foreign Key
                     name: sc.name,
                     description: sc.description,
-<<<<<<< HEAD
                     // Only set spellcastingType if explicitly provided (for third-casters)
                     ...(sc.spellcasting_type && { spellcastingType: sc.spellcasting_type }),
-=======
->>>>>>> 9666f57 (feat: base app layout and functionality)
                 });
             }
         }
@@ -66,7 +53,6 @@ export function parseSrdData(rawData: unknown) {
 
     // 3. Transform Spells
     for (const s of data.spells) {
-<<<<<<< HEAD
         // --- Parse Components ---
         let componentsJson = {
             v: false,
@@ -129,8 +115,6 @@ export function parseSrdData(rawData: unknown) {
             isConcentration = durationJson.type === 'concentration';
         }
 
-=======
->>>>>>> 9666f57 (feat: base app layout and functionality)
         spellsToInsert.push({
             id: s.id,
             name: s.name,
@@ -138,7 +122,6 @@ export function parseSrdData(rawData: unknown) {
             school: s.school,
             castingTime: s.casting_time,
             range: s.range,
-<<<<<<< HEAD
             components: componentsJson,
             duration: durationJson,
             isRitual: isRitual,
@@ -321,26 +304,14 @@ export function parseSrdData(rawData: unknown) {
         startingEquipment: b.starting_equipment
     }));
 
-=======
-            components: s.components,
-            duration: s.duration,
-            description: s.description,
-            classes: s.classes,
-        });
-    }
-
->>>>>>> 9666f57 (feat: base app layout and functionality)
     return {
         classes: classesToInsert,
         subclasses: subclassesToInsert,
         spells: spellsToInsert,
-<<<<<<< HEAD
         items: itemsToInsert,
         races: racesToInsert,
         traits: traitsToInsert,
         feats: featsToInsert,
         backgrounds: backgroundsToInsert,
-=======
->>>>>>> 9666f57 (feat: base app layout and functionality)
     };
 }
