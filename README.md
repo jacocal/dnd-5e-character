@@ -13,7 +13,7 @@ A dynamic character sheet application for Dungeons and Dragons 5th Edition (2024
 Start the local database and admin interface using Docker Compose:
 
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose.yml up -d
 ```
 
 This starts:
@@ -45,9 +45,6 @@ Populate the database with SRD rules (Classes, Spells, etc.) and a test characte
 ```bash
 # Import Rules (Classes, Subclasses, Spells)
 npx tsx scripts/seed.ts
-
-# Create Test Character (Level 5 Wizard with Items)
-npx tsx scripts/seed-character.ts
 ```
 
 ## Running the Application
@@ -58,11 +55,9 @@ Start the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser. 
-You can view the test character at `/character/1`.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ## Features
-- **Dynamic Character Sheet**: Real-time HP tracking and state management.
 - **Database Persistence**: All changes are saved to Postgres via Server Actions.
 - **Rules Integration**: Browse spells and verify inventory against 5e rules.
 
@@ -75,5 +70,8 @@ You can view the test character at `/character/1`.
 
 
 ## Credits
+- My friend Pablo who researched, centralized and provided the database which fed the seed data
+- Wizard of the Coast for providing a clear ruleset to use as a reference
+- My wife, while not understanding DnD, tested the app and provided feedback as a user
 - [DLtheDM](https://www.reddit.com/user/DLtheDM) for the [reference file](https://www.reddit.com/r/DnD/comments/1fa7bu9/formfillable_2024_character_sheet/)
  
