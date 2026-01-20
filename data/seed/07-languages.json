@@ -1,0 +1,103 @@
+{
+    "$schema": "src/lib/import/schemas.ts#LanguageSchema",
+    "$table": "languages",
+    "$description": "D&D 5e languages (SRD 5.2). Standard and Exotic types with script information.",
+    "data": [
+        {
+            "id": "common",
+            "name": "Common",
+            "script": "Common",
+            "type": "Standard"
+        },
+        {
+            "id": "dwarvish",
+            "name": "Dwarvish",
+            "script": "Dwarvish",
+            "type": "Standard"
+        },
+        {
+            "id": "elvish",
+            "name": "Elvish",
+            "script": "Elvish",
+            "type": "Standard"
+        },
+        {
+            "id": "giant",
+            "name": "Giant",
+            "script": "Dwarvish",
+            "type": "Standard"
+        },
+        {
+            "id": "gnomish",
+            "name": "Gnomish",
+            "script": "Dwarvish",
+            "type": "Standard"
+        },
+        {
+            "id": "goblin",
+            "name": "Goblin",
+            "script": "Dwarvish",
+            "type": "Standard"
+        },
+        {
+            "id": "halfling",
+            "name": "Halfling",
+            "script": "Common",
+            "type": "Standard"
+        },
+        {
+            "id": "orc",
+            "name": "Orc",
+            "script": "Dwarvish",
+            "type": "Standard"
+        },
+        {
+            "id": "abyssal",
+            "name": "Abyssal",
+            "script": "Infernal",
+            "type": "Exotic"
+        },
+        {
+            "id": "celestial",
+            "name": "Celestial",
+            "script": "Celestial",
+            "type": "Exotic"
+        },
+        {
+            "id": "draconic",
+            "name": "Draconic",
+            "script": "Draconic",
+            "type": "Exotic"
+        },
+        {
+            "id": "deep-speech",
+            "name": "Deep Speech",
+            "script": null,
+            "type": "Exotic"
+        },
+        {
+            "id": "infernal",
+            "name": "Infernal",
+            "script": "Infernal",
+            "type": "Exotic"
+        },
+        {
+            "id": "primordial",
+            "name": "Primordial",
+            "script": "Dwarvish",
+            "type": "Exotic"
+        },
+        {
+            "id": "sylvan",
+            "name": "Sylvan",
+            "script": "Elvish",
+            "type": "Exotic"
+        },
+        {
+            "id": "undercommon",
+            "name": "Undercommon",
+            "script": "Elvish",
+            "type": "Exotic"
+        }
+    ]
+}

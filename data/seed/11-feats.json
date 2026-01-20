@@ -1,0 +1,775 @@
+{
+    "$schema": "src/lib/import/schemas.ts#FeatSchema",
+    "$table": "feats",
+    "$description": "D&D 5e 2024 feats: Origin (level 1), General (level 4+), Fighting Style, and Epic Boon (level 19).",
+    "data": [
+        {
+            "id": "alert",
+            "name": "Alert",
+            "description": "Add Proficiency Bonus to Initiative. You can swap Initiative with a willing ally within 30 feet.",
+            "prerequisites": "Origin Feat",
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "initiative",
+                    "value": "proficiency"
+                }
+            ]
+        },
+        {
+            "id": "crafter",
+            "name": "Crafter",
+            "description": "Proficiency in 3 Artisan's Tools. 20% discount on nonmagical items. Fast crafting during Long Rest.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "healer",
+            "name": "Healer",
+            "description": "Reroll 1s on healing dice. Use Healer's Kit to heal a creature Hit Points once per Long Rest.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "lucky",
+            "name": "Lucky",
+            "description": "Gain Luck Points equal to your Proficiency Bonus. Spend to gain Advantage on rolls or impose Disadvantage.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "magic-initiate",
+            "name": "Magic Initiate",
+            "description": "Learn 2 Cantrips and one 1st-level spell from the Cleric, Druid, or Wizard list. Can cast once per Long Rest.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "musician",
+            "name": "Musician",
+            "description": "Proficiency in 3 Musical Instruments. Give Heroic Inspiration to allies after a Short or Long Rest.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "savage-attacker",
+            "name": "Savage Attacker",
+            "description": "Once per turn, when you hit with a weapon attack, you can roll the damage dice twice and use either roll.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "skilled",
+            "name": "Skilled",
+            "description": "Gain proficiency in any combination of three skills or tools of your choice.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "tavern-brawler",
+            "name": "Tavern Brawler",
+            "description": "Enhanced Unarmed Strikes (1d4). Reroll 1s on damage. Push a creature 5 feet on hit.",
+            "prerequisites": "Origin Feat"
+        },
+        {
+            "id": "tough",
+            "name": "Tough",
+            "description": "Your Hit Point maximum increases by an amount equal to twice your level.",
+            "prerequisites": "Origin Feat",
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "hp_per_level",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "id": "ability-score-improvement",
+            "name": "Ability Score Improvement",
+            "description": "Increase one ability score by 2, or increase two ability scores by 1. Maximum 20.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "id": "actor",
+            "name": "Actor",
+            "description": "Advantage on Deception and Performance to disguise yourself. Mimic speech. +1 Charisma.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "cha"
+                }
+            ]
+        },
+        {
+            "id": "athlete",
+            "name": "Athlete",
+            "description": "Faster climbing and standing from prone. Better jumping. +1 Strength or Dexterity.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "charger",
+            "name": "Charger",
+            "description": "Bonus damage or 10ft push when moving 10ft before attacking. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "chef",
+            "name": "Chef",
+            "description": "Cook treats that give Temporary HP. Better Short Rest healing. +1 Constitution or Wisdom.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "con,wis"
+                }
+            ]
+        },
+        {
+            "id": "crossbow-expert",
+            "name": "Crossbow Expert",
+            "description": "Ignore loading property. Fire in melee without disadvantage. Off-hand crossbow attacks. +1 Dexterity.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "dex"
+                }
+            ]
+        },
+        {
+            "id": "crusher",
+            "name": "Crusher",
+            "description": "Push targets with bludgeoning damage. Crits grant Advantage to allies. +1 Str or Con.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,con"
+                }
+            ]
+        },
+        {
+            "id": "defensive-duelist",
+            "name": "Defensive Duelist",
+            "description": "Use Reaction to add Proficiency Bonus to AC when hit by melee attack. +1 Dexterity.",
+            "prerequisites": "Level 4, Proficiency with Finesse weapon",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "dex"
+                }
+            ]
+        },
+        {
+            "id": "dual-wielder",
+            "name": "Dual Wielder",
+            "description": "Use non-light weapons for two-weapon fighting. +1 AC while dual-wielding. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "durable",
+            "name": "Durable",
+            "description": "Advantage on Death Saves. Use Bonus Action to heal with Hit Die. +1 Constitution.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "con"
+                }
+            ]
+        },
+        {
+            "id": "elemental-adept",
+            "name": "Elemental Adept",
+            "description": "Spells ignore resistance to a chosen element. 1s become 2s on damage dice. +1 Int, Wis, or Cha.",
+            "prerequisites": "Level 4, Spellcasting feature",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis,cha"
+                }
+            ]
+        },
+        {
+            "id": "fey-touched",
+            "name": "Fey-Touched",
+            "description": "Learn Misty Step and one 1st-level Divination/Enchantment spell. +1 Int, Wis, or Cha.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis,cha"
+                }
+            ]
+        },
+        {
+            "id": "grappler",
+            "name": "Grappler",
+            "description": "Attack while grappling. Move grappled targets. Unarmed strike with grapple attempt. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "great-weapon-master",
+            "name": "Great Weapon Master",
+            "description": "Bonus attack on crit or killing blow. Add Proficiency Bonus to damage with Heavy weapons. +1 Strength.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str"
+                }
+            ]
+        },
+        {
+            "id": "heavy-armor-master",
+            "name": "Heavy Armor Master",
+            "description": "Reduce B/P/S damage by Proficiency Bonus while in Heavy Armor. +1 Str or Con.",
+            "prerequisites": "Level 4, Heavy Armor Proficiency",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,con"
+                }
+            ]
+        },
+        {
+            "id": "inspiring-leader",
+            "name": "Inspiring Leader",
+            "description": "Grant Temporary HP to allies after a rest or 10-minute speech. +1 Cha or Wis.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "cha,wis"
+                }
+            ]
+        },
+        {
+            "id": "keen-mind",
+            "name": "Keen Mind",
+            "description": "Proficiency in a mental skill. Quick Study with Bonus Action Search. +1 Intelligence.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int"
+                }
+            ]
+        },
+        {
+            "id": "mage-slayer",
+            "name": "Mage Slayer",
+            "description": "Break concentration easier with Advantage on checks. Reaction attack when spell is cast. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "mounted-combatant",
+            "name": "Mounted Combatant",
+            "description": "Advantage against smaller targets. Protect mount from attacks. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "observant",
+            "name": "Observant",
+            "description": "Bonus to Passive Perception and Investigation. Quick Study bonus. +1 Int or Wis.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis"
+                }
+            ]
+        },
+        {
+            "id": "polearm-master",
+            "name": "Polearm Master",
+            "description": "Bonus Action butt-strike with polearm. Reaction attack when enemies enter reach. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "resilient",
+            "name": "Resilient",
+            "description": "Gain proficiency in one saving throw. +1 to that ability score.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "sentinel",
+            "name": "Sentinel",
+            "description": "Stop movement with Opportunity Attacks. Reaction attack for hits on allies. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "shadow-touched",
+            "name": "Shadow-Touched",
+            "description": "Learn Invisibility and one 1st-level Illusion/Necromancy spell. +1 Int, Wis, or Cha.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis,cha"
+                }
+            ]
+        },
+        {
+            "id": "sharpshooter",
+            "name": "Sharpshooter",
+            "description": "Ignore cover. Long range without disadvantage. Fire in melee. +1 Dexterity.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "dex"
+                }
+            ]
+        },
+        {
+            "id": "shield-master",
+            "name": "Shield Master",
+            "description": "Shield Bash for prone or push. Add shield bonus to Dex saves. +1 Strength.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str"
+                }
+            ]
+        },
+        {
+            "id": "skill-expert",
+            "name": "Skill Expert",
+            "description": "Proficiency in one skill. Expertise in one skill. +1 to any ability score.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "skulker",
+            "name": "Skulker",
+            "description": "Hide while lightly obscured. No miss penalty for hiding. +1 Dexterity.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "dex"
+                }
+            ]
+        },
+        {
+            "id": "slasher",
+            "name": "Slasher",
+            "description": "Reduce enemy speed with slashing damage. Crits cause Disadvantage on attacks. +1 Str or Dex.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "str,dex"
+                }
+            ]
+        },
+        {
+            "id": "spell-sniper",
+            "name": "Spell Sniper",
+            "description": "Ignore cover for spell attacks. Double range. Fire spells in melee. +1 Int, Wis, or Cha.",
+            "prerequisites": "Level 4, Spellcasting feature",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis,cha"
+                }
+            ]
+        },
+        {
+            "id": "telekinetic",
+            "name": "Telekinetic",
+            "description": "Learn Mage Hand (invisible/distant). Shove creatures with your mind. +1 Int, Wis, or Cha.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis,cha"
+                }
+            ]
+        },
+        {
+            "id": "telepathic",
+            "name": "Telepathic",
+            "description": "Speak telepathically. Cast Detect Thoughts without a slot. +1 Int, Wis, or Cha.",
+            "prerequisites": "Level 4",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis,cha"
+                }
+            ]
+        },
+        {
+            "id": "war-caster",
+            "name": "War Caster",
+            "description": "Advantage on Concentration saves. Spells as Opportunity Attacks. +1 Int, Wis, or Cha.",
+            "prerequisites": "Level 4, Spellcasting feature",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1,
+                    "condition": "int,wis,cha"
+                }
+            ]
+        },
+        {
+            "id": "fighting-style-archery",
+            "name": "Archery",
+            "description": "+2 bonus to attack rolls with ranged weapons.",
+            "prerequisites": "Fighting Style feature",
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "ranged_attack",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "id": "fighting-style-blind-fighting",
+            "name": "Blind Fighting",
+            "description": "Blindsight out to 10 feet.",
+            "prerequisites": "Fighting Style feature"
+        },
+        {
+            "id": "fighting-style-defense",
+            "name": "Defense",
+            "description": "+1 bonus to AC while wearing armor.",
+            "prerequisites": "Fighting Style feature",
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "ac",
+                    "value": 1,
+                    "condition": "wearing_armor"
+                }
+            ]
+        },
+        {
+            "id": "fighting-style-dueling",
+            "name": "Dueling",
+            "description": "+2 bonus to damage rolls with one-handed melee weapons.",
+            "prerequisites": "Fighting Style feature"
+        },
+        {
+            "id": "fighting-style-great-weapon",
+            "name": "Great Weapon Fighting",
+            "description": "Reroll 1s and 2s on damage dice for two-handed weapons.",
+            "prerequisites": "Fighting Style feature"
+        },
+        {
+            "id": "fighting-style-interception",
+            "name": "Interception",
+            "description": "As a Reaction, reduce damage to an ally within 5ft by 1d10 + Proficiency Bonus.",
+            "prerequisites": "Fighting Style feature"
+        },
+        {
+            "id": "fighting-style-protection",
+            "name": "Protection",
+            "description": "Impose Disadvantage on an attack against an ally when using your shield.",
+            "prerequisites": "Fighting Style feature"
+        },
+        {
+            "id": "fighting-style-two-weapon",
+            "name": "Two-Weapon Fighting",
+            "description": "Add ability modifier to the damage of the second (off-hand) attack.",
+            "prerequisites": "Fighting Style feature"
+        },
+        {
+            "id": "fighting-style-unarmed",
+            "name": "Unarmed Fighting",
+            "description": "Unarmed strikes deal 1d6 (or 1d8 if hands are empty) + Strength damage.",
+            "prerequisites": "Fighting Style feature"
+        },
+        {
+            "id": "boon-combat-prowess",
+            "name": "Boon of Combat Prowess",
+            "description": "Once per turn, turn a missed attack into a hit. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-dimensional-travel",
+            "name": "Boon of Dimensional Travel",
+            "description": "Teleport 30ft after taking the Attack or Magic action. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-energy-resistance",
+            "name": "Boon of Energy Resistance",
+            "description": "Resistance to two elements (swap on Long Rest). Can redirect damage. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-fate",
+            "name": "Boon of Fate",
+            "description": "Add or subtract 2d4 from a d20 roll within 60ft. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-fortitude",
+            "name": "Boon of Fortitude",
+            "description": "+40 Max HP. Heal extra whenever you receive healing. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "hp_max",
+                    "value": 40
+                },
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-irresistible-offense",
+            "name": "Boon of Irresistible Offense",
+            "description": "Ignore B/P/S resistance. Deal extra damage equal to your ability bonus on a 20. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-recovery",
+            "name": "Boon of Recovery",
+            "description": "Once per Long Rest, drop to 0 HP and immediately heal to half max HP. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-skill",
+            "name": "Boon of Skill",
+            "description": "Proficiency in all skills. Expertise in one skill. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-speed",
+            "name": "Boon of Speed",
+            "description": "+30ft movement. Use Bonus Action to Disengage. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "speed",
+                    "value": 30
+                },
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-spell-recall",
+            "name": "Boon of Spell Recall",
+            "description": "Casting Level 1-4 spells has a chance to not expend the slot. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-night-spirit",
+            "name": "Boon of the Night Spirit",
+            "description": "Invisibility in dim light/darkness. Resistance to most damage while in shadow. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "boon-truesight",
+            "name": "Boon of Truesight",
+            "description": "Gain Truesight out to 60 feet. +1 to any ability score (max 30).",
+            "prerequisites": "Level 19",
+            "modifiers": [
+                {
+                    "type": "ability_point_grant",
+                    "target": "ability_points",
+                    "value": 1
+                }
+            ]
+        }
+    ]
+}

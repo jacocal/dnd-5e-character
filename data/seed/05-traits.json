@@ -1,0 +1,324 @@
+{
+    "$schema": "src/lib/import/schemas.ts#TraitSchema",
+    "$table": "traits",
+    "$description": "D&D 5e 2024 racial/species traits. Associated with races via race field.",
+    "data": [
+        {
+            "id": "celestial-resistance",
+            "name": "Celestial Resistance",
+            "description": "You have Resistance to Necrotic damage and Radiant damage.",
+            "race": "aasimar"
+        },
+        {
+            "id": "darkvision",
+            "name": "Darkvision",
+            "description": "You can see in dim light within the range as if it were bright light and in darkness as if it were dim light.",
+            "race": null,
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "darkvision",
+                    "value": 60
+                }
+            ]
+        },
+        {
+            "id": "healing-hands",
+            "name": "Healing Hands",
+            "description": "As a Magic action, you can touch a creature and roll a number of d4s equal to your Proficiency Bonus. The creature regains Hit Points equal to the total rolled.",
+            "race": "aasimar"
+        },
+        {
+            "id": "light-bearer",
+            "name": "Light Bearer",
+            "description": "You know the Light cantrip. Charisma is your spellcasting ability for it.",
+            "race": "aasimar"
+        },
+        {
+            "id": "celestial-revelation",
+            "name": "Celestial Revelation",
+            "description": "At level 3, you gain a transformation based on your Aasimar subtype.",
+            "race": "aasimar"
+        },
+        {
+            "id": "heavenly-wings",
+            "name": "Heavenly Wings",
+            "description": "You gain a flying speed equal to your walking speed and can deal extra Radiant damage equal to your Proficiency Bonus once per turn.",
+            "race": "aasimar-heavenly"
+        },
+        {
+            "id": "inner-radiance",
+            "name": "Inner Radiance",
+            "description": "You shed bright light in a 10-foot radius and deal Radiant damage to creatures within it.",
+            "race": "aasimar-radiance"
+        },
+        {
+            "id": "necrotic-shroud",
+            "name": "Necrotic Shroud",
+            "description": "You can frighten nearby creatures and deal extra Necrotic damage once per turn.",
+            "race": "aasimar-necrotic"
+        },
+        {
+            "id": "draconic-ancestry",
+            "name": "Draconic Ancestry",
+            "description": "You have a dragon ancestor, which determines your damage type for Breath Weapon and Damage Resistance.",
+            "race": "dragonborn"
+        },
+        {
+            "id": "breath-weapon",
+            "name": "Breath Weapon",
+            "description": "When you take the Attack action, you can replace one of your attacks with a 15-foot cone or 30-foot line of elemental energy. Each creature in the area must make a Dexterity saving throw.",
+            "race": "dragonborn"
+        },
+        {
+            "id": "damage-resistance",
+            "name": "Damage Resistance",
+            "description": "You have Resistance to the damage type associated with your Draconic Ancestry.",
+            "race": "dragonborn"
+        },
+        {
+            "id": "draconic-flight",
+            "name": "Draconic Flight",
+            "description": "At level 5, you can sprout spectral wings that give you a Fly speed for 10 minutes, usable once per Long Rest.",
+            "race": "dragonborn"
+        },
+        {
+            "id": "dwarven-resilience",
+            "name": "Dwarven Resilience",
+            "description": "You have Advantage on saving throws against poison, and you have Resistance to Poison damage.",
+            "race": "dwarf"
+        },
+        {
+            "id": "dwarven-toughness",
+            "name": "Dwarven Toughness",
+            "description": "Your Hit Point maximum increases by 1, and it increases by 1 again whenever you gain a level.",
+            "race": "dwarf",
+            "modifiers": [
+                {
+                    "type": "bonus",
+                    "target": "hp_per_level",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "stonecunning",
+            "name": "Stonecunning",
+            "description": "As a Bonus Action, you gain Tremorsense with a range of 60 feet for 10 minutes while on stone surfaces.",
+            "race": "dwarf"
+        },
+        {
+            "id": "fey-ancestry",
+            "name": "Fey Ancestry",
+            "description": "You have Advantage on saving throws to avoid or end the Charmed condition.",
+            "race": "elf"
+        },
+        {
+            "id": "trance",
+            "name": "Trance",
+            "description": "You don't need to sleep. Instead, you enter a trance for 4 hours equal to a Long Rest.",
+            "race": "elf"
+        },
+        {
+            "id": "keen-senses",
+            "name": "Keen Senses",
+            "description": "You have proficiency in the Perception skill.",
+            "race": "elf",
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "perception",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "drow-lineage",
+            "name": "Drow Lineage",
+            "description": "At 1st level, you know Dancing Lights. At 3rd level, Faerie Fire. At 5th level, Darkness. Charisma is your spellcasting ability. You also have superior Darkvision (120 ft).",
+            "race": "elf-drow",
+            "modifiers": [
+                {
+                    "type": "set",
+                    "target": "darkvision",
+                    "value": 120
+                }
+            ]
+        },
+        {
+            "id": "high-elf-lineage",
+            "name": "High Elf Lineage",
+            "description": "You know one Wizard cantrip using Intelligence. At 3rd level, gain Detect Magic. At 5th level, Misty Step.",
+            "race": "elf-high"
+        },
+        {
+            "id": "wood-elf-lineage",
+            "name": "Wood Elf Lineage",
+            "description": "Your walking speed is 35 feet. You know Druidcraft. At 3rd level, Longstrider. At 5th level, Pass Without Trace.",
+            "race": "elf-wood"
+        },
+        {
+            "id": "gnomish-cunning",
+            "name": "Gnomish Cunning",
+            "description": "You have Advantage on Intelligence, Wisdom, and Charisma saving throws.",
+            "race": "gnome"
+        },
+        {
+            "id": "gnomish-lineage-forest",
+            "name": "Gnomish Lineage (Forest)",
+            "description": "You know Minor Illusion. You can communicate with Small beasts.",
+            "race": "gnome-forest"
+        },
+        {
+            "id": "gnomish-lineage-rock",
+            "name": "Gnomish Lineage (Rock)",
+            "description": "You know Prestidigitation and Mending. You can create Tiny clockwork devices.",
+            "race": "gnome-rock"
+        },
+        {
+            "id": "giant-ancestry",
+            "name": "Giant Ancestry",
+            "description": "You trace your lineage to a type of giant, which grants you a supernatural ability.",
+            "race": "goliath"
+        },
+        {
+            "id": "large-form",
+            "name": "Large Form",
+            "description": "At level 5, as a Bonus Action, you can become Large for 10 minutes. Advantage on Strength checks and deal extra damage.",
+            "race": "goliath"
+        },
+        {
+            "id": "powerful-build",
+            "name": "Powerful Build",
+            "description": "You have Advantage on saving throws to end the Grappled condition. You count as one size larger for carrying capacity.",
+            "race": "goliath"
+        },
+        {
+            "id": "clouds-jaunt",
+            "name": "Cloud's Jaunt",
+            "description": "As a Bonus Action, you can teleport up to 30 feet. Proficiency Bonus uses per Long Rest.",
+            "race": "goliath-cloud"
+        },
+        {
+            "id": "fires-burn",
+            "name": "Fire's Burn",
+            "description": "When you hit with an attack, you deal extra Fire damage equal to your Proficiency Bonus.",
+            "race": "goliath-fire"
+        },
+        {
+            "id": "frosts-chill",
+            "name": "Frost's Chill",
+            "description": "When you hit, the target's speed is reduced by 10 feet until the start of your next turn.",
+            "race": "goliath-frost"
+        },
+        {
+            "id": "hills-tumble",
+            "name": "Hill's Tumble",
+            "description": "When you hit a Large or smaller creature, you can knock it Prone.",
+            "race": "goliath-hill"
+        },
+        {
+            "id": "stones-endurance",
+            "name": "Stone's Endurance",
+            "description": "As a Reaction when you take damage, you can roll 1d12 + Constitution modifier and reduce the damage by that amount.",
+            "race": "goliath-stone"
+        },
+        {
+            "id": "storms-thunder",
+            "name": "Storm's Thunder",
+            "description": "When a creature within 60 feet hits you, you can use your Reaction to deal Thunder damage equal to your Proficiency Bonus.",
+            "race": "goliath-storm"
+        },
+        {
+            "id": "brave",
+            "name": "Brave",
+            "description": "You have Advantage on saving throws to avoid or end the Frightened condition.",
+            "race": "halfling"
+        },
+        {
+            "id": "halfling-nimbleness",
+            "name": "Halfling Nimbleness",
+            "description": "You can move through the space of any creature that is a size larger than you.",
+            "race": "halfling"
+        },
+        {
+            "id": "luck",
+            "name": "Luck",
+            "description": "When you roll a 1 on a d20 for a d20 Test, you can reroll the die, and you must use the new roll.",
+            "race": "halfling"
+        },
+        {
+            "id": "naturally-stealthy",
+            "name": "Naturally Stealthy",
+            "description": "You can hide behind creatures that are a size larger than you. You have proficiency in the Stealth skill.",
+            "race": "halfling",
+            "modifiers": [
+                {
+                    "type": "skill_proficiency",
+                    "target": "stealth",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": "resourceful",
+            "name": "Resourceful",
+            "description": "You gain Heroic Inspiration whenever you finish a Long Rest.",
+            "race": "human"
+        },
+        {
+            "id": "skillful",
+            "name": "Skillful",
+            "description": "You gain proficiency in one skill of your choice.",
+            "race": "human"
+        },
+        {
+            "id": "versatile",
+            "name": "Versatile",
+            "description": "You gain an Origin Feat of your choice.",
+            "race": "human"
+        },
+        {
+            "id": "adrenaline-rush",
+            "name": "Adrenaline Rush",
+            "description": "As a Bonus Action, you can take the Dash action and gain Temporary HP equal to your level. Proficiency Bonus uses per Long Rest.",
+            "race": "orc"
+        },
+        {
+            "id": "relentless-endurance",
+            "name": "Relentless Endurance",
+            "description": "When you are reduced to 0 HP but not killed outright, you can drop to 1 HP instead. Once per Long Rest.",
+            "race": "orc"
+        },
+        {
+            "id": "fiendish-legacy",
+            "name": "Fiendish Legacy",
+            "description": "You know a cantrip, and at levels 3 and 5 you learn additional spells based on your legacy. Charisma is your spellcasting ability.",
+            "race": "tiefling"
+        },
+        {
+            "id": "otherworldly-presence",
+            "name": "Otherworldly Presence",
+            "description": "You have proficiency in the Intimidation or Persuasion skill.",
+            "race": "tiefling"
+        },
+        {
+            "id": "poison-resistance",
+            "name": "Poison Resistance",
+            "description": "You have Resistance to Poison damage.",
+            "race": "tiefling-abyssal"
+        },
+        {
+            "id": "necrotic-resistance",
+            "name": "Necrotic Resistance",
+            "description": "You have Resistance to Necrotic damage.",
+            "race": "tiefling-chthonic"
+        },
+        {
+            "id": "fire-resistance",
+            "name": "Fire Resistance",
+            "description": "You have Resistance to Fire damage.",
+            "race": "tiefling-infernal"
+        }
+    ]
+}

@@ -1,0 +1,639 @@
+{
+    "$schema": "src/lib/import/schemas.ts#ClassSchema",
+    "$table": "classes",
+    "$description": "D&D 5e 2024 base classes (SRD 5.2). Complete proficiencies, skill options, and starting equipment.",
+    "data": [
+        {
+            "id": "barbarian",
+            "name": "Barbarian",
+            "hit_die": 12,
+            "spellcasting_type": "none",
+            "saving_throws": [
+                "STR",
+                "CON"
+            ],
+            "proficiencies": {
+                "armor": [
+                    "Light",
+                    "Medium",
+                    "Shields"
+                ],
+                "weapons": [
+                    "Simple",
+                    "Martial"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "animal_handling",
+                    "athletics",
+                    "intimidation",
+                    "nature",
+                    "perception",
+                    "survival"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "greataxe",
+                        "handaxe",
+                        "handaxe",
+                        "handaxe",
+                        "handaxe",
+                        "explorers-pack"
+                    ],
+                    "gp": 15
+                },
+                "B": {
+                    "items": [],
+                    "gp": 75
+                }
+            }
+        },
+        {
+            "id": "bard",
+            "name": "Bard",
+            "hit_die": 8,
+            "spellcasting_type": "full",
+            "saving_throws": [
+                "DEX",
+                "CHA"
+            ],
+            "spellcasting_ability": "CHA",
+            "proficiencies": {
+                "armor": [
+                    "Light"
+                ],
+                "weapons": [
+                    "Simple"
+                ],
+                "tools": [
+                    "3 Musical Instruments"
+                ]
+            },
+            "skill_options": {
+                "choose": 3,
+                "from": [
+                    "acrobatics",
+                    "animal_handling",
+                    "arcana",
+                    "athletics",
+                    "deception",
+                    "history",
+                    "insight",
+                    "intimidation",
+                    "investigation",
+                    "medicine",
+                    "nature",
+                    "perception",
+                    "performance",
+                    "persuasion",
+                    "religion",
+                    "sleight_of_hand",
+                    "stealth",
+                    "survival"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "leather-armor",
+                        "dagger",
+                        "dagger",
+                        "entertainers-pack"
+                    ],
+                    "gp": 19
+                },
+                "B": {
+                    "items": [],
+                    "gp": 90
+                }
+            }
+        },
+        {
+            "id": "cleric",
+            "name": "Cleric",
+            "hit_die": 8,
+            "spellcasting_type": "full",
+            "saving_throws": [
+                "WIS",
+                "CHA"
+            ],
+            "spellcasting_ability": "WIS",
+            "proficiencies": {
+                "armor": [
+                    "Light",
+                    "Medium",
+                    "Shields"
+                ],
+                "weapons": [
+                    "Simple"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "history",
+                    "insight",
+                    "medicine",
+                    "persuasion",
+                    "religion"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "chain-shirt",
+                        "shield",
+                        "mace",
+                        "holy-symbol-amulet",
+                        "priests-pack"
+                    ],
+                    "gp": 7
+                },
+                "B": {
+                    "items": [],
+                    "gp": 110
+                }
+            }
+        },
+        {
+            "id": "druid",
+            "name": "Druid",
+            "hit_die": 8,
+            "spellcasting_type": "full",
+            "saving_throws": [
+                "INT",
+                "WIS"
+            ],
+            "spellcasting_ability": "WIS",
+            "proficiencies": {
+                "armor": [
+                    "Light",
+                    "Shields"
+                ],
+                "weapons": [
+                    "Simple"
+                ],
+                "tools": [
+                    "Herbalism Kit"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "arcana",
+                    "animal_handling",
+                    "insight",
+                    "medicine",
+                    "nature",
+                    "perception",
+                    "religion",
+                    "survival"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "leather-armor",
+                        "shield",
+                        "sickle",
+                        "druidic-focus-staff",
+                        "explorers-pack",
+                        "herbalism-kit"
+                    ],
+                    "gp": 9
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "fighter",
+            "name": "Fighter",
+            "hit_die": 10,
+            "spellcasting_type": "none",
+            "saving_throws": [
+                "STR",
+                "CON"
+            ],
+            "proficiencies": {
+                "armor": [
+                    "Light",
+                    "Medium",
+                    "Heavy",
+                    "Shields"
+                ],
+                "weapons": [
+                    "Simple",
+                    "Martial"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "acrobatics",
+                    "animal_handling",
+                    "athletics",
+                    "history",
+                    "insight",
+                    "intimidation",
+                    "persuasion",
+                    "perception",
+                    "survival"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "chain-mail",
+                        "greatsword",
+                        "flail",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "dungeoneers-pack"
+                    ],
+                    "gp": 4
+                },
+                "B": {
+                    "items": [],
+                    "gp": 155
+                },
+                "C": {
+                    "items": [
+                        "studded-leather",
+                        "scimitar",
+                        "shortsword",
+                        "longbow",
+                        "arrows",
+                        "quiver",
+                        "dungeoneers-pack"
+                    ],
+                    "gp": 11
+                }
+            }
+        },
+        {
+            "id": "monk",
+            "name": "Monk",
+            "hit_die": 8,
+            "spellcasting_type": "none",
+            "saving_throws": [
+                "STR",
+                "DEX"
+            ],
+            "proficiencies": {
+                "weapons": [
+                    "Simple",
+                    "Martial (Light)"
+                ],
+                "tools": [
+                    "1 Artisan Tool or Musical Instrument"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "acrobatics",
+                    "athletics",
+                    "history",
+                    "insight",
+                    "religion",
+                    "stealth"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "spear",
+                        "dagger",
+                        "dagger",
+                        "dagger",
+                        "dagger",
+                        "dagger",
+                        "explorers-pack"
+                    ],
+                    "gp": 11
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "paladin",
+            "name": "Paladin",
+            "hit_die": 10,
+            "spellcasting_type": "half",
+            "saving_throws": [
+                "WIS",
+                "CHA"
+            ],
+            "spellcasting_ability": "CHA",
+            "proficiencies": {
+                "armor": [
+                    "Light",
+                    "Medium",
+                    "Heavy",
+                    "Shields"
+                ],
+                "weapons": [
+                    "Simple",
+                    "Martial"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "athletics",
+                    "insight",
+                    "intimidation",
+                    "medicine",
+                    "persuasion",
+                    "religion"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "chain-mail",
+                        "shield",
+                        "longsword",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "javelin",
+                        "holy-symbol-amulet",
+                        "priests-pack"
+                    ],
+                    "gp": 9
+                },
+                "B": {
+                    "items": [],
+                    "gp": 150
+                }
+            }
+        },
+        {
+            "id": "ranger",
+            "name": "Ranger",
+            "hit_die": 10,
+            "spellcasting_type": "half",
+            "saving_throws": [
+                "STR",
+                "DEX"
+            ],
+            "spellcasting_ability": "WIS",
+            "proficiencies": {
+                "armor": [
+                    "Light",
+                    "Medium",
+                    "Shields"
+                ],
+                "weapons": [
+                    "Simple",
+                    "Martial"
+                ]
+            },
+            "skill_options": {
+                "choose": 3,
+                "from": [
+                    "animal_handling",
+                    "athletics",
+                    "insight",
+                    "investigation",
+                    "nature",
+                    "perception",
+                    "stealth",
+                    "survival"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "studded-leather",
+                        "scimitar",
+                        "shortsword",
+                        "longbow",
+                        "arrows",
+                        "quiver",
+                        "druidic-focus-mistletoe",
+                        "explorers-pack"
+                    ],
+                    "gp": 7
+                },
+                "B": {
+                    "items": [],
+                    "gp": 150
+                }
+            }
+        },
+        {
+            "id": "rogue",
+            "name": "Rogue",
+            "hit_die": 8,
+            "spellcasting_type": "none",
+            "saving_throws": [
+                "DEX",
+                "INT"
+            ],
+            "proficiencies": {
+                "armor": [
+                    "Light"
+                ],
+                "weapons": [
+                    "Simple",
+                    "Martial (Finesse/Light)"
+                ],
+                "tools": [
+                    "Thieves' Tools"
+                ]
+            },
+            "skill_options": {
+                "choose": 4,
+                "from": [
+                    "acrobatics",
+                    "athletics",
+                    "deception",
+                    "insight",
+                    "intimidation",
+                    "investigation",
+                    "perception",
+                    "persuasion",
+                    "sleight_of_hand",
+                    "stealth"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "leather-armor",
+                        "dagger",
+                        "dagger",
+                        "shortsword",
+                        "shortbow",
+                        "arrows",
+                        "quiver",
+                        "thieves-tools",
+                        "burglars-pack"
+                    ],
+                    "gp": 8
+                },
+                "B": {
+                    "items": [],
+                    "gp": 100
+                }
+            }
+        },
+        {
+            "id": "sorcerer",
+            "name": "Sorcerer",
+            "hit_die": 6,
+            "spellcasting_type": "full",
+            "saving_throws": [
+                "CON",
+                "CHA"
+            ],
+            "spellcasting_ability": "CHA",
+            "proficiencies": {
+                "weapons": [
+                    "Simple"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "arcana",
+                    "deception",
+                    "insight",
+                    "intimidation",
+                    "persuasion",
+                    "religion"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "spear",
+                        "dagger",
+                        "dagger",
+                        "arcane-focus-crystal",
+                        "dungeoneers-pack"
+                    ],
+                    "gp": 28
+                },
+                "B": {
+                    "items": [],
+                    "gp": 50
+                }
+            }
+        },
+        {
+            "id": "warlock",
+            "name": "Warlock",
+            "hit_die": 8,
+            "spellcasting_type": "pact",
+            "saving_throws": [
+                "WIS",
+                "CHA"
+            ],
+            "spellcasting_ability": "CHA",
+            "proficiencies": {
+                "armor": [
+                    "Light"
+                ],
+                "weapons": [
+                    "Simple"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "arcana",
+                    "deception",
+                    "history",
+                    "intimidation",
+                    "investigation",
+                    "nature",
+                    "religion"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "leather-armor",
+                        "sickle",
+                        "dagger",
+                        "dagger",
+                        "arcane-focus-orb",
+                        "book",
+                        "scholars-pack"
+                    ],
+                    "gp": 15
+                },
+                "B": {
+                    "items": [],
+                    "gp": 100
+                }
+            }
+        },
+        {
+            "id": "wizard",
+            "name": "Wizard",
+            "hit_die": 6,
+            "spellcasting_type": "full",
+            "saving_throws": [
+                "INT",
+                "WIS"
+            ],
+            "spellcasting_ability": "INT",
+            "proficiencies": {
+                "weapons": [
+                    "Simple"
+                ]
+            },
+            "skill_options": {
+                "choose": 2,
+                "from": [
+                    "arcana",
+                    "history",
+                    "insight",
+                    "investigation",
+                    "medicine",
+                    "nature",
+                    "religion"
+                ]
+            },
+            "starting_equipment_options": {
+                "A": {
+                    "items": [
+                        "dagger",
+                        "dagger",
+                        "arcane-focus-staff",
+                        "robe",
+                        "spellbook",
+                        "scholars-pack"
+                    ],
+                    "gp": 5
+                },
+                "B": {
+                    "items": [],
+                    "gp": 55
+                }
+            }
+        }
+    ]
+}
