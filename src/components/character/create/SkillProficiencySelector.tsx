@@ -46,11 +46,15 @@ export default function SkillProficiencySelector({
 
     const maxSelections = classSkillOptions?.choose || 0;
 
+    // Stringify backgroundSkills for stable dependency comparison (array reference changes on every render)
+    const backgroundSkillsKey = JSON.stringify(backgroundSkills);
+
     useEffect(() => {
-        // Reset selections when class changes
+        // Reset selections when class or background changes
         setSelectedSkills([]);
         onChange([]);
-    }, [classSkillOptions]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [classSkillOptions, backgroundSkillsKey]);
 
     const handleSkillToggle = (skill: string) => {
         let newSelection: string[];
@@ -100,10 +104,10 @@ export default function SkillProficiencySelector({
                         <div
                             key={skill}
                             className={`flex items-center gap-2 p-2 rounded-md border transition-colors ${isSelected
-                                    ? "border-red-600 bg-red-50 dark:bg-red-900/20"
-                                    : isDisabled
-                                        ? "border-slate-200 dark:border-slate-700 opacity-50"
-                                        : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
+                                ? "border-red-600 bg-red-50 dark:bg-red-900/20"
+                                : isDisabled
+                                    ? "border-slate-200 dark:border-slate-700 opacity-50"
+                                    : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
                                 }`}
                         >
                             <Checkbox

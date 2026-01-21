@@ -179,6 +179,13 @@ export default function AbilityScoreCalculator({ abilityOptions }: Props) {
         }
     }, [method]);
 
+    // Reset bonus selections when abilityOptions changes (background changed)
+    useEffect(() => {
+        setPrimaryBonus(null);
+        setSecondaryBonus(null);
+        setTripleBonus([]);
+    }, [abilityOptions]);
+
     return (
         <div className="space-y-6">
             {/* Method Selector */}
