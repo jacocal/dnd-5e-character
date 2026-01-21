@@ -4,10 +4,26 @@ A dynamic character sheet application for Dungeons and Dragons 5th Edition (2024
 
 ## Prerequisites
 
-- Node.js 18+
-- Docker (for local Postgres database)
+- Node.js 24.0.0+
+- Docker Desktop (includes Docker Compose)
 
-## Setup
+## Quick Start
+
+### Windows (PowerShell)
+```powershell
+.\make.ps1 all      # Complete setup (checks, install, db, seed)
+.\make.ps1 dev      # Start development server
+.\make.ps1 help     # Show all available commands
+```
+
+### macOS/Linux (Make)
+```bash
+make all            # Complete setup (checks, install, db, seed)
+make dev            # Start development server
+make help           # Show all available commands
+```
+
+## Manual Setup
 
 ### 1. Database Setup
 Start the local database and admin interface using Docker Compose:
