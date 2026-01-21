@@ -82,6 +82,7 @@ export default function DynamicCreationOptions({ classes, backgrounds, feats }: 
             const target = e.target as HTMLSelectElement;
             setSelectedBackgroundId(target.value);
             setSelectedToolProficiency([]); // Reset tool selection
+            setSelectedSkills([]); // Reset skill selections since background skills affect available options
         };
 
         if (classSelect) {
