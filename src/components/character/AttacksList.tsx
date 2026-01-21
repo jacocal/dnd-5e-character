@@ -38,18 +38,17 @@ export function AttacksList() {
         if (!spell) return false;
 
         // Logic:
-        // 1. Cantrips (Level 0) tagged as "attack" are always shown (always available if known).
+        // 1. All Cantrips (Level 0) are always shown (always available if known).
         // 2. Level 1+ spells tagged as "attack" MUST be Prepared to show up here.
         // 3. Any other spell explicitly prepared is shown (e.g. if user prepares "Light" manual override)
 
         const isAttackTag = spell.tags?.includes("attack");
         const isCantrip = spell.level === 0;
 
-        if (isCantrip && isAttackTag) return true;
+        if (isCantrip) return true;
         if (isAttackTag && s.prepared) return true;
 
         // Also show non-attacks if they are explicitly prepared (User intent to use)
-        // Actually, user only wants Attacks in this specific list usually, but let's allow "Prepared" to override.
         return s.prepared === true;
     });
 
