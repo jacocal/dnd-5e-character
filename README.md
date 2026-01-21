@@ -73,5 +73,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 - My friend Pablo who researched, centralized and provided the database which fed the seed data
 - Wizard of the Coast for providing a clear ruleset to use as a reference
 - My wife, while not understanding DnD, tested the app and provided feedback as a user
+- The amazing [DnD Discord](https://discord.gg/dnd) community that helped me answer so many critical questions for the app  
 - [DLtheDM](https://www.reddit.com/user/DLtheDM) for the [reference file](https://www.reddit.com/r/DnD/comments/1fa7bu9/formfillable_2024_character_sheet/)
  
