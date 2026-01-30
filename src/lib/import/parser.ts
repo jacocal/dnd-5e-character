@@ -161,8 +161,8 @@ export function parseSrdData(rawData: unknown) {
         let armorClass: number | undefined;
         let damageDice: string | undefined;
         let damageType: string | undefined;
-        let properties: string[] = [];
-        let tags: string[] = []; // New Tags
+        const properties: string[] = [];
+        const tags: string[] = []; // New Tags
         let stealthDisadvantage = false;
         let strengthRequirement: number | undefined;
 

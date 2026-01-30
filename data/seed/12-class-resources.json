@@ -10,7 +10,37 @@
             "description": "Enter a rage as a Bonus Action, gaining benefits for 10 rounds or until incapacitated.",
             "max_formula": "proficiency",
             "recharge_on": "long",
-            "unlock_level": 1
+            "unlock_level": 1,
+            "onUse": [
+                {
+                    "type": "bonus",
+                    "target": "str_damage",
+                    "formula": "proficiency",
+                    "condition": "raging",
+                    "duration": "manual_disable"
+                },
+                {
+                    "type": "set",
+                    "target": "resistance_bludgeoning",
+                    "value": true,
+                    "condition": "raging",
+                    "duration": "manual_disable"
+                },
+                {
+                    "type": "set",
+                    "target": "resistance_piercing",
+                    "value": true,
+                    "condition": "raging",
+                    "duration": "manual_disable"
+                },
+                {
+                    "type": "set",
+                    "target": "resistance_slashing",
+                    "value": true,
+                    "condition": "raging",
+                    "duration": "manual_disable"
+                }
+            ]
         },
         {
             "id": "bardic-inspiration",
@@ -40,9 +70,9 @@
             "unlock_level": 2,
             "onUse": [
                 {
-                    "type": "grant_hp",
-                    "mode": "bonus",
-                    "formula": "3 * level",
+                    "type": "bonus",
+                    "target": "hp_max",
+                    "formula": "1 * class_level",
                     "duration": "long_rest"
                 }
             ]

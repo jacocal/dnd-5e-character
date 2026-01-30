@@ -1,20 +1,28 @@
 "use client";
 
 import React from "react";
-import { useCharacterStore } from "@/store/character-store";
+import { useKmpCharacter } from "@/components/character/kmp/KmpCharacterProvider";
 import { Button } from "@/components/ui/button";
 import { Moon, Coffee } from "lucide-react";
 
 export function CharacterHeaderActions() {
-    const { longRest, shortRest, maxPactSlots } = useCharacterStore();
+    const { viewModel } = useKmpCharacter();
+
+    const handleShortRest = () => {
+        viewModel?.performShortRest();
+    };
+
+    const handleLongRest = () => {
+        viewModel?.performLongRest();
+    };
 
     return (
         <div className="flex gap-2">
-            {/* Short Rest - Only show if character has pact slots or hit dice to spend */}
+            {/* Short Rest */}
             <Button
                 variant="outline"
                 size="sm"
-                onClick={shortRest}
+                onClick={handleShortRest}
                 className="gap-2"
                 title="Recover Pact Magic slots. Spend Hit Dice to heal."
             >
@@ -25,7 +33,7 @@ export function CharacterHeaderActions() {
             <Button
                 variant="outline"
                 size="sm"
-                onClick={longRest}
+                onClick={handleLongRest}
                 className="gap-2"
                 title="Restores HP, Hit Dice (1/2), and resets all Spell Slots"
             >
