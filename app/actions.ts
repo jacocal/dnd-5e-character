@@ -5,6 +5,21 @@ import { characters } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
+type Modifier = {
+    type: string;
+    target: string;
+    value: string | number | boolean;
+};
+
+type Feat = {
+    id: string;
+    name: string;
+    description: string;
+    modifiers: Modifier[];
+    originClass?: string;
+    level?: number;
+};
+
 interface VitalityUpdate {
     hpCurrent?: number;
     tempHp?: number;
@@ -37,8 +52,8 @@ interface VitalityUpdate {
     gp?: number;
     pp?: number;
     // Phase 5
-    feats?: any[];
-    traits?: any[];
+    feats?: Feat[];
+    traits?: Feat[];
     classes?: { classId: string; level: number; subclassId?: string | null }[];
     // Bio
     size?: string;
@@ -46,6 +61,7 @@ interface VitalityUpdate {
     backstory?: string;
     manualProficiencies?: Record<string, string[]>;
     proficiencyBonus?: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resourceModifiers?: any[];
 }
 
@@ -54,6 +70,7 @@ export async function updateCharacterVitality(characterId: number, data: Vitalit
         // Separate classes from other data
         // Also remove derived fields like proficiencyBonus that aren't in the DB schema
         const { classes: classesData, proficiencyBonus, ...characterData } = data;
+        void proficiencyBonus; // Suppress unused warning
 
         // 1. Update Characters Table
         if (Object.keys(characterData).length > 0) {
@@ -92,6 +109,12 @@ export async function updateCharacterVitality(characterId: number, data: Vitalit
         }
 
         revalidatePath(`/character/${characterId}`);
+
+        // Sync resources if level or classes updated
+        if (data.level || data.classes) {
+            await syncCharacterResources(characterId);
+        }
+
         return { success: true };
     } catch (error) {
         console.error("Failed to update character vitality:", error);
@@ -101,7 +124,7 @@ export async function updateCharacterVitality(characterId: number, data: Vitalit
 
 export async function performLongRest(characterId: number) {
     try {
-        const { characterClasses, classResources, characterResources } = await import("@/db/schema");
+        const { classResources, characterResources } = await import("@/db/schema");
         const { inArray } = await import("drizzle-orm");
 
         const char = await db.query.characters.findFirst({
@@ -139,7 +162,7 @@ export async function performLongRest(characterId: number) {
 
         // Reset ALL class resources on the SERVER side (both short and long rest)
         // This prevents race condition with revalidatePath
-        const classIds = char.classes.map((c: any) => c.classId);
+        const classIds = char.classes.map((c: { classId: string }) => c.classId);
         if (classIds.length > 0) {
             const { and } = await import("drizzle-orm");
 
@@ -199,7 +222,7 @@ export async function performShortRest(characterId: number) {
         if (!char) throw new Error("Character not found");
 
         // Short Rest: Only reset Pact Magic slots (Warlock), NOT standard spell slots
-        const hasWarlock = char.classes.some((c: any) => c.classId === 'warlock');
+        const hasWarlock = char.classes.some((c: { classId: string }) => c.classId === 'warlock');
 
         if (hasWarlock) {
             await db.update(characters)
@@ -212,7 +235,7 @@ export async function performShortRest(characterId: number) {
 
         // Reset short-rest class resources on the SERVER side
         // This prevents race condition with revalidatePath
-        const classIds = char.classes.map((c: any) => c.classId);
+        const classIds = char.classes.map((c) => c.classId);
         if (classIds.length > 0) {
             // Find all short-rest resources for this character's classes
             const shortRestResources = await db.select({ id: classResources.id })
@@ -286,14 +309,14 @@ export async function createCharacter(formData: FormData) {
 
     try {
         // 1. Fetch class data for hit die and equipment
-        const { classes: classesTable, feats, characterInventory } = await import("@/db/schema");
+        const { feats, characterInventory } = await import("@/db/schema");
         const classData = await db.query.classes.findFirst({
             where: (classes, { eq }) => eq(classes.id, classId),
         });
         const hitDie = classData?.hitDie || 8;
 
         // 2. Fetch background for skill proficiencies, tools, equipment, and origin feat
-        const { backgrounds: backgroundsTable } = await import("@/db/schema");
+        // const { backgrounds: backgroundsTable } = await import("@/db/schema"); // Unused
         const backgroundData = await db.query.backgrounds.findFirst({
             where: (backgrounds, { eq }) => eq(backgrounds.id, backgroundId),
         });
@@ -499,7 +522,7 @@ export async function createCharacter(formData: FormData) {
 
         // 10. Auto-load Racial Traits
         const { races, traits } = await import("@/db/schema");
-        const { ilike, or, isNull } = await import("drizzle-orm");
+        const { ilike, or } = await import("drizzle-orm");
 
         const raceData = await db.query.races.findFirst({
             where: eq(races.id, race)
@@ -515,7 +538,7 @@ export async function createCharacter(formData: FormData) {
 
             if (matchingTraits.length > 0) {
                 // Merge with any existing feats/traits
-                const existingFeats = newChar.feats || [];
+                // const existingFeats = newChar.feats || []; // Unused
                 await db.update(characters)
                     .set({
                         traits: matchingTraits.map(t => ({
@@ -528,6 +551,9 @@ export async function createCharacter(formData: FormData) {
                     .where(eq(characters.id, newChar.id));
             }
         }
+
+        // 11. Sync Class Resources (Arcane Recovery, etc.)
+        await syncCharacterResources(newChar.id);
 
         revalidatePath("/");
 
@@ -549,6 +575,7 @@ export async function deleteCharacter(characterId: number) {
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateCharacterProficiencies(characterId: number, proficiencies: any) {
     try {
         await db.update(characters)
@@ -586,10 +613,13 @@ export async function toggleSpellPrepared(characterId: number, spellId: string, 
     }
 }
 
-export async function toggleItemEquipped(characterId: number, itemId: string, isEquipped: boolean) {
+export async function toggleItemEquipped(_characterId: number, _itemId: string, _isEquipped: boolean) {
+    void _characterId;
+    void _itemId;
+    void _isEquipped;
     try {
-        const { characterInventory } = await import("@/db/schema");
-        const { and } = await import("drizzle-orm");
+        // const { characterInventory } = await import("@/db/schema"); // Unused
+        // const { and } = await import("drizzle-orm"); // Unused
 
         // Note: Ideally we'd also check slot conflicts here (e.g. unequip other armor), 
         // but for now we just toggle the flag as requested.
@@ -772,10 +802,19 @@ export async function addItemToInventory(characterId: number, itemId: string, qu
     }
 }
 
-export async function createCustomItem(characterId: number, data: any) {
+type CustomItemData = {
+    name: string;
+    type?: string;
+    weightAmount?: string;
+    costAmount?: string;
+    costCurrency?: "cp" | "sp" | "ep" | "gp" | "pp";
+    description?: string;
+};
+
+export async function createCustomItem(characterId: number, data: CustomItemData) {
     try {
         const { items, characterInventory } = await import("@/db/schema");
-        const { and, eq } = await import("drizzle-orm");
+        // const { and, eq } = await import("drizzle-orm"); // Unused
 
         // Generate a unique ID
         const itemId = `custom-${Date.now()}`;
@@ -785,9 +824,9 @@ export async function createCustomItem(characterId: number, data: any) {
             id: itemId,
             name: data.name,
             type: data.type || "gear",
-            weightAmount: parseFloat(data.weightAmount) || 0,
+            weightAmount: parseFloat(data.weightAmount || "0") || 0,
             weightUnit: "lb",
-            costAmount: parseFloat(data.costAmount) || 0,
+            costAmount: parseFloat(data.costAmount || "0") || 0,
             costCurrency: data.costCurrency || "gp",
             category: "custom",
             description: data.description || ""
@@ -806,6 +845,49 @@ export async function createCustomItem(characterId: number, data: any) {
     } catch (error) {
         console.error("Failed to create custom item:", error);
         return { success: false, error: "Failed to create custom item" };
+    }
+}
+
+export async function toggleSpellConcentration(characterId: number, spellId: string, isConcentrating: boolean) {
+    try {
+        const { characterSpells } = await import("@/db/schema");
+        const { and, eq } = await import("drizzle-orm");
+
+        if (isConcentrating) {
+            // Transaction: Clear all others, then set this one
+            // This acts as the "tie breaker" ensuring only one spell is concentrating at a time.
+            await db.transaction(async (tx) => {
+                // Clear any existing concentration (mimicking the "toggle off" action for all active spells)
+                await tx.update(characterSpells)
+                    .set({ isConcentrating: false })
+                    .where(and(
+                        eq(characterSpells.characterId, Number(characterId)),
+                        eq(characterSpells.isConcentrating, true)
+                    ));
+
+                // Set the new spell to concentrating
+                await tx.update(characterSpells)
+                    .set({ isConcentrating: true })
+                    .where(and(
+                        eq(characterSpells.characterId, Number(characterId)),
+                        eq(characterSpells.spellId, spellId)
+                    ));
+            });
+        } else {
+            // Just clear this one (Manual toggle off)
+            await db.update(characterSpells)
+                .set({ isConcentrating: false })
+                .where(and(
+                    eq(characterSpells.characterId, Number(characterId)),
+                    eq(characterSpells.spellId, spellId)
+                ));
+        }
+
+        revalidatePath(`/character/${characterId}`);
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to toggle spell concentration:", error);
+        return { success: false, error: "Update failed" };
     }
 }
 
@@ -972,6 +1054,7 @@ export async function getAvailableSubclasses(classId: string) {
 }
 
 export async function levelUpClass(characterId: number, classId: string, hpGain?: number) {
+    console.log(`[ServerAction] levelUpClass called for CharID: ${characterId}, Class: ${classId}, HP: ${hpGain}`);
     try {
         const { characters, characterClasses } = await import("@/db/schema");
         const { eq, and } = await import("drizzle-orm");
@@ -989,6 +1072,7 @@ export async function levelUpClass(characterId: number, classId: string, hpGain?
         ]);
 
         if (!currentChar) {
+            console.error(`[ServerAction] Character ${characterId} not found`);
             return { success: false, error: "Character not found" };
         }
 
@@ -1125,21 +1209,105 @@ export async function resetCharacterLevel(characterId: number) {
         const { characterClasses, characters } = await import("@/db/schema");
         const { eq } = await import("drizzle-orm");
 
-        // 1. Delete ALL classes (User must pick class again)
+        // 1. Fetch Character to revert ASI
+        const char = await db.query.characters.findFirst({
+            where: eq(characters.id, characterId)
+        });
+
+        if (!char) return { success: false, error: "Character not found" };
+
+        // 2. Revert ASI Stats
+        let newStr = char.str;
+        let newDex = char.dex;
+        let newCon = char.con;
+        let newInt = char.int;
+        let newWis = char.wis;
+        let newCha = char.cha;
+
+        const resourceModifiers = (char.resourceModifiers as any[]) || [];
+        const nonAsiModifiers = [];
+
+        let currentFeats = (char.feats as any[]) || [];
+
+        for (const mod of resourceModifiers) {
+            if (mod.id && typeof mod.id === 'string') {
+                if (mod.id.startsWith("asi_")) {
+                    // Check if modifications is an array (New Format)
+                    if (Array.isArray(mod.modifications)) {
+                        for (const m of mod.modifications) {
+                            // Relaxed check: trust the context (asi_ id) and existence of target/value
+                            if (m.target && (m.value !== undefined && m.value !== null)) {
+                                // Cast value to number to be safe
+                                const val = Number(m.value);
+                                if (!isNaN(val)) {
+                                    if (m.target === 'str') newStr -= val;
+                                    if (m.target === 'dex') newDex -= val;
+                                    if (m.target === 'con') newCon -= val;
+                                    if (m.target === 'int') newInt -= val;
+                                    if (m.target === 'wis') newWis -= val;
+                                    if (m.target === 'cha') newCha -= val;
+                                }
+                            }
+                        }
+                    } else {
+                        // Old Format Fallback (Map)
+                        const mods = mod.modifications || {};
+                        if (mods.str) newStr -= Number(mods.str);
+                        if (mods.dex) newDex -= Number(mods.dex);
+                        if (mods.con) newCon -= Number(mods.con);
+                        if (mods.int) newInt -= Number(mods.int);
+                        if (mods.wis) newWis -= Number(mods.wis);
+                        if (mods.cha) newCha -= Number(mods.cha);
+                    }
+                } else if (mod.id.startsWith("feat_")) {
+                    // Remove the feat added by this event
+                    let featIdToRemove = mod.content?.featId;
+
+                    // Fallback: Parse from ID if using v2 format
+                    // Format: feat_v2:<classId>:<level>:<featId>:<timestamp>
+                    if (!featIdToRemove && mod.id.startsWith("feat_v2:")) {
+                        const parts = mod.id.split(':');
+                        if (parts.length >= 4) {
+                            featIdToRemove = parts[3];
+                        }
+                    }
+
+                    if (featIdToRemove) {
+                        const initialLength = currentFeats.length;
+                        currentFeats = currentFeats.filter((f: any) => {
+                            const keep = f.id !== featIdToRemove;
+                            return keep;
+                        });
+                    }
+                } else {
+                    nonAsiModifiers.push(mod);
+                }
+            } else {
+                nonAsiModifiers.push(mod);
+            }
+        }
+
+        // 3. Delete ALL classes
         await db.delete(characterClasses).where(eq(characterClasses.characterId, characterId));
 
-        // 2. Reset Character Stats
-        // HP is set to 0 - when user picks their first class via Level Up,
-        // the first level will add hitDie + CON mod properly
+        // 4. Reset Character Stats
         await db.update(characters)
             .set({
-                level: 0, // Level 0 = no class yet
+                level: 0,
                 xp: 0,
                 hpCurrent: 0,
                 hpMax: 0,
                 tempHp: 0,
                 hitDiceCurrent: 0,
                 hitDiceMax: 0,
+                str: newStr,
+                dex: newDex,
+                con: newCon,
+                int: newInt,
+                wis: newWis,
+                cha: newCha,
+                feats: currentFeats,
+                resourceModifiers: nonAsiModifiers,
                 usedSpellSlots: {},
                 updatedAt: new Date()
             })
@@ -1312,5 +1480,67 @@ export async function getCharacterResources(characterId: number, classIds: strin
     } catch (error) {
         console.error("Get Resources Failed:", error);
         return [];
+    }
+}
+
+
+export async function fetchClasses() {
+    try {
+        const { getClasses } = await import("@/db/queries");
+        const classes = await getClasses();
+        return classes;
+    } catch (error) {
+        console.error("Failed to fetch classes:", error);
+        return [];
+    }
+}
+
+
+export async function syncCharacterResources(characterId: number) {
+    try {
+        const { classResources, characterResources } = await import("@/db/schema");
+        const { and, lte, eq } = await import("drizzle-orm");
+
+        // 1. Fetch Character to get classes and total level
+        const char = await db.query.characters.findFirst({
+            where: eq(characters.id, characterId),
+            with: {
+                classes: true
+            }
+        });
+
+        if (!char || !char.classes.length) return;
+
+        // 2. Iterate classes to identify eligible resources
+        for (const cls of char.classes) {
+            // Find resources for this class unlocked at this level or lower
+            const eligibleResources = await db.select()
+                .from(classResources)
+                .where(and(
+                    eq(classResources.classId, cls.classId),
+                    lte(classResources.unlockLevel, cls.level)
+                ));
+
+            for (const res of eligibleResources) {
+                // Upsert into characterResources
+                // Check exist
+                const exists = await db.query.characterResources.findFirst({
+                    where: and(
+                        eq(characterResources.characterId, characterId),
+                        eq(characterResources.resourceId, res.id)
+                    )
+                });
+
+                if (!exists) {
+                    await db.insert(characterResources).values({
+                        characterId,
+                        resourceId: res.id,
+                        usedUses: 0
+                    });
+                }
+            }
+        }
+    } catch (e) {
+        console.error("Failed to sync resources:", e);
     }
 }

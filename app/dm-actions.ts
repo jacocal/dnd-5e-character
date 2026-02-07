@@ -76,7 +76,7 @@ export async function createGlobalItem(data: CreateItemInput) {
             // Common
             description: validated.description,
             rarity: validated.rarity || "common",
-            category: (validated as any).category || "misc", // category might validly come from payload but isn't in ItemSchema yet?
+            category: (validated as { category?: string }).category || "misc",
             slot: validated.slot,
 
             // Combat

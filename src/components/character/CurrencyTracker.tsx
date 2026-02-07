@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { useCharacterStore } from "@/store/character-store";
+import React, { useState, useMemo, useEffect } from "react";
+import { useKmpCharacter } from "@/components/character/kmp/KmpCharacterProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -62,12 +62,27 @@ function calculateTotalGp(currencies: Record<CurrencyType, number>): number {
 type ViewMode = "edit" | "calculator";
 
 export function CurrencyTracker() {
-    const { cp, sp, ep, gp, pp, setCurrency } = useCharacterStore();
+    const { viewModel, state } = useKmpCharacter();
+    const character = state?.character;
+
+    const cp = character?.cp ?? 0;
+    const sp = character?.sp ?? 0;
+    const ep = character?.ep ?? 0;
+    const gp = character?.gp ?? 0;
+    const pp = character?.pp ?? 0;
+
     const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<ViewMode>("edit");
 
     // Local state for direct editing
     const [editValues, setEditValues] = useState({ cp, sp, ep, gp, pp });
+
+    // Sync edit values when open
+    useEffect(() => {
+        if (isOpen) {
+            setEditValues({ cp, sp, ep, gp, pp });
+        }
+    }, [isOpen, cp, sp, ep, gp, pp]);
 
     // Calculator state
     const [calcAmount, setCalcAmount] = useState("");
@@ -111,11 +126,8 @@ export function CurrencyTracker() {
     };
 
     const handleSave = () => {
-        setCurrency("cp", editValues.cp);
-        setCurrency("sp", editValues.sp);
-        setCurrency("ep", editValues.ep);
-        setCurrency("gp", editValues.gp);
-        setCurrency("pp", editValues.pp);
+        if (!viewModel) return;
+        viewModel.updateCharacterCurrency(editValues.cp, editValues.sp, editValues.ep, editValues.gp, editValues.pp);
         setIsOpen(false);
     };
 
@@ -125,13 +137,15 @@ export function CurrencyTracker() {
     };
 
     const handleCalculatorApply = () => {
-        if (!calcPreview?.valid || !calcPreview.coins) return;
+        if (!calcPreview?.valid || !calcPreview.coins || !viewModel) return;
 
-        setCurrency("cp", calcPreview.coins.cp);
-        setCurrency("sp", calcPreview.coins.sp);
-        setCurrency("ep", calcPreview.coins.ep);
-        setCurrency("gp", calcPreview.coins.gp);
-        setCurrency("pp", calcPreview.coins.pp);
+        viewModel.updateCharacterCurrency(
+            calcPreview.coins.cp,
+            calcPreview.coins.sp,
+            calcPreview.coins.ep,
+            calcPreview.coins.gp,
+            calcPreview.coins.pp
+        );
         setCalcAmount("");
         setIsOpen(false);
     };

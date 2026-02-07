@@ -228,6 +228,7 @@ export const characters = pgTable("characters", {
 
     // Modifiers & Effects
     resourceModifiers: jsonb("resource_modifiers"), // Array of { id, modifications, duration }
+    activeModifiers: jsonb("active_modifiers"), // Array of ActiveModifier from resource activation
 
     // Meta
     createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -250,6 +251,7 @@ export const characterSpells = pgTable("character_spells", {
     spellId: text("spell_id").references(() => spells.id).notNull(),
     prepared: boolean("prepared").default(false).notNull(),
     isRitual: boolean("is_ritual").default(false).notNull(),
+    isConcentrating: boolean("is_concentrating").default(false).notNull(),
 }, (table) => ({
     pk: [table.characterId, table.spellId]
 }));
@@ -298,6 +300,7 @@ export const characterRelations = relations(characters, ({ many, one }) => ({
         references: [races.id],
     }),
     quests: many(quests),
+    resources: many(characterResources),
 }));
 
 export const classRelations = relations(classes, ({ many }) => ({
@@ -487,6 +490,17 @@ export const characterConditionRelations = relations(characterConditions, ({ one
     condition: one(conditions, {
         fields: [characterConditions.conditionId],
         references: [conditions.id],
+    }),
+}));
+
+export const characterResourceRelations = relations(characterResources, ({ one }) => ({
+    character: one(characters, {
+        fields: [characterResources.characterId],
+        references: [characters.id],
+    }),
+    resource: one(classResources, {
+        fields: [characterResources.resourceId],
+        references: [classResources.id],
     }),
 }));
 

@@ -13,11 +13,17 @@ export function AbilityScore({ label, score, className, modifier }: AbilityScore
     const sign = calculatedModifier >= 0 ? "+" : "";
 
     return (
-        <div className={cn("flex flex-col items-center bg-slate-100 dark:bg-slate-800 p-2 rounded border border-slate-300 dark:border-slate-700", className)}>
-            <span className="text-xs font-bold uppercase text-slate-500 tracking-wider">{label}</span>
-            <span className="text-2xl font-bold font-mono">{calculatedModifier}{sign}</span>
-            <div className="bg-white dark:bg-slate-900 px-2 py-0.5 rounded-full border border-slate-200 dark:border-slate-800 -mb-4 z-10">
-                <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">{score}</span>
+        <div className={cn("flex flex-col items-center bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group min-h-[90px] justify-between", className)}>
+            <div className="absolute top-0 inset-x-0 h-1 bg-slate-100 dark:bg-slate-800" />
+
+            <span className="text-[10px] font-bold uppercase text-slate-400 tracking-widest mt-1">{label}</span>
+
+            <div className="text-2xl font-black font-mono text-slate-800 dark:text-slate-100 z-10">
+                {sign}{calculatedModifier}
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded-full border border-slate-100 dark:border-slate-700 mb-0.5 z-10">
+                <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400">{score}</span>
             </div>
         </div>
     );

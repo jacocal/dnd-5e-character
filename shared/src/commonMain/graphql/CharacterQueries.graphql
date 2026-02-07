@@ -1,0 +1,401 @@
+fragment FullCharacter on Character {
+    id
+    name
+    raceId
+    raceName
+    backgroundId
+    backgroundName
+    alignment
+    xp
+    level
+    str
+    dex
+    con
+    int
+    wis
+    cha
+    hpCurrent
+    hpMax
+    tempHp
+    armorClass
+    speed
+    initiativeBonus
+    hitDiceCurrent
+    hitDiceMax
+    deathSaveSuccess
+    deathSaveFailure
+    inspiration
+    exhaustion
+    usedSpellSlots
+    usedPactSlots
+    cp
+    sp
+    ep
+    gp
+    pp
+    proficiencies
+    manualProficiencies
+    feats
+    traits
+    abilityPointPool
+    size
+    appearance
+    backstory
+    notes
+    imageUrl
+    resourceModifiers
+    activeModifiers
+    languages {
+        id
+        characterId
+        languageId
+        language {
+            id
+            name
+            script
+        }
+    }
+    classes {
+      classId
+      subclassId
+      level
+      className
+      hitDie
+      subclass {
+        id
+        name
+        description
+        spellcastingType
+      }
+    }
+    spells {
+      spellId
+      prepared
+      prepared
+      isRitual
+      isConcentrating
+      spellName
+      spellLevel
+    }
+    inventory {
+      id
+      itemId
+      quantity
+      equipped
+      isIdentified
+      isAttuned
+      currentUses
+      itemName
+      itemCategory
+    }
+    conditions {
+      id
+      conditionId
+      duration
+      isPermanent
+      source
+      conditionName
+    }
+    resources {
+      resourceId
+      usedUses
+      resourceName
+      maxFormula
+      rechargeOn
+      onUse
+    }
+    quests {
+      id
+      title
+      description
+      status
+      isTracked
+      createdAt
+      updatedAt
+      objectives {
+        id
+        description
+        isCompleted
+        order
+      }
+      logs {
+        id
+        content
+        createdAt
+      }
+    }
+}
+
+query GetCharacter($id: Int!) {
+  character(id: $id) {
+    ...FullCharacter
+  }
+}
+
+query GetCharacters {
+  characters {
+    id
+    name
+    level
+    raceId
+    raceName
+    classes {
+      classId
+      className
+      level
+    }
+  }
+}
+
+mutation UpdateCharacter($id: Int!, $input: UpdateCharacterInput!) {
+  updateCharacter(id: $id, input: $input) {
+    ...FullCharacter
+  }
+}
+
+mutation CreateCharacter($input: CreateCharacterInput!) {
+  createCharacter(input: $input) {
+    ...FullCharacter
+  }
+}
+
+mutation DeleteCharacter($id: Int!) {
+  deleteCharacter(id: $id)
+}
+
+mutation AddCharacterItem($characterId: Int!, $itemId: String!, $quantity: Int!) {
+  addCharacterItem(characterId: $characterId, itemId: $itemId, quantity: $quantity) {
+    id
+    itemId
+    quantity
+    equipped
+    isIdentified
+    isAttuned
+    currentUses
+    itemName
+    itemCategory
+  }
+}
+
+mutation RemoveCharacterItem($inventoryId: Int!) {
+  removeCharacterItem(inventoryId: $inventoryId)
+}
+
+mutation UpdateCharacterItemState($inventoryId: Int!, $equipped: Boolean, $isIdentified: Boolean, $isAttuned: Boolean, $quantity: Int) {
+  updateCharacterItemState(inventoryId: $inventoryId, equipped: $equipped, isIdentified: $isIdentified, isAttuned: $isAttuned, quantity: $quantity) {
+    id
+    itemId
+    quantity
+    equipped
+    isIdentified
+    isAttuned
+    currentUses
+    itemName
+    itemCategory
+  }
+}
+
+mutation LearnSpell($characterId: Int!, $spellId: String!) {
+  learnSpell(characterId: $characterId, spellId: $spellId) {
+    spellId
+    prepared
+    isRitual
+    spellName
+    spellLevel
+  }
+}
+
+mutation ForgetSpell($characterId: Int!, $spellId: String!) {
+  forgetSpell(characterId: $characterId, spellId: $spellId)
+}
+
+mutation PrepareSpell($characterId: Int!, $spellId: String!, $prepared: Boolean!) {
+  prepareSpell(characterId: $characterId, spellId: $spellId, prepared: $prepared) {
+    spellId
+    prepared
+    isRitual
+    spellName
+    spellLevel
+  }
+}
+
+mutation ToggleSpellRitual($characterId: Int!, $spellId: String!, $isRitual: Boolean!) {
+  toggleSpellRitual(characterId: $characterId, spellId: $spellId, isRitual: $isRitual) {
+    spellId
+    prepared
+    isRitual
+    spellName
+    spellLevel
+  }
+}
+
+mutation UpdateCharacterCurrency($characterId: Int!, $cp: Int!, $sp: Int!, $ep: Int!, $gp: Int!, $pp: Int!) {
+  updateCharacterCurrency(characterId: $characterId, cp: $cp, sp: $sp, ep: $ep, gp: $gp, pp: $pp) {
+    ...FullCharacter
+  }
+}
+
+mutation AddCharacterLanguage($characterId: Int!, $languageId: String!) {
+  addCharacterLanguage(characterId: $characterId, languageId: $languageId) {
+    ...FullCharacter
+  }
+}
+
+mutation RemoveCharacterLanguage($characterId: Int!, $languageId: String!) {
+  removeCharacterLanguage(characterId: $characterId, languageId: $languageId) {
+    ...FullCharacter
+  }
+}
+
+mutation UpdateCharacterSkill($characterId: Int!, $skill: String!, $proficiency: String!) {
+  updateCharacterSkill(characterId: $characterId, skill: $skill, proficiency: $proficiency) {
+    ...FullCharacter
+  }
+}
+
+mutation AddCharacterTool($characterId: Int!, $tool: String!) {
+  addCharacterTool(characterId: $characterId, tool: $tool) {
+    ...FullCharacter
+  }
+}
+
+
+mutation RemoveCharacterTool($characterId: Int!, $tool: String!) {
+  removeCharacterTool(characterId: $characterId, tool: $tool) {
+    ...FullCharacter
+  }
+}
+
+query GetQuests($characterId: Int!) {
+  quests(characterId: $characterId) {
+    id
+    title
+    description
+    status
+    isTracked
+    createdAt
+    updatedAt
+    objectives {
+      id
+      description
+      isCompleted
+      order
+    }
+  }
+}
+
+mutation AddQuest($characterId: Int!, $title: String!, $description: String) {
+  addQuest(characterId: $characterId, title: $title, description: $description) {
+    id
+    title
+    description
+    status
+    isTracked
+    createdAt
+    updatedAt
+    objectives {
+      id
+      description
+      isCompleted
+      order
+    }
+    logs {
+      id
+      content
+      createdAt
+    }
+  }
+}
+
+mutation UpdateQuest($questId: Int!, $title: String, $description: String, $status: String, $isTracked: Boolean) {
+  updateQuest(questId: $questId, title: $title, description: $description, status: $status, isTracked: $isTracked) {
+    id
+    title
+    description
+    status
+    isTracked
+    createdAt
+    updatedAt
+    objectives {
+      id
+      description
+      isCompleted
+      order
+    }
+    logs {
+      id
+      content
+      createdAt
+    }
+  }
+}
+
+mutation DeleteQuest($questId: Int!) {
+  deleteQuest(questId: $questId)
+}
+
+mutation AddQuestObjective($questId: Int!, $description: String!, $order: Int) {
+  addQuestObjective(questId: $questId, description: $description, order: $order) {
+    id
+    questId
+    description
+    isCompleted
+    order
+  }
+}
+
+mutation ToggleQuestObjective($objectiveId: Int!, $isCompleted: Boolean!) {
+  toggleQuestObjective(objectiveId: $objectiveId, isCompleted: $isCompleted) {
+    id
+    questId
+    description
+    isCompleted
+    order
+  }
+}
+
+mutation AddQuestLog($questId: Int!, $content: String!) {
+  addQuestLog(questId: $questId, content: $content) {
+    id
+    questId
+    content
+    createdAt
+  }
+}
+
+mutation DeleteQuestObjective($objectiveId: Int!) {
+  deleteQuestObjective(objectiveId: $objectiveId)
+}
+
+mutation DeleteQuestLog($logId: Int!) {
+  deleteQuestLog(logId: $logId)
+}
+
+mutation ToggleSpellConcentration($characterId: Int!, $spellId: String!, $isConcentrating: Boolean!) {
+  toggleSpellConcentration(characterId: $characterId, spellId: $spellId, isConcentrating: $isConcentrating) {
+    spellId
+    prepared
+    isRitual
+    isConcentrating
+    spellName
+    spellLevel
+  }
+}
+
+mutation LevelUp($input: LevelUpInput!) {
+  levelUp(input: $input) {
+    ...FullCharacter
+  }
+}
+
+mutation AddCharacterCondition($characterId: Int!, $conditionId: String!, $level: Int) {
+  addCharacterCondition(characterId: $characterId, conditionId: $conditionId, level: $level) {
+    ...FullCharacter
+  }
+}
+
+mutation RemoveCharacterCondition($characterId: Int!, $conditionId: String!) {
+  removeCharacterCondition(characterId: $characterId, conditionId: $conditionId) {
+    ...FullCharacter
+  }
+}

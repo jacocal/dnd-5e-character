@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { createGlobalItem } from "@/app/dm-actions";
-import { Loader2, ArrowLeft, Wand2, Sword, Shield, Coins, FlaskConical, Gem } from "lucide-react";
+import { Loader2, ArrowLeft, Wand2, Sword, Shield, FlaskConical, Gem } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -56,7 +56,7 @@ export default function CreateItemPage() {
         setError(null);
 
         // Construct Payload based on Category
-        const payload: any = {
+        const payload: Record<string, unknown> = {
             name: baseData.name,
             cost: `${baseData.costAmount} ${baseData.costCurrency}`,
             weight: baseData.weight,
@@ -115,7 +115,8 @@ export default function CreateItemPage() {
         }
 
         try {
-            const result = await createGlobalItem(payload);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const result = await createGlobalItem(payload as any);
             if (result.success) {
                 router.push("/dm");
                 router.refresh();
@@ -125,7 +126,8 @@ export default function CreateItemPage() {
                     console.error("Validation details:", result.details);
                 }
             }
-        } catch (err) {
+        } catch (_err) {
+            void _err;
             setError("Something went wrong");
         } finally {
             setIsLoading(false);
@@ -227,14 +229,21 @@ export default function CreateItemPage() {
     );
 }
 
-function CategoryButton({ active, onClick, icon: Icon, label }: any) {
+type CategoryButtonProps = {
+    active: boolean;
+    onClick: () => void;
+    icon: React.ElementType;
+    label: string;
+};
+
+function CategoryButton({ active, onClick, icon: Icon, label }: CategoryButtonProps) {
     return (
         <button
             type="button"
             onClick={onClick}
             className={`flex items-center gap-2 px-4 py-3 rounded-lg border transition-all whitespace-nowrap ${active
-                    ? "bg-amber-900/20 border-amber-600 text-amber-500 ring-1 ring-amber-600/50"
-                    : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:border-zinc-700"
+                ? "bg-amber-900/20 border-amber-600 text-amber-500 ring-1 ring-amber-600/50"
+                : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:border-zinc-700"
                 }`}
         >
             <Icon size={18} />

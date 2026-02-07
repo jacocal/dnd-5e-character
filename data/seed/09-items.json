@@ -799,12 +799,12 @@
                 {
                     "type": "weapon_proficiency",
                     "target": "longbow",
-                    "value": true
+                    "value": 1
                 },
                 {
                     "type": "weapon_proficiency",
                     "target": "shortbow",
-                    "value": true
+                    "value": 1
                 }
             ]
         },

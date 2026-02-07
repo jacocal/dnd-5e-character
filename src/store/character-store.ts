@@ -126,7 +126,7 @@ interface CharacterState {
     }>;
 
     setLevel: (level: number) => void;
-    levelUp: (classId: string, hpGain?: number) => Promise<void>;
+    levelUp: (classId: string, hpGain?: number, characterIdOverride?: number) => Promise<void>;
     setXp: (xp: number) => void;
     consumeSpellSlot: (level: number) => void;
     restoreSpellSlot: (level: number) => void;
@@ -153,10 +153,10 @@ interface CharacterState {
     // Phase 3: Spells & Inventory
     spells: any[];
     inventory: any[];
-    concentratingOn: { spellId: string; spellName: string } | null;
+    // concentratingOn removed, derived from spells
     setSpells: (spells: any[]) => void;
     setInventory: (inventory: any[]) => void;
-    setConcentrating: (spell: { spellId: string; spellName: string } | null) => void;
+    setConcentrating: (spellId: string | null) => void;
     toggleSpellPrepared: (spellId: string, isPrepared: boolean) => void;
     toggleSpellRitual: (spellId: string, isRitual: boolean) => void;
 
@@ -535,11 +535,35 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
     proficiencies: {},
     spells: [],
     inventory: [],
-    concentratingOn: null,
 
     setSpells: (spells) => set({ spells }),
     setInventory: (inventory) => set({ inventory }),
-    setConcentrating: (spell) => set({ concentratingOn: spell }),
+    setConcentrating: (spellId) => set((state) => {
+        // Find currently concentrating spell for clearing logic
+        const currentConcentrating = state.spells.find(s => s.isConcentrating);
+
+        // Optimistic Update
+        const newSpells = state.spells.map(s => {
+            if (s.spellId === spellId) return { ...s, isConcentrating: true }; // Set target
+            if (s.isConcentrating) return { ...s, isConcentrating: false }; // Clear others
+            return s;
+        });
+
+        // Server Sync
+        if (state.characterId) {
+            import("../../app/actions").then(({ toggleSpellConcentration }) => {
+                if (spellId) {
+                    // Setting a new spell to concentration
+                    toggleSpellConcentration(state.characterId!, spellId, true);
+                } else if (currentConcentrating) {
+                    // Clearing existing concentration
+                    toggleSpellConcentration(state.characterId!, currentConcentrating.spellId, false);
+                }
+            });
+        }
+
+        return { spells: newSpells };
+    }),
 
 
     toggleSpellPrepared: (spellId, isPrepared) => set((state) => {
@@ -584,7 +608,7 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
         const isEquipping = !itemEntry.equipped;
 
         // Logic Engine: Constraints
-        let itemsToUnequip: number[] = [];
+        const itemsToUnequip: number[] = [];
 
         if (isEquipping) {
             // 1. Attunement Check
@@ -939,7 +963,7 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
         // Logic Engine: Check for onUse effects
         const resource = newResources.find(r => r.id === resourceId);
         const originalResource = state.resources.find(r => r.id === resourceId);
-        let stateUpdates: Partial<CharacterState> = {};
+        const stateUpdates: Partial<CharacterState> = {};
 
         // Only trigger if we actually consumed a use
         if (resource && originalResource && resource.usedUses > originalResource.usedUses) {
@@ -955,7 +979,7 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
                         formula = formula.replace(/[^0-9+\-*/().]/g, '');
                         let amount = 0;
                         try {
-                            // eslint-disable-next-line no-new-func
+
                             amount = Math.floor(new Function('return ' + formula)());
                         } catch (e) {
                             console.error("Error evaluating HP formula:", formula, e);
@@ -1219,12 +1243,18 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
         set({ level: safeLevel });
     },
 
-    levelUp: async (classId: string, hpGain?: number) => {
+    levelUp: async (classId: string, hpGain?: number, characterIdOverride?: number) => {
         const state = get();
-        if (state.characterId) {
-            const result = await levelUpClass(state.characterId, classId, hpGain);
+        const targetId = characterIdOverride ?? state.characterId;
+        console.log(`[Store] levelUp called. Class: ${classId}, HP: ${hpGain}, CharID: ${targetId}`);
+
+        if (targetId) {
+            console.log(`[Store] Calling server action levelUpClass...`);
+            const result = await levelUpClass(targetId, classId, hpGain);
+            console.log(`[Store] levelUpClass result:`, result);
+
             if (!result.success) {
-                console.error(result.error);
+                console.error(`[Store] levelUpClass failed: ${result.error}`);
                 return;
             }
 
@@ -1285,7 +1315,7 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
 
             // Sync with server
             const { updateCharacterVitality } = await import("@/app/actions");
-            await updateCharacterVitality(state.characterId, {
+            await updateCharacterVitality(targetId, {
                 classes: newClasses,
                 level: newTotal,
                 proficiencyBonus: calculateProficiencyBonus(newTotal),
@@ -1370,7 +1400,7 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
     getAbilityScore: (stat) => {
         const state = get();
         // Layer 0: Base
-        let base = (state as any)[stat] || 10;
+        const base = (state as any)[stat] || 10;
 
         // Collect Sources - only include items that don't require attunement OR are attuned
         const sources: ModifierSource[] = [

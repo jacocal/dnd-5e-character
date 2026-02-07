@@ -12,7 +12,27 @@ export type ModifierType =
     | 'ability_point_grant'  // Grants points to ability point pool (e.g., ASI feat)
     | 'saving_throw_proficiency'
     | 'armor_proficiency'
-    | 'weapon_proficiency';
+    | 'weapon_proficiency'
+    | 'tool_proficiency';
+
+// Modifier Conditions - matches KMP ModifierCondition enum
+export type ModifierCondition =
+    | 'wearing_armor'
+    | 'unarmored'
+    | 'wielding_shield'
+    | 'raging'
+    | 'concentrating'
+    | 'none';
+
+// Expiration Triggers - matches KMP ExpirationTrigger enum
+export type ExpirationTrigger =
+    | 'short_rest'
+    | 'long_rest'
+    | 'manual_disable'
+    | 'never';
+
+// Modifier Priority - hierarchy for resolution (bonus < set < override)
+export type ModifierPriority = 'bonus' | 'set' | 'override';
 
 export interface Modifier {
     type: ModifierType;
@@ -20,12 +40,24 @@ export interface Modifier {
     value: number | boolean | string;
     condition?: string;
     max?: number; // Maximum cap for ability_increase modifiers (e.g., 20)
+    // New fields for enhanced modifier system
+    formula?: string; // e.g., "1 * class_level:druid", "con_mod"
+    duration?: string; // e.g., "long_rest", "short_rest"
 }
 
 export interface ModifierSource {
     id: string;
     name: string;
     modifiers: Modifier[];
+}
+
+// Active Modifier - tracks temporary effects from resource activation
+export interface ActiveModifier {
+    sourceId: string;
+    sourceName: string;
+    modifier: Modifier;
+    expiresOn: ExpirationTrigger;
+    activatedAt?: string; // ISO timestamp
 }
 
 // Constants

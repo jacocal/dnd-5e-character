@@ -16,7 +16,7 @@ param(
         "all", "check", "check-docker", "check-node", "check-env",
         "setup", "install", "install-clean",
         "db-start", "db-stop", "db-reset", "db-push", "db-seed", "db-studio",
-        "dev", "build", "start", "lint", "quick-start",
+        "dev", "build", "start", "lint", "quick-start", "build-shared",
         "clean", "clean-all", "help"
     )]
     [string]$Command = "help"
@@ -259,6 +259,20 @@ function Invoke-Dev {
     npm run dev
 }
 
+function Build-Shared {
+    Write-Host "Building Shared KMP Module..." -ForegroundColor Cyan
+    # Check for gradlew, else try gradle
+    if (Test-Path ".\gradlew.bat") {
+        .\gradlew.bat :shared:jsBrowserProductionLibraryDistribution
+    }
+    elseif (Get-Command gradle -ErrorAction SilentlyContinue) {
+        gradle :shared:jsBrowserProductionLibraryDistribution
+    }
+    else {
+        Write-Error "Gradle not found. Please install Gradle or generate wrapper."
+    }
+}
+
 function Invoke-Build {
     if (Invoke-Check) {
         Write-Host "Building production application..."
@@ -351,6 +365,7 @@ function Show-Help {
     Write-Host "  .\make.ps1 build         - Build production application"
     Write-Host "  .\make.ps1 start         - Start production server"
     Write-Host "  .\make.ps1 lint          - Run ESLint"
+    Write-Host "  .\make.ps1 build-shared  - Build the Kotlin Shared Module"
     Write-Host "  .\make.ps1 quick-start   - Quick start (db + dev server)"
     Write-Host ""
     Write-Host "Utility:" -ForegroundColor Green
@@ -367,27 +382,28 @@ function Show-Help {
 # ============================================================================
 
 switch ($Command) {
-    "all"           { Invoke-All }
-    "check"         { Invoke-Check }
-    "check-docker"  { Test-Docker }
-    "check-node"    { Test-NodeVersion }
-    "check-env"     { Test-EnvFile }
-    "setup"         { Invoke-Setup }
-    "install"       { Invoke-Install }
+    "all" { Invoke-All }
+    "check" { Invoke-Check }
+    "check-docker" { Test-Docker }
+    "check-node" { Test-NodeVersion }
+    "check-env" { Test-EnvFile }
+    "setup" { Invoke-Setup }
+    "install" { Invoke-Install }
     "install-clean" { Invoke-InstallClean }
-    "db-start"      { Invoke-DbStart }
-    "db-stop"       { Invoke-DbStop }
-    "db-reset"      { Invoke-DbReset }
-    "db-push"       { Invoke-DbPush }
-    "db-seed"       { Invoke-DbSeed }
-    "db-studio"     { Invoke-DbStudio }
-    "dev"           { Invoke-Dev }
-    "build"         { Invoke-Build }
-    "start"         { Invoke-Start }
-    "lint"          { Invoke-Lint }
-    "quick-start"   { Invoke-QuickStart }
-    "clean"         { Invoke-Clean }
-    "clean-all"     { Invoke-CleanAll }
-    "help"          { Show-Help }
-    default         { Show-Help }
+    "db-start" { Invoke-DbStart }
+    "db-stop" { Invoke-DbStop }
+    "db-reset" { Invoke-DbReset }
+    "db-push" { Invoke-DbPush }
+    "db-seed" { Invoke-DbSeed }
+    "db-studio" { Invoke-DbStudio }
+    "dev" { Invoke-Dev }
+    "build-shared" { Build-Shared }
+    "build" { Invoke-Build }
+    "start" { Invoke-Start }
+    "lint" { Invoke-Lint }
+    "quick-start" { Invoke-QuickStart }
+    "clean" { Invoke-Clean }
+    "clean-all" { Invoke-CleanAll }
+    "help" { Show-Help }
+    default { Show-Help }
 }

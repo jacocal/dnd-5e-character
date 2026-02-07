@@ -1,0 +1,203 @@
+query GetClasses {
+  classes {
+    id
+    name
+    hitDie
+    savingThrows
+    proficiencies
+    spellcastingAbility
+    spellcastingType
+    skillOptions
+    startingEquipmentOptions
+  }
+}
+
+query GetRaces {
+  races {
+    id
+    name
+    description
+    traitOptions
+    modifiers
+  }
+}
+
+query GetBackgrounds {
+  backgrounds {
+    id
+    name
+    description
+    abilityOptions
+    modifiers
+    features
+    originFeatId
+    originFeatClass
+    toolProficiencies
+    startingEquipmentOptions
+  }
+}
+
+query GetSpells($classId: String, $level: Int) {
+  spells(classId: $classId, level: $level) {
+    id
+    name
+    level
+    school
+    castingTime
+    range
+    components
+    duration
+    isRitual
+    isConcentration
+    description
+    classes
+    tags
+  }
+}
+
+query GetItems($category: String) {
+  items(category: $category) {
+    id
+    name
+    type
+    costAmount
+    costCurrency
+    weightAmount
+    weightUnit
+    category
+    slot
+    armorClass
+    strengthRequirement
+    stealthDisadvantage
+    damageDice
+    damageType
+    range
+    properties
+    rarity
+    requiresAttunement
+    isMagical
+    isCursed
+    description
+    tags
+    modifiers
+    trueName
+    shownEffect
+    trueEffect
+  }
+}
+
+query GetItem($id: String!) {
+  item(id: $id) {
+    id
+    name
+    type
+    costAmount
+    costCurrency
+    weightAmount
+    weightUnit
+    category
+    slot
+    armorClass
+    strengthRequirement
+    stealthDisadvantage
+    damageDice
+    damageType
+    range
+    properties
+    rarity
+    requiresAttunement
+    isMagical
+    isCursed
+    description
+    tags
+    modifiers
+    trueName
+    shownEffect
+    trueEffect
+  }
+}
+
+query GetFeat($id: String!) {
+  feat(id: $id) {
+    id
+    name
+    description
+    prerequisites
+    modifiers
+  }
+}
+
+query GetSpell($id: String!) {
+  spell(id: $id) {
+    id
+    name
+    level
+    school
+    castingTime
+    range
+    components
+    duration
+    isRitual
+    isConcentration
+    description
+    classes
+    tags
+  }
+}
+
+query GetCondition($id: String!) {
+  condition(id: $id) {
+    id
+    name
+    description
+    modifiers
+  }
+}
+
+query GetRace($id: String!) {
+  race(id: $id) {
+    id
+    name
+    description
+    traitOptions
+    modifiers
+  }
+}
+
+query GetResource($id: String!) {
+  resource(id: $id) {
+    id
+    classId
+    name
+    description
+    maxFormula
+    rechargeOn
+    unlockLevel
+    onUse
+  }
+}
+
+query GetSubclasses {
+  subclasses {
+    id
+    classId
+    name
+    description
+    spellcastingType
+  }
+}
+
+query GetClassProgression($classId: String!) {
+  classProgression(classId: $classId) {
+    id
+    classId
+    subclassId
+    level
+    proficiencyBonus
+    features
+    spellSlots
+    cantripsKnown
+    spellsKnown
+    hasAsi
+  }
+}

@@ -80,6 +80,11 @@ export async function getCharacterById(id: number) {
                     objectives: true,
                     logs: true
                 }
+            },
+            resources: {
+                with: {
+                    resource: true
+                }
             }
         }
     });
