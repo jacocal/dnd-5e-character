@@ -11,7 +11,10 @@ import kotlinx.coroutines.promise
 
 import org.dndcharacter.shared.data.ApolloCharacterRepository
 import org.dndcharacter.shared.data.ApolloRulesRepository
+import org.dndcharacter.shared.data.ApolloDmRepository
 import org.dndcharacter.shared.ui.viewmodel.CharacterSheetViewModel
+import org.dndcharacter.shared.ui.viewmodel.DmDashboardViewModel
+import org.dndcharacter.shared.ui.viewmodel.DmItemCreatorViewModel
 import kotlin.js.JsExport
 import kotlin.js.Promise
 
@@ -62,7 +65,40 @@ object SharedFactory {
             val charRepo = ApolloCharacterRepository(apolloClient)
             val rulesRepo = ApolloRulesRepository(apolloClient)
             
+
             CharacterSheetViewModel(charRepo, rulesRepo)
+        }
+    }
+
+    /**
+     * Creates a DmDashboardViewModel with a custom API URL.
+     */
+    @OptIn(DelicateCoroutinesApi::class)
+    fun createDmDashboardViewModelWithUrl(graphqlUrl: String): Promise<DmDashboardViewModel> {
+        return GlobalScope.promise {
+            val apolloClient = ApolloClient.Builder()
+                .serverUrl(graphqlUrl)
+                .build()
+            
+            val dmRepo = ApolloDmRepository(apolloClient)
+            
+            DmDashboardViewModel(dmRepo)
+        }
+    }
+
+    /**
+     * Creates a DmItemCreatorViewModel with a custom API URL.
+     */
+    @OptIn(DelicateCoroutinesApi::class)
+    fun createDmItemCreatorViewModelWithUrl(graphqlUrl: String): Promise<DmItemCreatorViewModel> {
+        return GlobalScope.promise {
+            val apolloClient = ApolloClient.Builder()
+                .serverUrl(graphqlUrl)
+                .build()
+            
+            val dmRepo = ApolloDmRepository(apolloClient)
+            
+            DmItemCreatorViewModel(dmRepo)
         }
     }
 }

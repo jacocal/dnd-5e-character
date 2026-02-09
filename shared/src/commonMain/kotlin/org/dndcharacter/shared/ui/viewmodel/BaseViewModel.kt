@@ -1,3 +1,5 @@
+@file:OptIn(kotlin.js.ExperimentalJsExport::class)
+
 package org.dndcharacter.shared.ui.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
@@ -11,12 +13,14 @@ import kotlinx.coroutines.launch
 import kotlin.js.JsExport
 
 // Abstract base for all ViewModels
+@JsExport
 abstract class BaseViewModel<S>(initialState: S) {
     // Scope for this ViewModel
-    protected val viewModelScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+    internal val viewModelScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     private val _state = MutableStateFlow(initialState)
-    val state: StateFlow<S> = _state.asStateFlow()
+    // Hide StateFlow from JS export as it is not usable there directly
+    internal val state: StateFlow<S> = _state.asStateFlow()
     
     // JS Interop: Expose current state value directly
     fun getState(): S {

@@ -334,6 +334,18 @@ type Condition {
   name: String
 }
 
+type CreateItemResult {
+  error: String
+  itemId: String
+  success: Boolean!
+}
+
+type DmPlayer {
+  alignment: String
+  id: Int!
+  name: String!
+}
+
 type Feat {
   description: String
 
@@ -344,6 +356,37 @@ type Feat {
   name: String
 
   prerequisites: String
+}
+
+input CreateItemInput {
+  armorClass: Int
+  category: String
+  costAmount: Int
+  costCurrency: String
+  damageDice: String
+  damageType: String
+  description: String
+  fixedWeight: Boolean
+  isCursed: Boolean
+  isMagical: Boolean
+  modifiers: JSON
+  name: String!
+  properties: [String!]
+  range: String
+  rarity: String
+  requiresAttunement: Boolean
+  shownEffect: String
+  slot: String
+  stealthDisadvantage: Boolean
+  strengthRequirement: Int
+  tags: [String!]
+  trueEffect: String
+  trueName: String
+  type: String!
+  uses: Int
+  usesMax: Int
+  weightAmount: Float
+  weightUnit: String
 }
 
 input CreateCharacterInput {
@@ -459,6 +502,8 @@ type Mutation {
 
   createCharacter(input: CreateCharacterInput!): Character
 
+  createGlobalItem(input: CreateItemInput!): CreateItemResult
+
   deleteCharacter(id: Int!): Boolean
 
   deleteQuest(questId: Int!): Boolean
@@ -491,6 +536,8 @@ type Mutation {
 
   updateCharacter(id: Int!, input: UpdateCharacterInput!): Character
 
+  updateCharacterAlignment(alignment: String!, characterId: Int!): Boolean
+
   updateCharacterCurrency(characterId: Int!, cp: Int!, ep: Int!, gp: Int!, pp: Int!, sp: Int!): Character
 
   updateCharacterItemState(equipped: Boolean, inventoryId: Int!, isAttuned: Boolean, isIdentified: Boolean, quantity: Int): CharacterInventory
@@ -501,6 +548,8 @@ type Mutation {
 }
 
 type Query {
+  activePlayers: [DmPlayer!]
+
   backgrounds: [Background!]
 
   character(id: Int!): Character
