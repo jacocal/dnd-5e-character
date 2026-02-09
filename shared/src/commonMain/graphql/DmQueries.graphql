@@ -1,0 +1,19 @@
+query GetActivePlayers {
+  activePlayers {
+    id
+    name
+    alignment
+  }
+}
+
+mutation CreateGlobalItem($input: CreateItemInput!) {
+  createGlobalItem(input: $input) {
+    success
+    itemId
+    error
+  }
+}
+
+mutation UpdateCharacterAlignment($characterId: Int!, $alignment: String!) {
+  updateCharacterAlignment(characterId: $characterId, alignment: $alignment)
+}

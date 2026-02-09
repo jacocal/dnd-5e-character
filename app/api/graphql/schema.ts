@@ -70,6 +70,50 @@ const LevelUpInput = builder.inputType("LevelUpInput", {
     }),
 });
 
+const CreateItemInput = builder.inputType("CreateItemInput", {
+    fields: (t) => ({
+        name: t.string({ required: true }),
+        description: t.string({ required: false }),
+        type: t.string({ required: true }), // Weapon, Armor, Potion, etc.
+        category: t.string({ required: false }), // weapon, armor, consumable, misc
+        rarity: t.string({ required: false }),
+
+        // Structured Cost
+        costAmount: t.int({ required: false }),
+        costCurrency: t.string({ required: false }),
+
+        // Structured Weight
+        weightAmount: t.float({ required: false }),
+        weightUnit: t.string({ required: false }),
+        fixedWeight: t.boolean({ required: false }),
+
+        // Combat
+        damageDice: t.string({ required: false }),
+        damageType: t.string({ required: false }),
+        armorClass: t.int({ required: false }),
+        strengthRequirement: t.int({ required: false }),
+        stealthDisadvantage: t.boolean({ required: false }),
+        properties: t.stringList({ required: false }),
+        range: t.string({ required: false }),
+        slot: t.string({ required: false }),
+
+        // Magic
+        isMagical: t.boolean({ required: false }),
+        isCursed: t.boolean({ required: false }),
+        requiresAttunement: t.boolean({ required: false }),
+        trueName: t.string({ required: false }),
+        shownEffect: t.string({ required: false }),
+        trueEffect: t.string({ required: false }),
+        modifiers: t.field({ type: "JSON", required: false }), // Array of modifiers
+
+        // Consumable
+        uses: t.int({ required: false }),
+        usesMax: t.int({ required: false }),
+
+        tags: t.stringList({ required: false }),
+    }),
+});
+
 // Race Type
 const RaceType = builder.objectRef<{
     id: string;
@@ -597,6 +641,35 @@ builder.objectType(QuestType, {
 });
 
 
+const DmPlayerType = builder.objectRef<{
+    id: number;
+    name: string;
+    alignment: string | null;
+}>("DmPlayer");
+
+builder.objectType(DmPlayerType, {
+    fields: (t) => ({
+        id: t.exposeInt("id"),
+        name: t.exposeString("name"),
+        alignment: t.exposeString("alignment", { nullable: true }),
+    }),
+});
+
+const CreateItemResultType = builder.objectRef<{
+    success: boolean;
+    itemId: string | null;
+    error: string | null;
+}>("CreateItemResult");
+
+builder.objectType(CreateItemResultType, {
+    fields: (t) => ({
+        success: t.exposeBoolean("success"),
+        itemId: t.exposeString("itemId", { nullable: true }),
+        error: t.exposeString("error", { nullable: true }),
+    }),
+});
+
+
 // Character Type (main entity)
 
 
@@ -827,7 +900,24 @@ builder.objectType(ClassProgressionType, {
 // === Query Type ===
 builder.queryType({
     fields: (t) => ({
+
+        // DM Tools
+        activePlayers: t.field({
+            type: [DmPlayerType],
+            resolve: async () => {
+                const players = await db.query.characters.findMany({
+                    columns: {
+                        id: true,
+                        name: true,
+                        alignment: true,
+                    }
+                });
+                return players;
+            }
+        }),
+
         // Rules queries
+
         classProgression: t.field({
             type: [ClassProgressionType],
             args: {
@@ -1224,6 +1314,9 @@ builder.mutationType({
                 return deleted.length > 0;
             }
         }),
+
+
+
 
         updateCharacter: t.field({
             type: CharacterType,
@@ -1790,6 +1883,105 @@ builder.mutationType({
             }
         }),
 
+        createGlobalItem: t.field({
+            type: CreateItemResultType,
+            args: {
+                input: t.arg({ type: CreateItemInput, required: true }),
+            },
+            resolve: async (_, { input }) => {
+                try {
+                    // Generate ID from name: "Sword of Truth" -> "sword-of-truth"
+                    const sourceName = input.trueName || input.name;
+                    let slug = sourceName
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '');
+
+                    if (!slug) slug = "item";
+
+                    // Check for existing ID
+                    let uniqueId = slug;
+                    let counter = 1;
+                    while (true) {
+                        const existing = await db.query.items.findFirst({
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+                            where: (items, { eq }) => eq(items.id, uniqueId)
+                        });
+                        if (!existing) break;
+                        uniqueId = `${slug}-${counter}`;
+                        counter++;
+                    }
+
+                    // Insert Item
+                    await db.insert(items).values({
+                        id: uniqueId,
+                        name: input.name,
+                        type: input.type,
+
+                        // Cost & Weight
+                        costAmount: input.costAmount ?? 0,
+                        costCurrency: input.costCurrency ?? "gp",
+                        weightAmount: input.weightAmount ?? 0,
+                        weightUnit: input.weightUnit ?? "lb",
+                        fixedWeight: input.fixedWeight ?? false,
+
+                        // Common
+                        description: input.description,
+                        rarity: input.rarity ?? "common",
+                        category: input.category ?? "misc",
+                        slot: input.slot,
+
+                        // Combat
+                        damageDice: input.damageDice,
+                        damageType: input.damageType,
+                        armorClass: input.armorClass,
+                        strengthRequirement: input.strengthRequirement,
+                        stealthDisadvantage: input.stealthDisadvantage ?? false,
+                        properties: input.properties ?? [],
+                        range: input.range,
+
+                        // Magic
+                        isMagical: input.isMagical ?? false,
+                        isCursed: input.isCursed ?? false,
+                        requiresAttunement: input.requiresAttunement ?? false,
+                        trueName: input.trueName,
+                        shownEffect: input.shownEffect,
+                        trueEffect: input.trueEffect,
+                        modifiers: input.modifiers ?? [],
+
+                        // Consumable
+                        uses: input.uses,
+                        usesMax: input.usesMax,
+
+                        tags: input.tags ?? [],
+                    });
+
+                    return { success: true, itemId: uniqueId, error: null };
+                } catch (e) {
+                    console.error("Failed to create item:", e);
+                    return { success: false, itemId: null, error: String(e) };
+                }
+            },
+        }),
+        updateCharacterAlignment: t.field({
+            type: "Boolean",
+            args: {
+                characterId: t.arg.int({ required: true }),
+                alignment: t.arg.string({ required: true }),
+            },
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            resolve: async (_, { characterId, alignment }) => {
+                try {
+                    await db.update(characters)
+                        .set({ alignment })
+                        .where(eq(characters.id, characterId));
+                    return true;
+                } catch (e) {
+                    console.error(e);
+                    return false;
+                }
+            },
+        }),
         levelUp: t.field({
             type: CharacterType,
             args: {

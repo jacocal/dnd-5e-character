@@ -1,10 +1,17 @@
-
-import { AlignmentManager } from "@/components/dm/AlignmentManager";
+import { KmpDmDashboardProvider } from "@/components/dm/kmp/KmpDmDashboardProvider";
+import { KmpDmDashboard } from "@/components/dm/kmp/KmpDmDashboard";
 
 export default function DMPage() {
     return (
-        <div className="p-8 max-w-4xl">
+        <div className="p-4 md:p-8 max-w-4xl space-y-8">
             <h1 className="text-3xl font-bold text-white mb-6">DM Sandbox</h1>
+
+            {/* KMP Dashboard */}
+            <div className="p-6 rounded-lg bg-zinc-900 border border-zinc-800">
+                <KmpDmDashboardProvider>
+                    <KmpDmDashboard />
+                </KmpDmDashboardProvider>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-6 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-amber-900/50 transition-colors">
@@ -20,8 +27,6 @@ export default function DMPage() {
                         Open Item Creator
                     </a>
                 </div>
-
-                <AlignmentManager />
 
                 <div className="p-6 rounded-lg bg-zinc-900 border border-zinc-800 opacity-60">
                     <h2 className="text-xl font-semibold text-zinc-500 mb-2">Spell Grimoire</h2>
