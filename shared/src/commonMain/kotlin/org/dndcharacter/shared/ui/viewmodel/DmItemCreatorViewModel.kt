@@ -127,7 +127,17 @@ class DmItemCreatorViewModel(
 
     fun updateName(name: String) = setState { it.copy(name = name) }
     fun updateDescription(desc: String) = setState { it.copy(description = desc) }
-    fun updateType(type: String) = setState { it.copy(type = type) }
+    fun updateType(type: String) = setState { 
+        val newCategory = when (type) {
+            "Weapon" -> "weapon"
+            "Armor", "Shield" -> "armor"
+            "Consumable" -> "consumable"
+            "Wondrous Item" -> "treasure"
+            "Adventuring Gear", "Trinket" -> "misc"
+            else -> "misc"
+        }
+        it.copy(type = type, category = newCategory) 
+    }
     fun updateCategory(category: String) = setState { it.copy(category = category) }
     fun updateRarity(rarity: String) = setState { it.copy(rarity = rarity) }
     
