@@ -102,7 +102,18 @@ export function KmpInventoryList() {
     const [selectedCategory, setSelectedCategory] = useState<InventoryCategory>('all');
     const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
 
-    const inventory = state?.resolvedItems || [];
+    const getDisplayName = (entry: any) => {
+        const item = entry.item;
+        if (!item) return '';
+        const requiresAttunement = item.requiresAttunement || false;
+        const isMagical = item.isMagical || entry.isAttuned || requiresAttunement;
+        const isUnidentified = entry.isIdentified === false && isMagical;
+        return (isUnidentified ? item.name : (item.trueName || item.name)) || '';
+    };
+
+    const inventory = [...(state?.resolvedItems || [])].sort((a: any, b: any) => {
+        return getDisplayName(a).localeCompare(getDisplayName(b));
+    });
     const attunedCount = inventory.filter((i: any) => i.isAttuned).length;
 
     const toggleExpand = (itemId: number) => {

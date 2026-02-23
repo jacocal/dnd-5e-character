@@ -19,7 +19,11 @@ export function KmpSpellList() {
 
     if (!state || !state.resolvedSpells) return <div>Loading Spells...</div>;
 
-    const spells = state.resolvedSpells;
+    const spells = [...state.resolvedSpells].sort((a: any, b: any) => {
+        const nameA = a.spell?.name || '';
+        const nameB = b.spell?.name || '';
+        return nameA.localeCompare(nameB);
+    });
     const concentratingSpell = spells.find((s: any) => s.isConcentrating);
 
     // Group by Level
