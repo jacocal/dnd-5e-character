@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { createPortal } from "react-dom"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -46,17 +47,22 @@ const DialogTrigger = ({ asChild, children }: { asChild?: boolean, children: Rea
 
 const DialogContent = ({ children, className }: { children: React.ReactNode, className?: string }) => {
     const { open, onOpenChange } = React.useContext(DialogContext);
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
 
     if (!open) return null;
 
-    return (
+    const content = (
         <div className="fixed inset-0 z-50 flex items-start justify-center sm:items-center">
             <div
                 className="fixed inset-0 bg-black/50 backdrop-blur-sm animate-in fade-in"
                 onClick={() => onOpenChange?.(false)}
             />
             <div className={cn(
-                "fixed z-50 grid w-full gap-4 border bg-white p-6 shadow-lg duration-200 animate-in fade-in-0 zoom-in-95 sm:rounded-lg md:w-full dark:bg-slate-950 dark:border-slate-800",
+                "fixed z-50 grid w-full max-w-lg gap-4 border bg-white p-6 shadow-lg duration-200 animate-in fade-in-0 zoom-in-95 sm:rounded-lg dark:bg-slate-950 dark:border-slate-800",
                 className
             )}>
                 {children}
@@ -70,6 +76,12 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
             </div>
         </div>
     );
+
+    if (mounted && typeof document !== 'undefined') {
+        return createPortal(content, document.body);
+    }
+
+    return content;
 }
 
 const DialogHeader = ({ children, className }: { children: React.ReactNode, className?: string }) => (

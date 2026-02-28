@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { User, Shield, Sword, PlusCircle, Trash2 } from "lucide-react";
+import { User, Shield, Sword, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getAllCharacters } from "@/db/queries";
-import { deleteCharacter } from "./actions";
+import { DeleteCharacterButton } from "./DeleteCharacterButton";
 
 export default async function Home() {
   const characters = await getAllCharacters();
@@ -34,50 +34,38 @@ export default async function Home() {
                 const level = char.level;
 
                 return (
-                  <li key={char.id} className="relative group">
-                    <Link
-                      href={`/character/${char.id}`}
-                      className="block hover:bg-slate-50 dark:hover:bg-slate-800 transition duration-150 ease-in-out"
-                    >
-                      <div className="px-4 py-4 sm:px-6 flex items-center pr-16">
-                        <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-                          <div className="flex items-center gap-4">
-                            <div className="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500">
-                              <User size={20} />
-                            </div>
-                            <div>
-                              <p className="text-sm font-medium text-red-600 truncate">
-                                {char.name}
-                              </p>
-                              <p className="flex items-center text-xs text-slate-500">
-                                <Sword size={12} className="mr-1" />
-                                Level {level} {mainClass}
-                              </p>
-                            </div>
+                  <li key={char.id} className="relative group border-b border-slate-200 dark:border-slate-800 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800 transition duration-150 ease-in-out">
+                    <div className="flex items-center">
+                      <Link
+                        href={`/character/${char.id}`}
+                        className="flex-1 px-4 py-4 sm:px-6 flex items-center min-w-0"
+                      >
+                        <div className="min-w-0 flex-1 flex items-center gap-4">
+                          <div className="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 shrink-0">
+                            <User size={20} />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium text-red-600 truncate">
+                              {char.name}
+                            </p>
+                            <p className="flex items-center text-xs text-slate-500 truncate">
+                              <Sword size={12} className="mr-1 shrink-0" />
+                              <span className="truncate">Level {level} {mainClass}</span>
+                            </p>
                           </div>
                         </div>
-                        <div className="ml-5 flex-shrink-0">
-                          <span className="text-slate-400">→</span>
+                      </Link>
+                      {/* Action Buttons Container */}
+                      <div className="flex items-center pr-4 sm:pr-6 shrink-0 gap-3">
+                        {/* Always visible on mobile, visible on hover/focus on desktop */}
+                        <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                          <DeleteCharacterButton characterId={char.id} characterName={char.name} />
                         </div>
+                        {/* We add an explicit secondary Link wrapped around the arrow so clicking the extreme right edge still navigates */}
+                        <Link href={`/character/${char.id}`} tabIndex={-1} className="p-2 -mr-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+                          →
+                        </Link>
                       </div>
-                    </Link>
-                    <div className="absolute top-1/2 right-12 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <form
-                        action={async () => {
-                          "use server";
-                          await deleteCharacter(char.id);
-                        }}
-                      >
-                        <Button
-                          type="submit"
-                          variant="ghost"
-                          size="icon"
-                          className="text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
-                          title="Delete Character"
-                        >
-                          <Trash2 size={18} />
-                        </Button>
-                      </form>
                     </div>
                   </li>
                 );
