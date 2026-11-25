@@ -62,11 +62,15 @@ export default function StartingEquipmentSelector({
 }: StartingEquipmentSelectorProps) {
     const [classSelection, setClassSelection] = useState<"A" | "B" | "C">("A");
     const [backgroundSelection, setBackgroundSelection] = useState<"A" | "B">("A");
+    const [prevOptions, setPrevOptions] = useState({ classOptions, backgroundOptions });
 
-    useEffect(() => {
-        // Reset to A when options change
+    if (prevOptions.classOptions !== classOptions || prevOptions.backgroundOptions !== backgroundOptions) {
+        setPrevOptions({ classOptions, backgroundOptions });
         setClassSelection("A");
         setBackgroundSelection("A");
+    }
+
+    useEffect(() => {
         onClassOptionChange("A");
         onBackgroundOptionChange("A");
     }, [classOptions, backgroundOptions]);

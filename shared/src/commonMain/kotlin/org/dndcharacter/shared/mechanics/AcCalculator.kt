@@ -54,24 +54,24 @@ private class BarbarianUnarmoredDefense : AcFormula {
 private class MonkUnarmoredDefense : AcFormula {
     override val featureName = "Unarmored Defense"
     override val classId = "monk"
-    override val description = "AC = 10 + DEX modifier + WIS modifier when not wearing armor"
+    override val description = "AC = 10 + DEX modifier + WIS modifier when not wearing armor or wielding a shield"
     
     override fun calculate(abilities: AbilityScores, dexMod: Int): Int {
         return 10 + dexMod + getModifier(abilities.wis)
     }
 
     override fun isApplicable(states: Array<String>): Boolean {
-        return states.contains("unarmored")
+        return states.contains("unarmored") && !states.contains("shielded")
     }
 }
 
 private class DraconicResilience : AcFormula {
     override val featureName = "Draconic Resilience"
     override val classId = "sorcerer"
-    override val description = "AC = 13 + DEX modifier when not wearing armor (Draconic Bloodline)"
+    override val description = "2024 PHB: AC = 10 + DEX modifier + CHA modifier when not wearing armor (Draconic Sorcery)"
     
     override fun calculate(abilities: AbilityScores, dexMod: Int): Int {
-        return 13 + dexMod
+        return 10 + dexMod + getModifier(abilities.cha)
     }
 
     override fun isApplicable(states: Array<String>): Boolean {
@@ -79,17 +79,27 @@ private class DraconicResilience : AcFormula {
     }
 }
 
+private class DanceBardUnarmoredDefense : AcFormula {
+    override val featureName = "Dazzling Footwork"
+    override val classId = "bard"
+    override val description = "2024 PHB: AC = 10 + DEX modifier + CHA modifier when not wearing armor or wielding a shield (College of Dance)"
+
+    override fun calculate(abilities: AbilityScores, dexMod: Int): Int {
+        return 10 + dexMod + getModifier(abilities.cha)
+    }
+
+    override fun isApplicable(states: Array<String>): Boolean {
+        return states.contains("unarmored") && !states.contains("shielded")
+    }
+}
+
 @JsExport
 object AcCalculator {
-    // We cannot export 'List' directly to JS well in some KMP versions without mapping, 
-    // but internal usage is fine. For the public API, we hide the concrete classes 
-    // or expose them carefully. 
-    // For simplicity, we keep the registry internal and expose the calculation method.
-    
     private val formulas = listOf(
         BarbarianUnarmoredDefense(),
         MonkUnarmoredDefense(),
-        DraconicResilience()
+        DraconicResilience(),
+        DanceBardUnarmoredDefense()
     )
 
     fun calculateBestAc(

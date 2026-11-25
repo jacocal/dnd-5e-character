@@ -1,144 +1,438 @@
 {
-    "$schema": "src/lib/import/schemas.ts#ClassResourceSchema",
-    "$table": "class_resources",
-    "$description": "D&D 5e 2024 class resources (Rage, Ki, Wild Shape, etc.)",
-    "data": [
+  "$schema": "src/lib/import/schemas.ts#ClassResourceSchema",
+  "$table": "class_resources",
+  "$description": "D&D 5e 2024 class resources (Rage, Ki, Wild Shape, etc.)",
+  "data": [
+    {
+      "id": "rage",
+      "class_id": "barbarian",
+      "name": "Rage",
+      "description": "Enter a rage as a Bonus Action, gaining benefits for 10 rounds or until incapacitated.",
+      "max_formula": "proficiency",
+      "recharge_on": "long",
+      "unlock_level": 1,
+      "onUse": [
         {
-            "id": "rage",
-            "class_id": "barbarian",
-            "name": "Rage",
-            "description": "Enter a rage as a Bonus Action, gaining benefits for 10 rounds or until incapacitated.",
-            "max_formula": "proficiency",
-            "recharge_on": "long",
-            "unlock_level": 1,
-            "onUse": [
-                {
-                    "type": "bonus",
-                    "target": "str_damage",
-                    "formula": "proficiency",
-                    "condition": "raging",
-                    "duration": "manual_disable"
-                },
-                {
-                    "type": "set",
-                    "target": "resistance_bludgeoning",
-                    "value": true,
-                    "condition": "raging",
-                    "duration": "manual_disable"
-                },
-                {
-                    "type": "set",
-                    "target": "resistance_piercing",
-                    "value": true,
-                    "condition": "raging",
-                    "duration": "manual_disable"
-                },
-                {
-                    "type": "set",
-                    "target": "resistance_slashing",
-                    "value": true,
-                    "condition": "raging",
-                    "duration": "manual_disable"
-                }
-            ]
+          "type": "bonus",
+          "target": "str_damage",
+          "formula": "rage_damage",
+          "condition": "raging",
+          "duration": "manual_disable"
         },
         {
-            "id": "bardic-inspiration",
-            "class_id": "bard",
-            "name": "Bardic Inspiration",
-            "description": "As a Bonus Action, give an ally a Bardic Inspiration die (d6 to d12 based on level).",
-            "max_formula": "cha_mod",
-            "recharge_on": "long",
-            "unlock_level": 1
+          "type": "set",
+          "target": "resistance_bludgeoning",
+          "value": true,
+          "condition": "raging",
+          "duration": "manual_disable"
         },
         {
-            "id": "channel-divinity-cleric",
-            "class_id": "cleric",
-            "name": "Channel Divinity",
-            "description": "Channel divine energy through your holy symbol to fuel magical effects.",
-            "max_formula": "1",
-            "recharge_on": "short",
-            "unlock_level": 2
+          "type": "set",
+          "target": "resistance_piercing",
+          "value": true,
+          "condition": "raging",
+          "duration": "manual_disable"
         },
         {
-            "id": "wild-shape",
-            "class_id": "druid",
-            "name": "Wild Shape",
-            "description": "Magically transform into a beast you have seen.",
-            "max_formula": "2",
-            "recharge_on": "short",
-            "unlock_level": 2,
-            "onUse": [
-                {
-                    "type": "bonus",
-                    "target": "hp_max",
-                    "formula": "1 * class_level",
-                    "duration": "long_rest"
-                }
-            ]
-        },
-        {
-            "id": "action-surge",
-            "class_id": "fighter",
-            "name": "Action Surge",
-            "description": "Take one additional action on your turn.",
-            "max_formula": "1",
-            "recharge_on": "short",
-            "unlock_level": 2
-        },
-        {
-            "id": "second-wind",
-            "class_id": "fighter",
-            "name": "Second Wind",
-            "description": "As a Bonus Action, regain HP equal to 1d10 + your Fighter level.",
-            "max_formula": "1",
-            "recharge_on": "short",
-            "unlock_level": 1
-        },
-        {
-            "id": "ki-points",
-            "class_id": "monk",
-            "name": "Ki Points",
-            "description": "Harness the mystic energy of ki to fuel special abilities.",
-            "max_formula": "level",
-            "recharge_on": "short",
-            "unlock_level": 2
-        },
-        {
-            "id": "channel-divinity-paladin",
-            "class_id": "paladin",
-            "name": "Channel Divinity",
-            "description": "Channel divine energy to fuel magical effects granted by your oath.",
-            "max_formula": "1",
-            "recharge_on": "long",
-            "unlock_level": 3
-        },
-        {
-            "id": "lay-on-hands",
-            "class_id": "paladin",
-            "name": "Lay on Hands",
-            "description": "A pool of healing power that can restore HP or cure disease/poison.",
-            "max_formula": "level_x5",
-            "recharge_on": "long",
-            "unlock_level": 1
-        },
-        {
-            "id": "sorcery-points",
-            "class_id": "sorcerer",
-            "name": "Sorcery Points",
-            "description": "A pool of magical energy used for Metamagic and spell slot conversion.",
-            "max_formula": "level",
-            "recharge_on": "long",
-            "unlock_level": 2
-        },
-        {
-            "id": "arcane-recovery",
-            "class_id": "wizard",
-            "name": "Arcane Recovery",
-            "description": "Once per day during a short rest, recover spell slots with combined level up to half your wizard level.",
-            "max_formula": "1",
-            "recharge_on": "long",
-            "unlock_level": 1
+          "type": "set",
+          "target": "resistance_slashing",
+          "value": true,
+          "condition": "raging",
+          "duration": "manual_disable"
         }
-    ]
+      ],
+      "source_type": "class",
+      "source_id": "barbarian",
+      "partial_short_rest_recovery": 1
+    },
+    {
+      "id": "bardic-inspiration",
+      "class_id": "bard",
+      "name": "Bardic Inspiration",
+      "description": "As a Bonus Action, give an ally a Bardic Inspiration die (d6 to d12 based on level).",
+      "max_formula": "cha_mod",
+      "recharge_on": "long",
+      "unlock_level": 1,
+      "source_type": "class",
+      "source_id": "bard",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "channel-divinity-cleric",
+      "class_id": "cleric",
+      "name": "Channel Divinity",
+      "description": "Channel divine energy through your holy symbol to fuel magical effects (2 uses at Lv 2, 3 at Lv 6, 4 at Lv 18; regain 1 on Short Rest, all on Long Rest).",
+      "max_formula": "channel_divinity_cleric",
+      "recharge_on": "long",
+      "unlock_level": 2,
+      "source_type": "class",
+      "source_id": "cleric",
+      "partial_short_rest_recovery": 1
+    },
+    {
+      "id": "wild-shape",
+      "class_id": "druid",
+      "name": "Wild Shape",
+      "description": "Magically transform into a beast you have seen (2 uses at Lv 2, 3 at Lv 6, 4 at Lv 17; regain 1 on Short Rest, all on Long Rest).",
+      "max_formula": "wild_shape_charges",
+      "recharge_on": "long",
+      "unlock_level": 2,
+      "onUse": [],
+      "source_type": "class",
+      "source_id": "druid",
+      "partial_short_rest_recovery": 1
+    },
+    {
+      "id": "action-surge",
+      "class_id": "fighter",
+      "name": "Action Surge",
+      "description": "Take one additional action on your turn.",
+      "max_formula": "action_surge_charges",
+      "recharge_on": "short",
+      "unlock_level": 2,
+      "source_type": "class",
+      "source_id": "fighter",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "second-wind",
+      "class_id": "fighter",
+      "name": "Second Wind",
+      "description": "As a Bonus Action, regain HP equal to 1d10 + your Fighter level (2 uses at Lv 1, 3 at Lv 4, 4 at Lv 10; regain 1 on Short Rest, all on Long Rest).",
+      "max_formula": "second_wind_charges",
+      "recharge_on": "long",
+      "unlock_level": 1,
+      "source_type": "class",
+      "source_id": "fighter",
+      "partial_short_rest_recovery": 1
+    },
+    {
+      "id": "indomitable",
+      "class_id": "fighter",
+      "name": "Indomitable",
+      "description": "Reroll a failed saving throw with a bonus equal to your Fighter level (1 use at Lv 9, 2 at Lv 13, 3 at Lv 17).",
+      "max_formula": "indomitable_charges",
+      "recharge_on": "long",
+      "unlock_level": 9,
+      "source_type": "class",
+      "source_id": "fighter",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "superiority-dice",
+      "class_id": "fighter",
+      "name": "Superiority Dice",
+      "description": "Fuel Battle Master combat maneuvers (4 dice at Lv 3, 5 at Lv 7, 6 at Lv 15; d8 -> d10 at Lv 10 -> d12 at Lv 18).",
+      "max_formula": "superiority_dice",
+      "recharge_on": "short",
+      "unlock_level": 3,
+      "source_type": "subclass",
+      "source_id": "fighter-battlemaster",
+      "partial_short_rest_recovery": 0,
+      "subclass_id": "fighter-battlemaster"
+    },
+    {
+      "id": "ki-points",
+      "class_id": "monk",
+      "name": "Ki Points",
+      "description": "Harness the mystic energy of Focus/Ki to fuel special Monk abilities.",
+      "max_formula": "level",
+      "recharge_on": "short",
+      "unlock_level": 2,
+      "source_type": "class",
+      "source_id": "monk",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "uncanny-metabolism",
+      "class_id": "monk",
+      "name": "Uncanny Metabolism",
+      "description": "Once per Long Rest when you roll Initiative, regain all expended Focus/Ki points and heal 1 Martial Arts die + Monk level HP.",
+      "max_formula": "1",
+      "recharge_on": "long",
+      "unlock_level": 2,
+      "source_type": "class",
+      "source_id": "monk",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "channel-divinity-paladin",
+      "class_id": "paladin",
+      "name": "Channel Divinity",
+      "description": "Channel divine energy to fuel magical effects granted by your oath (2 uses at Lv 3, 3 at Lv 11; regain 1 on Short Rest, all on Long Rest).",
+      "max_formula": "channel_divinity_paladin",
+      "recharge_on": "long",
+      "unlock_level": 3,
+      "source_type": "class",
+      "source_id": "paladin",
+      "partial_short_rest_recovery": 1
+    },
+    {
+      "id": "lay-on-hands",
+      "class_id": "paladin",
+      "name": "Lay on Hands",
+      "description": "A pool of healing power that can restore HP or cure Poisoned/conditions.",
+      "max_formula": "level_x5",
+      "recharge_on": "long",
+      "unlock_level": 1,
+      "source_type": "class",
+      "source_id": "paladin",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "favored-enemy",
+      "class_id": "ranger",
+      "name": "Favored Enemy (Hunter's Mark)",
+      "description": "Cast Hunter's Mark without expending a spell slot (2 free casts at Lv 1, 3 at Lv 5, 4 at Lv 9, 5 at Lv 13, 6 at Lv 17).",
+      "max_formula": "favored_enemy_charges",
+      "recharge_on": "long",
+      "unlock_level": 1,
+      "source_type": "class",
+      "source_id": "ranger",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "innate-sorcery",
+      "class_id": "sorcerer",
+      "name": "Innate Sorcery",
+      "description": "Bonus Action (1 min): +1 to Sorcerer spell save DC and Advantage on Sorcerer spell attack rolls.",
+      "max_formula": "2",
+      "recharge_on": "long",
+      "unlock_level": 1,
+      "source_type": "class",
+      "source_id": "sorcerer",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "sorcery-points",
+      "class_id": "sorcerer",
+      "name": "Sorcery Points",
+      "description": "A pool of magical energy used for Metamagic and spell slot conversion.",
+      "max_formula": "level",
+      "recharge_on": "long",
+      "unlock_level": 2,
+      "source_type": "class",
+      "source_id": "sorcerer",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "magical-cunning",
+      "class_id": "warlock",
+      "name": "Magical Cunning",
+      "description": "Perform a 1-minute esoteric rite once per Long Rest to regain expended Pact Magic spell slots up to half your maximum (rounded up).",
+      "max_formula": "1",
+      "recharge_on": "long",
+      "unlock_level": 2,
+      "source_type": "class",
+      "source_id": "warlock",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "arcane-recovery",
+      "class_id": "wizard",
+      "name": "Arcane Recovery",
+      "description": "Once per day during a short rest, recover spell slots with combined level up to half your wizard level (rounded up).",
+      "max_formula": "1",
+      "recharge_on": "long",
+      "unlock_level": 1,
+      "source_type": "class",
+      "source_id": "wizard",
+      "partial_short_rest_recovery": 0
+    },
+    {
+      "id": "psionic-energy-dice-fighter",
+      "class_id": "fighter",
+      "subclass_id": "fighter-psi",
+      "source_type": "subclass",
+      "source_id": "fighter-psi",
+      "name": "Psionic Energy Dice (Psi Warrior)",
+      "description": "Fuel Psionic Power abilities. Regain 1 expended die on a Short Rest, all on a Long Rest.",
+      "max_formula": "psionic_energy_dice",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 1,
+      "unlock_level": 3
+    },
+    {
+      "id": "psionic-energy-dice-rogue",
+      "class_id": "rogue",
+      "subclass_id": "rogue-soulknife",
+      "source_type": "subclass",
+      "source_id": "rogue-soulknife",
+      "name": "Psionic Energy Dice (Soulknife)",
+      "description": "Fuel Psi-Bolstered Knack and Psychic Whispers. Regain 1 die on a Short Rest, all on a Long Rest.",
+      "max_formula": "psionic_energy_dice",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 1,
+      "unlock_level": 3
+    },
+    {
+      "id": "warding-flare",
+      "class_id": "cleric",
+      "subclass_id": "cleric-light",
+      "source_type": "subclass",
+      "source_id": "cleric-light",
+      "name": "Warding Flare",
+      "description": "Reaction: Impose Disadvantage on an attack roll made by a creature within 30 feet. (Recharges on Short Rest at Lv 6+)",
+      "max_formula": "wis_mod",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 3
+    },
+    {
+      "id": "war-priest",
+      "class_id": "cleric",
+      "subclass_id": "cleric-war",
+      "source_type": "subclass",
+      "source_id": "cleric-war",
+      "name": "War Priest",
+      "description": "Bonus Action: Make one weapon attack or Unarmed Strike.",
+      "max_formula": "wis_mod",
+      "recharge_on": "short",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 3
+    },
+    {
+      "id": "steps-of-the-fey",
+      "class_id": "warlock",
+      "subclass_id": "warlock-archfey",
+      "source_type": "subclass",
+      "source_id": "warlock-archfey",
+      "name": "Steps of the Fey",
+      "description": "Cast Misty Step without expending a spell slot and trigger a Fey effect.",
+      "max_formula": "cha_mod",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 3
+    },
+    {
+      "id": "healing-light",
+      "class_id": "warlock",
+      "subclass_id": "warlock-celestial",
+      "source_type": "subclass",
+      "source_id": "warlock-celestial",
+      "name": "Healing Light (d6 Pool)",
+      "description": "Bonus Action: Spend d6s (up to CHA mod at once) to heal a creature within 60 feet. Pool equals 1 + Warlock level.",
+      "max_formula": "level_plus_1",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 3
+    },
+    {
+      "id": "starry-form",
+      "class_id": "druid",
+      "subclass_id": "druid-stars",
+      "source_type": "subclass",
+      "source_id": "druid-stars",
+      "name": "Star Map (Free Guiding Bolt)",
+      "description": "Cast Guiding Bolt without expending a spell slot (WIS modifier uses per Long Rest).",
+      "max_formula": "wis_mod",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 3
+    },
+    {
+      "id": "sorcerous-restoration",
+      "class_id": "sorcerer",
+      "subclass_id": null,
+      "source_type": "class",
+      "source_id": "sorcerer",
+      "name": "Sorcerous Restoration",
+      "description": "On a Short Rest, regain Sorcery Points equal to half your Sorcerer level (round down). Once per Long Rest.",
+      "max_formula": "1",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 5
+    },
+    {
+      "id": "stroke-of-luck",
+      "class_id": "rogue",
+      "subclass_id": null,
+      "source_type": "class",
+      "source_id": "rogue",
+      "name": "Stroke of Luck",
+      "description": "Turn a failed D20 Test into a natural 20. Recharges on a Short or Long Rest.",
+      "max_formula": "1",
+      "recharge_on": "short",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 20
+    },
+    {
+      "id": "breath-weapon",
+      "class_id": null,
+      "subclass_id": null,
+      "source_type": "species",
+      "source_id": "dragonborn",
+      "name": "Breath Weapon (Dragonborn)",
+      "description": "Replace one attack to exhale elemental energy (15-ft Cone or 30-ft Line, DEX save DC 8 + CON + PB). Uses = Proficiency Bonus per Long Rest.",
+      "max_formula": "proficiency",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 1
+    },
+    {
+      "id": "giant-ancestry",
+      "class_id": null,
+      "subclass_id": null,
+      "source_type": "species",
+      "source_id": "goliath",
+      "name": "Giant Ancestry (Goliath)",
+      "description": "Activate your supernatural Giant Ancestry boon (Cloud, Fire, Frost, Hill, Stone, or Storm). Uses = Proficiency Bonus per Long Rest.",
+      "max_formula": "proficiency",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 1
+    },
+    {
+      "id": "adrenaline-rush",
+      "class_id": null,
+      "subclass_id": null,
+      "source_type": "species",
+      "source_id": "orc",
+      "name": "Adrenaline Rush (Orc)",
+      "description": "Bonus Action: Take the Dash action and gain Temporary HP equal to your Proficiency Bonus. Uses = Proficiency Bonus per Short or Long Rest.",
+      "max_formula": "proficiency",
+      "recharge_on": "short",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 1
+    },
+    {
+      "id": "healing-hands",
+      "class_id": null,
+      "subclass_id": null,
+      "source_type": "species",
+      "source_id": "aasimar",
+      "name": "Healing Hands (Aasimar)",
+      "description": "Magic Action: Touch a creature and roll d4s equal to your Proficiency Bonus to restore Hit Points. Once per Long Rest.",
+      "max_formula": "1",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 1
+    },
+    {
+      "id": "celestial-revelation",
+      "class_id": null,
+      "subclass_id": null,
+      "source_type": "species",
+      "source_id": "aasimar",
+      "name": "Celestial Revelation (Aasimar)",
+      "description": "2024 PHB: Bonus Action at Lv 3+ to choose Heavenly Wings, Inner Radiance, or Necrotic Shroud for 1 minute (+PB extra Radiant/Necrotic damage 1/turn).",
+      "max_formula": "1",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 3
+    },
+    {
+      "id": "luck-points",
+      "class_id": null,
+      "subclass_id": null,
+      "source_type": "feat",
+      "source_id": "lucky",
+      "name": "Luck Points (Lucky Feat)",
+      "description": "2024 PHB: Spend 1 Luck Point to give yourself Advantage on a D20 Test or impose Disadvantage on an attack roll against you. Pool = Proficiency Bonus per Long Rest.",
+      "max_formula": "proficiency",
+      "recharge_on": "long",
+      "partial_short_rest_recovery": 0,
+      "unlock_level": 1
+    }
+  ]
 }

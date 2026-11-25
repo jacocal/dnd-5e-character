@@ -1,5 +1,5 @@
 import { createCharacter } from "../../actions";
-import { getClasses, getBackgrounds, getRaces, getFeats } from "@/db/queries";
+import { getClasses, getBackgrounds, getRaces, getFeats, getLanguages } from "@/db/queries";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -7,11 +7,14 @@ import { ArrowLeft } from "lucide-react";
 import DynamicAbilityScoreCalculator from "@/components/character/create/DynamicAbilityScoreCalculator";
 import DynamicCreationOptions from "@/components/character/create/DynamicCreationOptions";
 
+export const dynamic = "force-dynamic";
+
 export default async function CreateCharacterPage() {
     const classes = await getClasses();
     const backgrounds = await getBackgrounds();
     const races = await getRaces();
     const feats = await getFeats();
+    const languages = await getLanguages();
 
     async function submitAction(formData: FormData) {
         "use server";
@@ -157,7 +160,15 @@ export default async function CreateCharacterPage() {
                                 id: f.id,
                                 name: f.name,
                                 description: f.description,
+                                category: f.category,
+                                repeatable: f.repeatable,
                             }))}
+                            languages={languages.map(l => ({
+                                id: l.id,
+                                name: l.name,
+                                type: l.type || "Standard",
+                            }))}
+                            initialRaceId={races[0]?.id || "human"}
                         />
 
                         {/* HP Calculation Mode */}

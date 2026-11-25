@@ -4,8 +4,6 @@ package org.dndcharacter.shared.model
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
-// Imports are auto-resolved if in same package, which they are (org.dndcharacter.shared.model)
-// So no explicit import needed for RuleCondition/RuleResource.
 
 @Serializable
 @JsExport
@@ -16,8 +14,8 @@ data class InventoryItem(
     val isIdentified: Boolean = true,
     val isAttuned: Boolean = false,
     val currentUses: Int? = null,
-    // Database ID of this specific row, not the rule Item ID
-    val instanceId: Int? = null 
+    val instanceId: Int? = null,
+    val isProficient: Boolean = true
 )
 
 @Serializable
@@ -27,7 +25,8 @@ data class KnownSpell(
     val prepared: Boolean = false,
     val isRitual: Boolean = false,
     val isConcentrating: Boolean = false,
-    // Custom overrides possible here (e.g., origin)
+    val source: String = "class", // "class", "spellbook", "subclass_always_prepared", "feat", "species"
+    val alwaysPrepared: Boolean = false,
     val originClassId: String? = null
 )
 
@@ -54,15 +53,15 @@ data class ActiveCondition(
 data class TrackedResource(
     val resource: RuleResource,
     val used: Int,
-    val max: Int // calculated or from rule
+    val max: Int
 )
 
 @Serializable
 @JsExport
 data class ResolvedProficiency(
     val name: String,
-    val source: String, // "Class: Fighter", "Background: Soldier", "Manual"
-    val type: String // "Armor", "Weapon", "Tool"
+    val source: String,
+    val type: String
 )
 
 @Serializable

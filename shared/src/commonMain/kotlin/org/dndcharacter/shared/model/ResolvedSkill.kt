@@ -2,8 +2,10 @@
 
 package org.dndcharacter.shared.model
 
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
+@Serializable
 @JsExport
 data class ResolvedSkill(
     val name: String,
@@ -13,5 +15,6 @@ data class ResolvedSkill(
     val isProficient: Boolean,
     val isExpertise: Boolean,
     val hasBonus: Boolean,
-    val passive: Int
+    val passive: Int,
+    val advantageState: String = "NORMAL" // "NORMAL", "ADVANTAGE", "DISADVANTAGE"
 )

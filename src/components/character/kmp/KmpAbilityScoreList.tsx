@@ -5,13 +5,12 @@ import { useKmpCharacter } from "@/components/character/kmp/KmpCharacterProvider
 import { AbilityScore } from "../AbilityScore";
 
 export function KmpAbilityScoreList() {
-    const { state } = useKmpCharacter();
+    const { state, executeInstantRoll } = useKmpCharacter();
     const character = state?.character;
     const resolvedAbilityScores = state?.resolvedAbilityScores || [];
 
     if (!character) return null;
 
-    // Use resolved ability scores if available (modifier-applied), fallback to raw values
     const abilities = resolvedAbilityScores.length > 0
         ? resolvedAbilityScores.map((ab: any) => ({
             key: ab.ability,
@@ -31,11 +30,23 @@ export function KmpAbilityScoreList() {
         <div className="space-y-4">
             <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {abilities.map((ability: { key: string; label: string; score: number }) => (
-                    <AbilityScore
+                    <div
                         key={ability.key}
-                        label={ability.label}
-                        score={ability.score}
-                    />
+                        onClick={() =>
+                            executeInstantRoll({
+                                rollType: "ability_check",
+                                targetId: ability.key,
+                                label: `${ability.label} Ability Check`
+                            })
+                        }
+                        className="cursor-pointer transition-transform hover:scale-[1.03] active:scale-95"
+                        title={`1-Click Instant ${ability.label} Check`}
+                    >
+                        <AbilityScore
+                            label={ability.label}
+                            score={ability.score}
+                        />
+                    </div>
                 ))}
             </div>
         </div>

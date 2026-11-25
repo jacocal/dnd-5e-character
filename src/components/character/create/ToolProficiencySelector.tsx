@@ -62,10 +62,14 @@ export default function ToolProficiencySelector({
     onChange,
 }: ToolProficiencySelectorProps) {
     const [selectedTool, setSelectedTool] = useState<string>("");
+    const [prevInputs, setPrevInputs] = useState({ toolChoice, fixedTools });
+
+    if (prevInputs.toolChoice !== toolChoice || prevInputs.fixedTools !== fixedTools) {
+        setPrevInputs({ toolChoice, fixedTools });
+        setSelectedTool("");
+    }
 
     useEffect(() => {
-        // Reset when background changes
-        setSelectedTool("");
         onChange([]);
     }, [toolChoice, fixedTools]);
 

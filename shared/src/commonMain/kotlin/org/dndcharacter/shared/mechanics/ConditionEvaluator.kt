@@ -56,10 +56,12 @@ object ConditionEvaluator {
             typeLower.contains("shield") || tags.contains("armor:shield")
         }
         
-        // Check for Raging condition
-        val isRaging = character.conditions?.any { 
-            it.conditionId.lowercase() == "raging" 
-        } == true
+        // Check for Raging condition OR active Rage resource modifier
+        val isRaging = (character.conditions?.any { 
+            it.conditionId.equals("raging", ignoreCase = true) 
+        } == true) || (character.activeModifiers?.any {
+            it.sourceId.equals("rage", ignoreCase = true)
+        } == true)
         
         // Check for concentration (any spell with isConcentrating)
         val isConcentrating = character.spells?.any { 

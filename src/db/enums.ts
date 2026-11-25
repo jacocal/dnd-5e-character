@@ -47,13 +47,22 @@ export const castingTimeEnum = pgEnum("casting_time", [
     "10 Minutes",
     "1 Hour",
     "8 Hours",
+    "12 Hours",
     "24 Hours",
+    "Special",
+]);
+
+export const featCategoryEnum = pgEnum("feat_category", [
+    "origin",
+    "general",
+    "fighting_style",
+    "epic_boon",
 ]);
 
 // Spellcasting type for multiclass spell slot calculation
 // - full: Full casters (Wizard, Sorcerer, Bard, Cleric, Druid) - 1.0 multiplier
-// - half: Half casters (Paladin, Ranger) - 0.5 round DOWN
-// - artificer: Artificer - 0.5 round UP (special rule)
+// - half: Half casters (Paladin, Ranger) - 0.5 round UP (D&D 5e 2024 rules: cast at Lv 1)
+// - artificer: Artificer - 0.5 round UP
 // - third: Third casters (Arcane Trickster, Eldritch Knight subclasses) - 0.33 round DOWN
 // - pact: Warlock Pact Magic - separate slot pool
 // - none: Non-casters (Barbarian, Fighter, Monk, Rogue base)

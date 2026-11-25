@@ -14,7 +14,8 @@ data class CharacterClass(
     val level: Int,
     val className: String? = null,
     val subclassName: String? = null,
-    val hitDie: Int? = null
+    val hitDie: Int? = null,
+    val hitDiceUsed: Int = 0
 )
 
 @Serializable
@@ -25,6 +26,8 @@ data class CharacterSpell(
     val prepared: Boolean = false,
     val isRitual: Boolean = false,
     val isConcentrating: Boolean = false,
+    val source: String = "class", // "class", "spellbook", "subclass_always_prepared", "feat", "species"
+    val alwaysPrepared: Boolean = false,
     val spell: Spell? = null,
     val spellName: String? = null,
     val spellLevel: Int? = null
@@ -69,4 +72,16 @@ data class CharacterResource(
     val resourceName: String? = null,
     val maxFormula: String? = null,
     val rechargeOn: String? = null
+)
+
+@Serializable
+@JsExport
+data class CharacterEvent(
+    val id: Int = 0,
+    val characterId: Int = 0,
+    val eventType: String, // "roll", "attack", "spell_cast", "damage", "heal", "rest", "level_up", "resource", "condition"
+    val title: String,
+    val summary: String,
+    val payloadJson: String? = null,
+    val createdAt: String = ""
 )

@@ -7,291 +7,899 @@
             "id": "barbarian-berserker",
             "class_id": "barbarian",
             "name": "Path of the Berserker",
-            "description": "Features: Frenzy, Mindless Rage, Retaliation, Intimidating Presence"
+            "description": "Features: Frenzy, Mindless Rage, Retaliation, Intimidating Presence",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-frenzy",
+                    "name": "Frenzy",
+                    "dice": "2d6",
+                    "damageType": "weapon",
+                    "appliesTo": "melee_damage",
+                    "description": "First hit on Reckless Attack while Raging deals extra Rage d6s"
+                }
+            ]
         },
         {
             "id": "barbarian-wildheart",
             "class_id": "barbarian",
             "name": "Path of the Wild Heart",
-            "description": "Features: Animal Speaker, Rage of the Wilds, Aspect of the Wilds, Nature Speaker, Power of the Wilds"
+            "description": "Features: Animal Speaker, Rage of the Wilds, Aspect of the Wilds, Nature Speaker, Power of the Wilds",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "barbarian-worldtree",
             "class_id": "barbarian",
             "name": "Path of the World Tree",
-            "description": "Features: Vitality of the Tree, Branches of the Tree, Battering Roots, Travel Along the Tree"
+            "description": "Features: Vitality of the Tree, Branches of the Tree, Battering Roots, Travel Along the Tree",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "barbarian-zealot",
             "class_id": "barbarian",
             "name": "Path of the Zealot",
-            "description": "Features: Divine Fury, Warrior of the Gods, Fanatical Focus, Zealous Presence, Rage of the Gods"
+            "description": "Features: Divine Fury, Warrior of the Gods, Fanatical Focus, Zealous Presence, Rage of the Gods",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-divine-fury",
+                    "name": "Divine Fury",
+                    "dice": "1d6",
+                    "formula": "half_class_level",
+                    "damageType": "radiant",
+                    "appliesTo": "melee_damage",
+                    "description": "First hit each turn while Raging deals +1d6 + half Barbarian level Radiant or Necrotic damage"
+                }
+            ]
         },
         {
             "id": "bard-dance",
             "class_id": "bard",
             "name": "College of Dance",
-            "description": "Features: Dazzling Footwork, Inspiring Movement, Tandem Footwork, Leading Evasion"
+            "description": "Features: Dazzling Footwork, Inspiring Movement, Tandem Footwork, Leading Evasion",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "bard-glamour",
             "class_id": "bard",
             "name": "College of Glamour",
-            "description": "Features: Beguiling Magic, Mantle of Inspiration, Mantle of Majesty, Unbreakable Majesty"
+            "description": "Features: Beguiling Magic, Mantle of Inspiration, Mantle of Majesty, Unbreakable Majesty",
+            "granted_spells": {
+                "3": [
+                    "charm-person",
+                    "mirror-image",
+                    "command"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "bard-lore",
             "class_id": "bard",
             "name": "College of Lore",
-            "description": "Features: Bonus Proficiencies, Cutting Words, Magical Discoveries, Peerless Skill"
+            "description": "Features: Bonus Proficiencies, Cutting Words, Magical Discoveries, Peerless Skill",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "bard-valor",
             "class_id": "bard",
             "name": "College of Valor",
-            "description": "Features: Combat Inspiration, Martial Training, Extra Attack, Battle Magic"
+            "description": "Features: Combat Inspiration, Martial Training, Extra Attack, Battle Magic",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "cleric-life",
             "class_id": "cleric",
             "name": "Life Domain",
-            "description": "Features: Disciple of Life, Life Domain Spells, Preserve Life, Blessed Healer, Supreme Healing"
+            "description": "Features: Disciple of Life, Life Domain Spells, Preserve Life, Blessed Healer, Supreme Healing",
+            "granted_spells": {
+                "3": [
+                    "aid",
+                    "bless",
+                    "cure-wounds",
+                    "lesser-restoration"
+                ],
+                "5": [
+                    "mass-healing-word",
+                    "revivify"
+                ],
+                "7": [
+                    "aura-of-life",
+                    "death-ward"
+                ],
+                "9": [
+                    "greater-restoration",
+                    "mass-cure-wounds"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "cleric-light",
             "class_id": "cleric",
             "name": "Light Domain",
-            "description": "Features: Light Domain Spells, Radiance of the Dawn, Warding Flare, Improved Warding Flare, Corona of Light"
+            "description": "Features: Light Domain Spells, Radiance of the Dawn, Warding Flare, Improved Warding Flare, Corona of Light",
+            "granted_spells": {
+                "3": [
+                    "burning-hands",
+                    "faerie-fire",
+                    "scorching-ray",
+                    "see-invisibility"
+                ],
+                "5": [
+                    "daylight",
+                    "fireball"
+                ],
+                "7": [
+                    "arcane-eye",
+                    "wall-of-fire"
+                ],
+                "9": [
+                    "flame-strike",
+                    "scrying"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "cleric-trickery",
             "class_id": "cleric",
             "name": "Trickery Domain",
-            "description": "Features: Blessing of the Trickster, Invoke Duplicity, Trickery Domain Spells, Trickster's Transposition, Improved Duplicity"
+            "description": "Features: Blessing of the Trickster, Invoke Duplicity, Trickery Domain Spells, Trickster's Transposition, Improved Duplicity",
+            "granted_spells": {
+                "3": [
+                    "charm-person",
+                    "disguise-self",
+                    "invisibility",
+                    "pass-without-trace"
+                ],
+                "5": [
+                    "hypnotic-pattern",
+                    "nondetection"
+                ],
+                "7": [
+                    "confusion",
+                    "dimension-door"
+                ],
+                "9": [
+                    "dominate-person",
+                    "modify-memory"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "cleric-war",
             "class_id": "cleric",
             "name": "War Domain",
-            "description": "Features: Guided Strike, War Domain Spells, War Priest, War God's Blessing, Avatar of Battle"
+            "description": "Features: Guided Strike, War Domain Spells, War Priest, War God's Blessing, Avatar of Battle",
+            "granted_spells": {
+                "3": [
+                    "guiding-bolt",
+                    "magic-weapon",
+                    "shield-of-faith",
+                    "spiritual-weapon"
+                ],
+                "5": [
+                    "crusaders-mantle",
+                    "spirit-guardians"
+                ],
+                "7": [
+                    "fire-shield",
+                    "freedom-of-movement"
+                ],
+                "9": [
+                    "hold-monster",
+                    "steel-wind-strike"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "druid-land",
             "class_id": "druid",
             "name": "Circle of the Land",
-            "description": "Features: Circle of the Land Spells, Land's Aid, Natural Recovery, Nature's Ward, Nature's Sanctuary"
+            "description": "Features: Circle of the Land Spells, Land's Aid, Natural Recovery, Nature's Ward, Nature's Sanctuary",
+            "granted_spells": {
+                "3": [
+                    "aid",
+                    "blur",
+                    "burning-hands",
+                    "hold-person"
+                ],
+                "5": [
+                    "fireball",
+                    "lightning-bolt"
+                ],
+                "7": [
+                    "blight",
+                    "ice-storm"
+                ],
+                "9": [
+                    "cone-of-cold",
+                    "scrying"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "druid-moon",
             "class_id": "druid",
             "name": "Circle of the Moon",
-            "description": "Features: Circle Forms, Circle of the Moon Spells, Improved Circle Forms, Moonlight Step, Lunar Form"
+            "description": "Features: Circle Forms, Circle of the Moon Spells, Improved Circle Forms, Moonlight Step, Lunar Form",
+            "granted_spells": {
+                "3": [
+                    "cure-wounds",
+                    "moonbeam",
+                    "starry-wisp"
+                ],
+                "5": [
+                    "conjure-animals",
+                    "daylight"
+                ],
+                "7": [
+                    "fount-of-moonlight",
+                    "freedom-of-movement"
+                ],
+                "9": [
+                    "mass-cure-wounds"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "druid-sea",
             "class_id": "druid",
             "name": "Circle of the Sea",
-            "description": "Features: Circle of the Sea Spells, Wrath of the Sea, Aquatic Affinity, Stormborn, Oceanic Gift"
+            "description": "Features: Circle of the Sea Spells, Wrath of the Sea, Aquatic Affinity, Stormborn, Oceanic Gift",
+            "granted_spells": {
+                "3": [
+                    "fog-cloud",
+                    "gust-of-wind",
+                    "ray-of-frost",
+                    "shatter",
+                    "thunderwave"
+                ],
+                "5": [
+                    "lightning-bolt",
+                    "water-breathing"
+                ],
+                "7": [
+                    "control-water",
+                    "ice-storm"
+                ],
+                "9": [
+                    "conjure-elemental",
+                    "hold-monster"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "druid-stars",
             "class_id": "druid",
             "name": "Circle of the Stars",
-            "description": "Features: Star Map, Starry Form, Cosmic Omen, Twinkling Constellations, Full of Stars"
+            "description": "Features: Star Map, Starry Form, Cosmic Omen, Twinkling Constellations, Full of Stars",
+            "granted_spells": {
+                "1": [
+                    "guidance",
+                    "guiding-bolt"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "fighter-battlemaster",
             "class_id": "fighter",
             "name": "Battle Master",
-            "description": "Features: Combat Superiority, Student of War, Know Your Enemy, Improved Combat Superiority, Relentless"
+            "description": "Features: Combat Superiority, Student of War, Know Your Enemy, Improved Combat Superiority, Relentless",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-maneuver",
+                    "name": "Combat Superiority Maneuver",
+                    "dice": "1d8",
+                    "damageType": "weapon",
+                    "appliesTo": "damage",
+                    "description": "Expend a Superiority Die (+1d8/+1d10/+1d12) on hit or attack roll"
+                }
+            ]
         },
         {
             "id": "fighter-champion",
             "class_id": "fighter",
             "name": "Champion",
-            "description": "Features: Improved Critical, Remarkable Athlete, Additional Fighting Style, Superior Critical, Survivor"
+            "description": "Features: Improved Critical, Remarkable Athlete, Additional Fighting Style, Superior Critical, Survivor",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "fighter-eldritch",
             "class_id": "fighter",
             "name": "Eldritch Knight",
             "description": "Features: Spellcasting, Weapon Bond, War Magic, Eldritch Strike, Arcane Charge, Improved War Magic",
-            "spellcasting_type": "third"
+            "spellcasting_type": "third",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "fighter-psi",
             "class_id": "fighter",
             "name": "Psi Warrior",
-            "description": "Features: Psionic Power, Protective Field, Psionic Strike, Telekinetic Movement, Telekinetic Bulwark, Guarded Mind"
+            "description": "Features: Psionic Power, Protective Field, Psionic Strike, Telekinetic Movement, Telekinetic Bulwark, Guarded Mind",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-psionic-strike",
+                    "name": "Psionic Strike",
+                    "dice": "1d8",
+                    "formula": "int_mod",
+                    "damageType": "force",
+                    "appliesTo": "damage",
+                    "description": "Expend Psionic Energy die for +1d8 + INT mod Force damage"
+                }
+            ]
         },
         {
             "id": "monk-mercy",
             "class_id": "monk",
             "name": "Warrior of Mercy",
-            "description": "Features: Hand of Harm, Hand of Healing, Implements of Mercy, Physician's Touch, Flurry of Healing and Harm"
+            "description": "Features: Hand of Harm, Hand of Healing, Implements of Mercy, Physician's Touch, Flurry of Healing and Harm",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-hand-of-harm",
+                    "name": "Hand of Harm",
+                    "dice": "1d6",
+                    "formula": "wis_mod",
+                    "damageType": "necrotic",
+                    "appliesTo": "damage",
+                    "description": "Spend 1 Focus Point on Unarmed Strike for extra Martial Arts die + WIS mod Necrotic damage"
+                }
+            ]
         },
         {
             "id": "monk-shadow",
             "class_id": "monk",
             "name": "Warrior of Shadow",
-            "description": "Features: Shadow Arts, Shadow Step, Improved Shadow Step, Cloak of Shadows"
+            "description": "Features: Shadow Arts, Shadow Step, Improved Shadow Step, Cloak of Shadows",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "monk-elements",
             "class_id": "monk",
             "name": "Warrior of the Elements",
-            "description": "Features: Elemental Attunement, Manipulate Elements, Elemental Burst, Stride of the Elements, Elemental Epitome"
+            "description": "Features: Elemental Attunement, Manipulate Elements, Elemental Burst, Stride of the Elements, Elemental Epitome",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "monk-openhand",
             "class_id": "monk",
             "name": "Warrior of the Open Hand",
-            "description": "Features: Open Hand Technique, Wholeness of Body, Fleet Step, Quivering Palm"
+            "description": "Features: Open Hand Technique, Wholeness of Body, Fleet Step, Quivering Palm",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "paladin-devotion",
             "class_id": "paladin",
             "name": "Oath of Devotion",
-            "description": "Features: Oath of Devotion Spells, Sacred Weapon, Aura of Devotion, Smite of Protection, Holy Nimbus"
+            "description": "Features: Oath of Devotion Spells, Sacred Weapon, Aura of Devotion, Smite of Protection, Holy Nimbus",
+            "granted_spells": {
+                "3": [
+                    "protection-from-evil-and-good",
+                    "shield-of-faith"
+                ],
+                "5": [
+                    "aid",
+                    "zone-of-truth"
+                ],
+                "9": [
+                    "beacon-of-hope",
+                    "dispel-magic"
+                ],
+                "13": [
+                    "freedom-of-movement",
+                    "guardian-of-faith"
+                ],
+                "17": [
+                    "commune",
+                    "flame-strike"
+                ]
+            },
+            "combat_riders": [
+                {
+                    "id": "rider-sacred-weapon",
+                    "name": "Sacred Weapon (+CHA to Hit)",
+                    "formula": "cha_mod",
+                    "appliesTo": "attack_roll",
+                    "description": "Channel Divinity: add CHA modifier (min +1) to attack rolls"
+                }
+            ]
         },
         {
             "id": "paladin-glory",
             "class_id": "paladin",
             "name": "Oath of Glory",
-            "description": "Features: Oath of Glory Spells, Peerless Athlete, Aura of Alacrity, Glorious Defense, Living Legend"
+            "description": "Features: Oath of Glory Spells, Peerless Athlete, Aura of Alacrity, Glorious Defense, Living Legend",
+            "granted_spells": {
+                "3": [
+                    "guiding-bolt",
+                    "heroism"
+                ],
+                "5": [
+                    "enhance-ability",
+                    "magic-weapon"
+                ],
+                "9": [
+                    "haste",
+                    "protection-from-energy"
+                ],
+                "13": [
+                    "compulsion",
+                    "freedom-of-movement"
+                ],
+                "17": [
+                    "commune",
+                    "flame-strike"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "paladin-ancients",
             "class_id": "paladin",
             "name": "Oath of the Ancients",
-            "description": "Features: Oath of the Ancients Spells, Nature's Wrath, Aura of Warding, Undying Sentinel, Elder Champion"
+            "description": "Features: Oath of the Ancients Spells, Nature's Wrath, Aura of Warding, Undying Sentinel, Elder Champion",
+            "granted_spells": {
+                "3": [
+                    "ensnaring-strike",
+                    "speak-with-animals"
+                ],
+                "5": [
+                    "misty-step",
+                    "moonbeam"
+                ],
+                "9": [
+                    "plant-growth",
+                    "protection-from-energy"
+                ],
+                "13": [
+                    "ice-storm"
+                ],
+                "17": [
+                    "commune-with-nature",
+                    "tree-stride"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "paladin-vengeance",
             "class_id": "paladin",
             "name": "Oath of Vengeance",
-            "description": "Features: Oath of Vengeance Spells, Vow of Enmity, Relentless Avenger, Soul of Vengeance, Avenging Angel"
+            "description": "Features: Oath of Vengeance Spells, Vow of Enmity, Relentless Avenger, Soul of Vengeance, Avenging Angel",
+            "granted_spells": {
+                "3": [
+                    "bane",
+                    "hunters-mark"
+                ],
+                "5": [
+                    "hold-person",
+                    "misty-step"
+                ],
+                "9": [
+                    "haste",
+                    "protection-from-energy"
+                ],
+                "13": [
+                    "banishment",
+                    "dimension-door"
+                ],
+                "17": [
+                    "hold-monster",
+                    "scrying"
+                ]
+            },
+            "combat_riders": [
+                {
+                    "id": "rider-vow-of-enmity",
+                    "name": "Vow of Enmity",
+                    "grantsAdvantage": true,
+                    "appliesTo": "attack_roll",
+                    "description": "Channel Divinity: Advantage on attack rolls against marked creature"
+                }
+            ]
         },
         {
             "id": "ranger-beast",
             "class_id": "ranger",
             "name": "Beast Master",
-            "description": "Features: Primal Companion, Exceptional Training, Bestial Fury, Share Spells"
+            "description": "Features: Primal Companion, Exceptional Training, Bestial Fury, Share Spells",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "ranger-fey",
             "class_id": "ranger",
             "name": "Fey Wanderer",
-            "description": "Features: Dreadful Strikes, Fey Wanderer Spells, Otherworldly Glamour, Beguiling Twist, Fey Reinforcements"
+            "description": "Features: Dreadful Strikes, Fey Wanderer Spells, Otherworldly Glamour, Beguiling Twist, Fey Reinforcements",
+            "granted_spells": {
+                "3": [
+                    "charm-person"
+                ],
+                "5": [
+                    "misty-step"
+                ],
+                "9": [
+                    "summon-fey"
+                ],
+                "13": [
+                    "dimension-door"
+                ],
+                "17": [
+                    "mislead"
+                ]
+            },
+            "combat_riders": [
+                {
+                    "id": "rider-dreadful-strikes",
+                    "name": "Dreadful Strikes",
+                    "dice": "1d4",
+                    "damageType": "psychic",
+                    "appliesTo": "weapon_damage",
+                    "description": "Once per turn per target +1d4 Psychic damage (1d6 at Lvl 11)"
+                }
+            ]
         },
         {
             "id": "ranger-gloom",
             "class_id": "ranger",
             "name": "Gloom Stalker",
-            "description": "Features: Dread Ambusher, Gloom Stalker Spells, Umbral Sight, Iron Mind, Stalker's Flurry"
+            "description": "Features: Dread Ambusher, Gloom Stalker Spells, Umbral Sight, Iron Mind, Stalker's Flurry",
+            "granted_spells": {
+                "3": [
+                    "disguise-self"
+                ],
+                "5": [
+                    "rope-trick"
+                ],
+                "9": [
+                    "fear"
+                ],
+                "13": [
+                    "greater-invisibility"
+                ],
+                "17": [
+                    "seeming"
+                ]
+            },
+            "combat_riders": [
+                {
+                    "id": "rider-dread-ambusher",
+                    "name": "Dread Ambusher",
+                    "dice": "2d6",
+                    "damageType": "psychic",
+                    "appliesTo": "weapon_damage",
+                    "description": "+2d6 Psychic damage on Dread Ambusher strike"
+                }
+            ]
         },
         {
             "id": "ranger-hunter",
             "class_id": "ranger",
             "name": "Hunter",
-            "description": "Features: Hunter's Lore, Hunter's Prey, Defensive Tactics, Superior Hunter's Prey, Superior Hunter's Defense"
+            "description": "Features: Hunter's Lore, Hunter's Prey, Defensive Tactics, Superior Hunter's Prey, Superior Hunter's Defense",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-colossus-slayer",
+                    "name": "Colossus Slayer",
+                    "dice": "1d8",
+                    "damageType": "weapon",
+                    "appliesTo": "weapon_damage",
+                    "description": "Once per turn +1d8 weapon damage if target is below max HP"
+                }
+            ]
         },
         {
             "id": "rogue-trickster",
             "class_id": "rogue",
             "name": "Arcane Trickster",
             "description": "Features: Spellcasting, Mage Hand Legerdemain, Magical Ambush, Versatile Trickster, Spell Thief",
-            "spellcasting_type": "third"
+            "spellcasting_type": "third",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "rogue-assassin",
             "class_id": "rogue",
             "name": "Assassin",
-            "description": "Features: Assassinate, Assassin's Tools, Infiltration Expertise, Envenom Weapons, Death Strike"
+            "description": "Features: Assassinate, Assassin's Tools, Infiltration Expertise, Envenom Weapons, Death Strike",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-assassinate",
+                    "name": "Assassinate",
+                    "formula": "class_level",
+                    "damageType": "weapon",
+                    "appliesTo": "weapon_damage",
+                    "description": "First round hit deals extra damage equal to Rogue level"
+                }
+            ]
         },
         {
             "id": "rogue-soulknife",
             "class_id": "rogue",
             "name": "Soulknife",
-            "description": "Features: Psionic Power, Psychic Blades, Soul Blades, Psychic Veil, Rend Mind"
+            "description": "Features: Psionic Power, Psychic Blades, Soul Blades, Psychic Veil, Rend Mind",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "rogue-thief",
             "class_id": "rogue",
             "name": "Thief",
-            "description": "Features: Fast Hands, Second-Story Work, Supreme Sneak, Use Magic Device, Thief's Reflexes"
+            "description": "Features: Fast Hands, Second-Story Work, Supreme Sneak, Use Magic Device, Thief's Reflexes",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "sorcerer-aberrant",
             "class_id": "sorcerer",
             "name": "Aberrant Sorcery",
-            "description": "Features: Psionic Spells, Telepathic Speech, Psionic Sorcery, Psychic Defenses, Revelation in Flesh"
+            "description": "Features: Psionic Spells, Telepathic Speech, Psionic Sorcery, Psychic Defenses, Revelation in Flesh",
+            "granted_spells": {
+                "3": [
+                    "arms-of-hadar",
+                    "calm-emotions",
+                    "detect-thoughts",
+                    "dissonant-whispers",
+                    "mind-sliver"
+                ],
+                "5": [
+                    "hunger-of-hadar",
+                    "sending"
+                ],
+                "7": [
+                    "evards-black-tentacles",
+                    "summon-aberration"
+                ],
+                "9": [
+                    "rarys-telepathic-bond",
+                    "telekinesis"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "sorcerer-clockwork",
             "class_id": "sorcerer",
             "name": "Clockwork Sorcery",
-            "description": "Features: Clockwork Spells, Restore Balance, Bastion of Law, Trance of Order, Clockwork Cavalcade"
+            "description": "Features: Clockwork Spells, Restore Balance, Bastion of Law, Trance of Order, Clockwork Cavalcade",
+            "granted_spells": {
+                "3": [
+                    "aid",
+                    "alarm",
+                    "lesser-restoration",
+                    "protection-from-evil-and-good"
+                ],
+                "5": [
+                    "dispel-magic",
+                    "protection-from-energy"
+                ],
+                "7": [
+                    "freedom-of-movement",
+                    "summon-construct"
+                ],
+                "9": [
+                    "greater-restoration",
+                    "wall-of-force"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "sorcerer-draconic",
             "class_id": "sorcerer",
             "name": "Draconic Sorcery",
-            "description": "Features: Draconic Resilience, Draconic Spells, Elemental Affinity, Dragon Wings, Dragon Companion"
+            "description": "Features: Draconic Resilience, Draconic Spells, Elemental Affinity, Dragon Wings, Dragon Companion",
+            "granted_spells": {
+                "3": [
+                    "alter-self",
+                    "chromatic-orb",
+                    "command"
+                ],
+                "5": [
+                    "fear",
+                    "fly"
+                ],
+                "7": [
+                    "arcane-eye",
+                    "charm-monster"
+                ],
+                "9": [
+                    "legend-lore",
+                    "summon-dragon"
+                ]
+            },
+            "combat_riders": [
+                {
+                    "id": "rider-elemental-affinity",
+                    "name": "Elemental Affinity (+CHA)",
+                    "formula": "cha_mod",
+                    "appliesTo": "spell_damage",
+                    "minLevel": 6,
+                    "description": "Add CHA modifier to one damage roll of a spell matching draconic element"
+                }
+            ]
         },
         {
             "id": "sorcerer-wild",
             "class_id": "sorcerer",
             "name": "Wild Magic Sorcery",
-            "description": "Features: Wild Magic Surge, Bend Luck, Controlled Chaos, Tamed Surge"
+            "description": "Features: Wild Magic Surge, Bend Luck, Controlled Chaos, Tamed Surge",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "warlock-archfey",
             "class_id": "warlock",
             "name": "Archfey Patron",
-            "description": "Features: Archfey Spells, Steps of the Fey, Misty Escape, Beguiling Defenses, Bewitching Magic"
+            "description": "Features: Archfey Spells, Steps of the Fey, Misty Escape, Beguiling Defenses, Bewitching Magic",
+            "granted_spells": {
+                "3": [
+                    "calm-emotions",
+                    "faerie-fire",
+                    "misty-step",
+                    "phantasmal-force",
+                    "sleep"
+                ],
+                "5": [
+                    "blink",
+                    "plant-growth"
+                ],
+                "7": [
+                    "dominate-beast",
+                    "greater-invisibility"
+                ],
+                "9": [
+                    "dominate-person",
+                    "seeming"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "warlock-celestial",
             "class_id": "warlock",
             "name": "Celestial Patron",
-            "description": "Features: Celestial Spells, Healing Light, Radiant Soul, Celestial Resilience, Searing Vengeance"
+            "description": "Features: Celestial Spells, Healing Light, Radiant Soul, Celestial Resilience, Searing Vengeance",
+            "granted_spells": {
+                "3": [
+                    "aid",
+                    "cure-wounds",
+                    "guiding-bolt",
+                    "lesser-restoration",
+                    "light",
+                    "sacred-flame"
+                ],
+                "5": [
+                    "daylight",
+                    "revivify"
+                ],
+                "7": [
+                    "guardian-of-faith",
+                    "wall-of-fire"
+                ],
+                "9": [
+                    "greater-restoration",
+                    "summon-celestial"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "warlock-fiend",
             "class_id": "warlock",
             "name": "Fiend Patron",
-            "description": "Features: Fiend Spells, Dark One's Blessing, Dark One's Own Luck, Fiendish Resilience, Hurl Through Hell"
+            "description": "Features: Fiend Spells, Dark One's Blessing, Dark One's Own Luck, Fiendish Resilience, Hurl Through Hell",
+            "granted_spells": {
+                "3": [
+                    "burning-hands",
+                    "command",
+                    "scorching-ray",
+                    "suggestion"
+                ],
+                "5": [
+                    "fireball",
+                    "stinking-cloud"
+                ],
+                "7": [
+                    "fire-shield",
+                    "wall-of-fire"
+                ],
+                "9": [
+                    "geas",
+                    "insect-plague"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "warlock-greatoldone",
             "class_id": "warlock",
             "name": "Great Old One Patron",
-            "description": "Features: Great Old One Spells, Awakened Mind, Clairvoyant Combatant, Eldritch Hex, Thought Shield, Create Thrall"
+            "description": "Features: Great Old One Spells, Awakened Mind, Clairvoyant Combatant, Eldritch Hex, Thought Shield, Create Thrall",
+            "granted_spells": {
+                "3": [
+                    "detect-thoughts",
+                    "dissonant-whispers",
+                    "phantasmal-force",
+                    "tashas-hideous-laughter"
+                ],
+                "5": [
+                    "clairvoyance",
+                    "hunger-of-hadar"
+                ],
+                "7": [
+                    "confusion",
+                    "summon-aberration"
+                ],
+                "9": [
+                    "modify-memory",
+                    "telekinesis"
+                ]
+            },
+            "combat_riders": []
         },
         {
             "id": "wizard-abjurer",
             "class_id": "wizard",
             "name": "Abjurer",
-            "description": "Features: Abjuration Savant, Arcane Ward, Projected Ward, Spell Breaker, Spell Resistance"
+            "description": "Features: Abjuration Savant, Arcane Ward, Projected Ward, Spell Breaker, Spell Resistance",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "wizard-diviner",
             "class_id": "wizard",
             "name": "Diviner",
-            "description": "Features: Divination Savant, Portent, Expert Divination, The Third Eye, Greater Portent"
+            "description": "Features: Divination Savant, Portent, Expert Divination, The Third Eye, Greater Portent",
+            "granted_spells": {},
+            "combat_riders": []
         },
         {
             "id": "wizard-evoker",
             "class_id": "wizard",
             "name": "Evoker",
-            "description": "Features: Evocation Savant, Potent Cantrip, Sculpt Spells, Empowered Evocation, Overchannel"
+            "description": "Features: Evocation Savant, Potent Cantrip, Sculpt Spells, Empowered Evocation, Overchannel",
+            "granted_spells": {},
+            "combat_riders": [
+                {
+                    "id": "rider-empowered-evocation",
+                    "name": "Empowered Evocation (+INT)",
+                    "formula": "int_mod",
+                    "appliesTo": "spell_damage",
+                    "minLevel": 10,
+                    "description": "Add INT modifier to one damage roll of any Wizard Evocation spell"
+                }
+            ]
         },
         {
             "id": "wizard-illusionist",
             "class_id": "wizard",
             "name": "Illusionist",
-            "description": "Features: Illusion Savant, Improved Illusions, Phantasmal Creatures, Illusory Self, Illusory Reality"
+            "description": "Features: Illusion Savant, Improved Illusions, Phantasmal Creatures, Illusory Self, Illusory Reality",
+            "granted_spells": {},
+            "combat_riders": []
         }
     ]
 }

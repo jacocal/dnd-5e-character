@@ -2,9 +2,11 @@
 
 package org.dndcharacter.shared.model
 
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @JsExport
+@Serializable
 data class LevelUpData(
     val characterId: Int,
     val classId: String,
@@ -16,6 +18,7 @@ data class LevelUpData(
 )
 
 @JsExport
+@Serializable
 data class AbilityScoreImprovement(
     val str: Int = 0,
     val dex: Int = 0,

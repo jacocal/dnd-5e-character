@@ -1,10 +1,6 @@
 import { z } from "zod";
-import { abilityEnum, sizeEnum, castingTimeEnum } from "../../db/enums";
 
 // Helper to match Postgres Enums with Zod
-// We'll use simple string validation for checking against the JSON, 
-// but ensure it matches the values allowed in the DB.
-
 export const AbilityEnumSchema = z.enum(["STR", "DEX", "CON", "INT", "WIS", "CHA"]);
 export const CastingTimeEnumSchema = z.enum([
     "1 Action",
@@ -14,15 +10,21 @@ export const CastingTimeEnumSchema = z.enum([
     "10 Minutes",
     "1 Hour",
     "8 Hours",
+    "12 Hours",
     "24 Hours",
+    "Special",
 ]);
 export const SpellcastingTypeEnumSchema = z.enum(["full", "half", "artificer", "third", "pact", "none"]);
+export const FeatCategoryEnumSchema = z.enum(["origin", "general", "fighting_style", "epic_boon"]);
 
 export const SubclassSchema = z.object({
     id: z.string(),
+    class_id: z.string().optional(),
     name: z.string(),
     description: z.string(),
-    spellcasting_type: SpellcastingTypeEnumSchema.optional(), // For third-casters like Arcane Trickster
+    spellcasting_type: SpellcastingTypeEnumSchema.nullable().optional(),
+    granted_spells: z.record(z.string(), z.array(z.string())).optional(),
+    combat_riders: z.array(z.any()).optional(),
 });
 
 export const ClassSchema = z.object({
@@ -30,9 +32,13 @@ export const ClassSchema = z.object({
     name: z.string(),
     hit_die: z.number().int().min(4).max(12),
     saving_throws: z.array(AbilityEnumSchema),
-    proficiencies: z.record(z.string(), z.any()).optional(), // { armor: [], weapons: [] }
-    spellcasting_ability: AbilityEnumSchema.optional(),
-    spellcasting_type: SpellcastingTypeEnumSchema.optional(), // Multiclass slot calculation type
+    proficiencies: z.record(z.string(), z.any()).optional(),
+    spellcasting_ability: AbilityEnumSchema.nullable().optional(),
+    spellcasting_type: SpellcastingTypeEnumSchema.optional(),
+    spell_prep_mode: z.string().optional(),
+    skill_options: z.record(z.string(), z.any()).optional(),
+    starting_equipment_options: z.record(z.string(), z.any()).optional(),
+    combat_riders: z.array(z.any()).optional(),
     subclasses: z.array(SubclassSchema).optional(),
 });
 
@@ -55,8 +61,8 @@ export const SpellSchema = z.object({
     level: z.number().int().min(0).max(9),
     school: z.string(),
     casting_time: CastingTimeEnumSchema,
+    casting_time_trigger: z.string().nullable().optional(),
     range: z.string(),
-    // Allow string input for backward compatibility during parse transform
     components: z.union([z.string(), SpellComponentsSchema]),
     duration: z.union([z.string(), SpellDurationSchema]),
     is_ritual: z.boolean().default(false),
@@ -64,18 +70,22 @@ export const SpellSchema = z.object({
     description: z.string(),
     classes: z.array(z.string()),
     tags: z.array(z.string()).optional(),
+    mechanics: z.record(z.string(), z.any()).optional(),
 });
 
 export const ModifierSchema = z.object({
     type: z.enum([
-        'bonus', 'set', 'override', 'proficiency', 'language', 'expertise', 'skill_proficiency',
-        // New modifier types
-        'ability_increase', 'saving_throw_proficiency', 'armor_proficiency', 'weapon_proficiency'
+        "bonus", "set", "override", "proficiency", "language", "expertise", "skill_proficiency",
+        "ability_increase", "ability_point_grant", "saving_throw_proficiency",
+        "armor_proficiency", "weapon_proficiency", "tool_proficiency",
+        "damage_resistance", "damage_immunity", "damage_vulnerability", "condition_immunity",
     ]),
-    target: z.string(), // e.g. 'str', 'ac', 'athletics', 'light' (for armor), 'longsword' (for weapon)
+    target: z.string(),
     value: z.union([z.number(), z.boolean(), z.string()]),
     condition: z.string().optional(),
-    max: z.number().optional() // Maximum cap for ability_increase modifiers (e.g., 20)
+    formula: z.string().optional(),
+    duration: z.string().optional(),
+    max: z.number().optional(),
 });
 
 export const ItemSchema = z.object({
@@ -90,7 +100,9 @@ export const ItemSchema = z.object({
 
     // Combat & Equipment Stats
     damage_dice: z.string().optional(),
+    versatile_dice: z.string().optional(),
     damage_type: z.string().optional(),
+    weapon_mastery: z.string().optional(),
     armor_class: z.number().optional(),
     strength_requirement: z.number().optional(),
     stealth_disadvantage: z.boolean().optional(),
@@ -99,48 +111,53 @@ export const ItemSchema = z.object({
     rarity: z.string().optional(),
     slot: z.string().optional(),
     range: z.string().optional(),
+    category: z.string().optional(),
 
     // Magic Item Properties
     is_magical: z.boolean().optional(),
     is_cursed: z.boolean().optional(),
     requires_attunement: z.boolean().optional(),
-    true_name: z.string().optional(), // Revealed after identification
-    shown_effect: z.string().optional(), // Displayed before identification
-    true_effect: z.string().optional(), // Revealed after identification
+    true_name: z.string().optional(),
+    shown_effect: z.string().optional(),
+    true_effect: z.string().optional(),
 
     // Consumable Properties
-    uses: z.number().optional(), // Max uses for charge-based items
-    uses_max: z.number().optional(), // Maximum uses
+    uses: z.number().optional(),
+    uses_max: z.number().optional(),
 });
-
 
 export const TraitSchema = z.object({
     id: z.string(),
     name: z.string(),
     description: z.string(),
-    race: z.string().optional(),
+    race: z.string().nullable().optional(),
     parameters: z.record(z.string(), z.any()).optional(),
     modifiers: z.array(ModifierSchema).optional(),
+    granted_spells: z.record(z.string(), z.array(z.string())).optional(),
+    combat_riders: z.array(z.any()).optional(),
 });
 
 export const RaceSchema = z.object({
     id: z.string(),
     name: z.string(),
     description: z.string(),
-    trait_options: z.record(z.string(), z.any()).optional(),
+    trait_options: z.union([z.array(z.string()), z.record(z.string(), z.any())]).optional(),
     modifiers: z.array(ModifierSchema).optional(),
 });
 
 export const FeatSchema = z.object({
     id: z.string(),
     name: z.string(),
+    category: FeatCategoryEnumSchema.optional(),
+    repeatable: z.boolean().optional(),
     description: z.string(),
-    prerequisites: z.string().optional(),
+    prerequisites: z.string().nullable().optional(),
     parameters: z.record(z.string(), z.any()).optional(),
     modifiers: z.array(ModifierSchema).optional(),
+    granted_spells: z.record(z.string(), z.array(z.string())).optional(),
+    combat_riders: z.array(z.any()).optional(),
+    skill_grants: z.record(z.string(), z.any()).nullable().optional(),
 });
-
-// ... existing schemas
 
 export const LanguageSchema = z.object({
     id: z.string(),
@@ -154,7 +171,7 @@ export const ConditionSchema = z.object({
     id: z.string(),
     name: z.string(),
     description: z.string(),
-    modifiers: z.array(ModifierSchema).optional(),
+    modifiers: z.array(ModifierSchema).nullable().optional(),
 });
 
 export const BackgroundSchema = z.object({
@@ -165,31 +182,61 @@ export const BackgroundSchema = z.object({
     modifiers: z.array(ModifierSchema).optional(),
     features: z.array(z.object({
         name: z.string(),
-        description: z.string()
+        description: z.string(),
     })).optional(),
-    starting_equipment: z.array(z.string()).optional()
+    starting_equipment: z.array(z.string()).optional(),
+    origin_feat_id: z.string().nullable().optional(),
+    origin_feat_class: z.string().nullable().optional(),
+    tool_proficiencies: z.record(z.string(), z.any()).optional(),
+    starting_equipment_options: z.record(z.string(), z.any()).optional(),
 });
 
 export const ResourceEffectSchema = z.object({
-    type: z.enum(['grant_hp']),
-    mode: z.enum(['temporary', 'bonus']), // 'temporary' = standard 5e, 'bonus' = healable + max hp boost
-    formula: z.string(),
-    duration: z.enum(['long_rest', 'short_rest', 'permanent']).optional()
+    type: z.string(),
+    target: z.string().optional(),
+    mode: z.enum(["temporary", "bonus"]).optional(),
+    formula: z.string().optional(),
+    value: z.union([z.boolean(), z.number(), z.string()]).optional(),
+    condition: z.string().optional(),
+    duration: z.string().optional(),
 });
 
 export const ClassResourceSchema = z.object({
     id: z.string(),
-    class_id: z.string(),
+    class_id: z.string().nullable().optional(),
+    subclass_id: z.string().nullable().optional(),
+    source_type: z.enum(["class", "subclass", "species", "feat"]).optional().default("class"),
+    source_id: z.string().nullable().optional(),
     name: z.string(),
     description: z.string().optional(),
-    max_formula: z.string(), // "proficiency", "level", "cha_mod", "1", etc.
+    max_formula: z.string(),
     recharge_on: z.enum(["short", "long"]),
+    partial_short_rest_recovery: z.number().int().min(0).optional().default(0),
     unlock_level: z.number().int().min(1).max(20).default(1),
-    onUse: z.array(ResourceEffectSchema).optional()
+    onUse: z.array(ResourceEffectSchema).optional(),
+});
+
+export const CompanionSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    category: z.string(),
+    source_type: z.string().nullable().optional(),
+    source_id: z.string().nullable().optional(),
+    cr: z.number().optional().default(0),
+    size: z.string().optional().default("Medium"),
+    armor_class_formula: z.string(),
+    max_hp_formula: z.string(),
+    speed: z.string(),
+    attack_name: z.string(),
+    attack_bonus_formula: z.string().nullable().optional(),
+    damage_dice: z.string(),
+    damage_bonus_formula: z.string().nullable().optional(),
+    damage_type: z.string(),
+    notes: z.string().optional().default(""),
+    statblock: z.record(z.string(), z.any()).optional(),
 });
 
 export const SrdDataSchema = z.object({
-
     classes: z.array(ClassSchema),
     spells: z.array(SpellSchema),
     items: z.array(ItemSchema).optional().default([]),

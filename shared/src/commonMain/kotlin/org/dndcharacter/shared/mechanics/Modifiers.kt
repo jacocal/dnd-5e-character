@@ -257,4 +257,80 @@ object ModifierCalculator {
         }
         return total
     }
+
+    fun getAttackBonus(
+        sources: Array<ModifierSource>,
+        conditionContext: ConditionEvaluator.ConditionContext?,
+        isMelee: Boolean,
+        isRanged: Boolean,
+        abilityUsed: String,
+        excludeSourceId: String? = null
+    ): Int {
+        val targets = mutableSetOf("attack", "weapon_attack", "attack_roll")
+        if (isMelee) targets.add("melee_attack")
+        if (isRanged) targets.add("ranged_attack")
+        targets.add("${abilityUsed.lowercase()}_attack")
+        return sumMatchingBonuses(sources, conditionContext, targets, excludeSourceId)
+    }
+
+    fun getWeaponDamageBonus(
+        sources: Array<ModifierSource>,
+        conditionContext: ConditionEvaluator.ConditionContext?,
+        isMelee: Boolean,
+        isRanged: Boolean,
+        abilityUsed: String,
+        excludeSourceId: String? = null
+    ): Int {
+        val targets = mutableSetOf("damage", "weapon_damage")
+        if (isMelee) targets.add("melee_damage")
+        if (isRanged) targets.add("ranged_damage")
+        targets.add("${abilityUsed.lowercase()}_damage")
+        return sumMatchingBonuses(sources, conditionContext, targets, excludeSourceId)
+    }
+
+    fun getSpellDamageBonus(
+        sources: Array<ModifierSource>,
+        conditionContext: ConditionEvaluator.ConditionContext?,
+        isCantrip: Boolean,
+        damageType: String?,
+        school: String?
+    ): Int {
+        val targets = mutableSetOf("damage", "spell_damage")
+        if (isCantrip) targets.add("cantrip_damage")
+        if (!damageType.isNullOrBlank()) targets.add("${damageType.lowercase()}_damage")
+        if (!school.isNullOrBlank()) targets.add("${school.lowercase()}_damage")
+        return sumMatchingBonuses(sources, conditionContext, targets, null)
+    }
+
+    fun getSpellHealingBonus(
+        sources: Array<ModifierSource>,
+        conditionContext: ConditionEvaluator.ConditionContext?
+    ): Int {
+        val targets = setOf("healing", "spell_healing")
+        return sumMatchingBonuses(sources, conditionContext, targets, null)
+    }
+
+    private fun sumMatchingBonuses(
+        sources: Array<ModifierSource>,
+        conditionContext: ConditionEvaluator.ConditionContext?,
+        targets: Set<String>,
+        excludeSourceId: String?
+    ): Int {
+        var total = 0
+        for (source in sources) {
+            if (excludeSourceId != null && source.id.equals(excludeSourceId, ignoreCase = true)) continue
+            for (mod in source.modifiers) {
+                if (mod.type.trim() != "bonus") continue
+                val t = mod.target.trim().lowercase()
+                if (!targets.contains(t)) continue
+                if (!mod.condition.isNullOrEmpty()) {
+                    if (conditionContext == null) continue
+                    val cond = org.dndcharacter.shared.model.ModifierCondition.fromKey(mod.condition)
+                    if (!ConditionEvaluator.isConditionMet(cond, conditionContext)) continue
+                }
+                total += mod.getNumberValue()
+            }
+        }
+        return total
+    }
 }

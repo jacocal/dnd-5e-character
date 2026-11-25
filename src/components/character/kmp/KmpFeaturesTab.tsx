@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useKmpCharacter } from "@/components/character/kmp/KmpCharacterProvider";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Shield, Zap, Eye, Trash2, Plus, X } from "lucide-react";
+import { Shield, Zap, Eye, Plus, X, Sparkles, Swords } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -24,9 +24,118 @@ export function KmpFeaturesTab() {
     const charFeats = feats || [];
     const classFeatures = state.resolvedFeatures || [];
     const proficiencies = state.resolvedProficiencies;
+    const triggerMatrix: any[] = state.activeTriggerMatrix || [];
+    const featureChoiceSlots: any[] = state.featureChoiceSlots || [];
 
     return (
         <div className="space-y-8">
+            {/* Class Feature Sub-Choices (Fighting Style, Eldritch Invocations, Metamagic, Maneuvers, Divine/Primal Order) */}
+            {featureChoiceSlots.length > 0 && (
+                <section className="space-y-3">
+                    <div className="flex items-center justify-between border-b border-amber-500/30 pb-2">
+                        <h3 className="text-sm font-bold uppercase text-amber-600 dark:text-amber-400 tracking-wider flex items-center gap-2">
+                            <Zap className="h-4 w-4" />
+                            Class Feature Choices & Loadout ({featureChoiceSlots.length})
+                        </h3>
+                        <span className="text-[11px] text-slate-400">
+                            Select or swap your Fighting Style, Invocations, Metamagic, or Maneuvers
+                        </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {featureChoiceSlots.map((slot: any) => (
+                            <div
+                                key={slot.slotId}
+                                className="p-3.5 rounded-xl border border-amber-300/60 dark:border-amber-800/60 bg-amber-50/30 dark:bg-amber-950/15 space-y-2"
+                            >
+                                <div className="flex items-center justify-between gap-2">
+                                    <span className="text-[10px] font-bold uppercase text-amber-600 dark:text-amber-400">
+                                        {slot.sourceClass} (Lvl {slot.unlockLevel}) • {slot.category}
+                                    </span>
+                                    {slot.selectedOptionSummary && (
+                                        <Badge variant="outline" className="text-[9px] h-4 px-1.5 border-amber-500/40 text-amber-700 dark:text-amber-300">
+                                            {slot.selectedOptionSummary}
+                                        </Badge>
+                                    )}
+                                </div>
+
+                                <Select
+                                    value={slot.selectedOptionId || ""}
+                                    onValueChange={(optId) => viewModel?.selectFeatureChoice(slot.slotId, optId)}
+                                >
+                                    <SelectTrigger className="h-8 text-xs font-semibold bg-white dark:bg-slate-900 border-amber-300/60 dark:border-amber-800">
+                                        <SelectValue placeholder={`Choose ${slot.category}...`} />
+                                    </SelectTrigger>
+                                    <SelectContent className="max-h-72">
+                                        {(slot.options || []).map((opt: any) => (
+                                            <SelectItem key={opt.id} value={opt.id}>
+                                                <span className="font-bold">{opt.name}</span> —{" "}
+                                                <span className="text-slate-400 text-[11px]">{opt.effectSummary}</span>
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+
+                                {slot.selectedOptionId && (
+                                    <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-snug">
+                                        {(slot.options || []).find((o: any) => o.id === slot.selectedOptionId)?.description}
+                                    </p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {/* Causal Trigger Matrix: How Feats, Class Features, Species Traits & Weapon Masteries Trigger Each Other */}
+            <section className="space-y-3">
+                <div className="flex items-center justify-between border-b border-indigo-500/30 pb-2">
+                    <h3 className="text-sm font-bold uppercase text-indigo-500 dark:text-indigo-400 tracking-wider flex items-center gap-2">
+                        <Sparkles className="h-4 w-4" />
+                        Active Causal Trigger Matrix ({triggerMatrix.length})
+                    </h3>
+                    <span className="text-[11px] text-slate-400">
+                        Automatically evaluated during attacks, saves, skills & damage
+                    </span>
+                </div>
+
+                {triggerMatrix.length === 0 ? (
+                    <p className="text-xs text-slate-400 italic">
+                        Equip weapons with Masteries or acquire Feats/Class Features to populate active triggers.
+                    </p>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {triggerMatrix.map((trig: any) => (
+                            <div
+                                key={trig.id}
+                                className={cn(
+                                    "p-3 rounded-xl border transition-all",
+                                    trig.isActive !== false
+                                        ? "bg-indigo-50/40 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-800/60"
+                                        : "bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 opacity-60"
+                                )}
+                            >
+                                <div className="flex items-center justify-between gap-2 mb-1">
+                                    <span className="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5">
+                                        <Swords className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                                        {trig.sourceName}
+                                    </span>
+                                    <Badge variant="outline" className="text-[9px] h-4 px-1.5 border-indigo-400/40 text-indigo-600 dark:text-indigo-300">
+                                        {trig.sourceType}
+                                    </Badge>
+                                </div>
+                                <div className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-semibold mb-1">
+                                    Trigger: {trig.triggerCondition}
+                                </div>
+                                <div className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+                                    {trig.effectSummary}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
+
             {/* Proficiencies */}
             <section className="space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
@@ -76,17 +185,17 @@ export function KmpFeaturesTab() {
 
             {/* Racial Traits */}
             <FeatureSection
-                title="Racial Traits"
+                title="Species Traits"
                 icon={Eye}
                 iconColor="text-emerald-500"
                 items={raceTraits}
-                emptyText="No racial traits."
+                emptyText="No species traits."
             />
         </div>
     );
 }
 
-function ProficiencyGroup({ title, items, onRemove }: { title: string, items: any[], onRemove: (item: any) => void }) {
+function ProficiencyGroup({ title, items, onRemove }: { title: string; items: any[]; onRemove: (item: any) => void }) {
     if (!items || items.length === 0) return null;
     return (
         <div>
@@ -96,16 +205,23 @@ function ProficiencyGroup({ title, items, onRemove }: { title: string, items: an
                     <TooltipProvider key={idx}>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <span className={`
+                                <span
+                                    className={`
                                     text-xs font-medium px-2.5 py-1 rounded-md capitalize border flex items-center gap-1.5
-                                    ${p.source === 'Manual'
-                                        ? 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800'
-                                        : 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700'}
-                                `}>
+                                    ${
+                                        p.source === "Manual"
+                                            ? "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800"
+                                            : "bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"
+                                    }
+                                `}
+                                >
                                     {p.name}
-                                    {p.source === 'Manual' && (
+                                    {p.source === "Manual" && (
                                         <button
-                                            onClick={(e) => { e.stopPropagation(); onRemove(p); }}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                onRemove(p);
+                                            }}
                                             className="hover:text-red-500 transition-colors"
                                         >
                                             <X className="h-3 w-3" />
@@ -124,7 +240,7 @@ function ProficiencyGroup({ title, items, onRemove }: { title: string, items: an
     );
 }
 
-const PROFICIENCY_OPTIONS: Record<string, { label: string, value: string }[]> = {
+const PROFICIENCY_OPTIONS: Record<string, { label: string; value: string }[]> = {
     armor: [
         { label: "Light Armor", value: "light" },
         { label: "Medium Armor", value: "medium" },
@@ -139,13 +255,8 @@ const PROFICIENCY_OPTIONS: Record<string, { label: string, value: string }[]> = 
         "Alchemist's Supplies", "Brewer's Supplies", "Calligrapher's Supplies", "Carpenter's Tools", "Cartographer's Tools",
         "Cobbler's Tools", "Cook's Utensils", "Glassblower's Tools", "Jeweler's Tools", "Leatherworker's Tools",
         "Mason's Tools", "Painter's Supplies", "Potter's Tools", "Smith's Tools", "Tinker's Tools", "Weaver's Tools", "Woodcarver's Tools",
-        "Disguise Kit", "Forgery Kit", "Herbalism Kit", "Navigator's Tools", "Poisoner's Kit", "Thieves' Tools",
-        "Gaming Set (Dice)", "Gaming Set (Dragonchess)", "Gaming Set (Playing Cards)", "Gaming Set (Three-Dragon Ante)",
-        "Musical Instrument (Bagpipes)", "Musical Instrument (Drum)", "Musical Instrument (Dulcimer)", "Musical Instrument (Flute)",
-        "Musical Instrument (Lute)", "Musical Instrument (Lyre)", "Musical Instrument (Horn)", "Musical Instrument (Pan Flute)",
-        "Musical Instrument (Shawm)", "Musical Instrument (Viol)",
-        "Land Vehicles", "Water Vehicles"
-    ].map(t => ({ label: t, value: t }))
+        "Disguise Kit", "Forgery Kit", "Herbalism Kit", "Navigator's Tools", "Poisoner's Kit", "Thieves' Tools"
+    ].map((t) => ({ label: t, value: t }))
 };
 
 function AddProficiencyDialog({ viewModel }: { viewModel: any }) {
@@ -219,7 +330,7 @@ function AddProficiencyDialog({ viewModel }: { viewModel: any }) {
                                     <SelectValue placeholder="Select..." />
                                 </SelectTrigger>
                                 <SelectContent className="max-h-[200px]">
-                                    {currentOptions.map(opt => (
+                                    {currentOptions.map((opt) => (
                                         <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
                                     ))}
                                 </SelectContent>
@@ -232,7 +343,7 @@ function AddProficiencyDialog({ viewModel }: { viewModel: any }) {
                                 value={customValue}
                                 onChange={(e) => setCustomValue(e.target.value)}
                                 placeholder="e.g. Cook's Utensils"
-                                onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+                                onKeyDown={(e) => e.key === "Enter" && handleSave()}
                             />
                         </div>
                     )}
@@ -266,59 +377,16 @@ function FeatureSection({ title, icon: Icon, iconColor, items, emptyText }: any)
                 {title}
             </h3>
 
-            {/* Mobile: Grid of Cards */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden`}>
+            <div className="flex flex-col gap-px bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
                 {items.map((item: any, idx: number) => (
-                    <FeatureCard key={idx} item={item} />
-                ))}
-            </div>
-
-            {/* Desktop: List Rows */}
-            <div className={`hidden md:flex flex-col gap-px bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden`}>
-                {items.map((item: any, idx: number) => (
-                    <FeatureRow key={idx} item={item} isLast={idx === items.length - 1} />
+                    <FeatureRow key={idx} item={item} />
                 ))}
             </div>
         </section>
     );
 }
 
-function FeatureCard({ item }: { item: any }) {
-    const [expanded, setExpanded] = useState(false);
-    return (
-        <Card
-            className={`
-                bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 transition-all duration-200 cursor-pointer shadow-sm
-                ${expanded ? 'ring-2 ring-indigo-500/20' : 'hover:border-slate-300 dark:hover:border-slate-700'}
-            `}
-            onClick={() => setExpanded(!expanded)}
-        >
-            <CardHeader className="p-3 flex flex-row items-center justify-between space-y-0">
-                <CardTitle className="text-sm font-bold text-slate-800 dark:text-slate-200 flex justify-between w-full">
-                    <span>{item.name}</span>
-                    {item.level && <span className="text-xs font-normal text-slate-400">Lvl {item.level}</span>}
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 pt-0">
-                <p className={`text-xs text-slate-500 dark:text-slate-400 leading-relaxed ${!expanded && 'line-clamp-3'}`}>
-                    {item.description || "No description available."}
-                </p>
-
-                {expanded && item.modifiers && item.modifiers.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/50 flex flex-wrap gap-1">
-                        {item.modifiers.map((mod: any, i: number) => (
-                            <Badge key={i} variant="secondary" className="text-[10px] h-5 bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-                                {mod.target} {mod.value > 0 ? '+' : ''}{mod.value ?? mod.valueString}
-                            </Badge>
-                        ))}
-                    </div>
-                )}
-            </CardContent>
-        </Card>
-    );
-}
-
-function FeatureRow({ item, isLast }: { item: any, isLast: boolean }) {
+function FeatureRow({ item }: { item: any }) {
     const [expanded, setExpanded] = useState(false);
     const hasModifiers = item.modifiers && item.modifiers.length > 0;
 
@@ -348,14 +416,13 @@ function FeatureRow({ item, isLast }: { item: any, isLast: boolean }) {
             </div>
 
             {expanded && (
-                <div className="px-4 py-3 bg-slate-50/50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 text-sm text-slate-600 dark:text-slate-400 leading-relaxed animate-in slide-in-from-top-1 duration-200">
+                <div className="px-4 py-3 bg-slate-50/50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     <p>{item.description || "No description available."}</p>
-
                     {hasModifiers && (
                         <div className="mt-3 pt-2 border-t border-slate-200/50 dark:border-slate-800 flex flex-wrap gap-2">
                             {item.modifiers.map((mod: any, i: number) => (
-                                <Badge key={i} variant="outline" className="text-xs border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400">
-                                    {mod.target}: {mod.value > 0 ? '+' : ''}{mod.value ?? mod.valueString}
+                                <Badge key={i} variant="outline" className="text-xs">
+                                    {mod.target}: {(mod.value ?? 0) > 0 ? "+" : ""}{mod.value ?? mod.valueString}
                                 </Badge>
                             ))}
                         </div>

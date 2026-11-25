@@ -13,7 +13,7 @@ YELLOW := \033[0;33m
 RED := \033[0;31m
 NC := \033[0m
 
-.PHONY: all check check-docker check-node check-env setup install db-start db-stop db-reset db-push db-seed dev build start clean help
+.PHONY: all check check-docker check-node check-env setup install db-start db-stop db-reset db-push db-seed dev build start clean help shared-build
 
 # Default target
 all: check setup db-start db-push db-seed
@@ -138,12 +138,36 @@ db-studio:
 	@npx drizzle-kit studio
 
 # ============================================================================
+# KOTLIN SHARED MODULE
+# ============================================================================
+
+## shared-build: Build the Kotlin shared module & Ktor server
+shared-build:
+	@echo "Building Kotlin shared module and Ktor server..."
+	@chmod +x ./gradlew
+	@JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew :shared:jvmTest :shared:compileProductionLibraryKotlinJs :shared:jvmJar :server:compileKotlin --no-daemon
+	@echo "$(GREEN)✓ Shared module & Ktor server built$(NC)"
+
+## server: Run the Kotlin/Ktor backend server on port 8081
+server:
+	@echo "Starting Kotlin/Ktor backend server on port 8081..."
+	@JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew :server:run --no-daemon
+
+# ============================================================================
 # DEVELOPMENT & BUILD
 # ============================================================================
 
-## dev: Start the development server
+## dev: Start the development server (Ktor backend on :8081 + Next.js on :3000)
 dev:
-	@echo "Starting development server..."
+	@echo "Ensuring Kotlin/Ktor backend distribution is built..."
+	@if [ ! -f server/build/install/server/bin/server ]; then \
+		JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew :server:installDist --no-daemon; \
+	fi
+	@if ! lsof -i :8081 > /dev/null 2>&1; then \
+		echo "Starting Kotlin/Ktor backend server on port 8081..."; \
+		JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./server/build/install/server/bin/server > /tmp/dnd-ktor-server.log 2>&1 & \
+	fi
+	@echo "Starting Next.js development server on port 3000..."
 	@npm run dev
 
 ## build: Build the production application
@@ -209,6 +233,9 @@ help:
 	@echo "  make db-push       - Push Drizzle schema to database"
 	@echo "  make db-seed       - Seed database with SRD data"
 	@echo "  make db-studio     - Open Drizzle Studio"
+	@echo ""
+	@echo "$(GREEN)Kotlin:$(NC)"
+	@echo "  make shared-build  - Build the Kotlin shared module"
 	@echo ""
 	@echo "$(GREEN)Development:$(NC)"
 	@echo "  make dev           - Start development server"
