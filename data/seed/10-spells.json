@@ -25,7 +25,25 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "acid"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d6",
+          "11": "3d6",
+          "17": "4d6"
+        }
+      }
     },
     {
       "id": "aid",
@@ -55,7 +73,24 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "hp_max",
+            "value": 5,
+            "duration": "long_rest"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 5
+        }
+      }
     },
     {
       "id": "alarm",
@@ -82,7 +117,10 @@
         "ranger",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "alter-self",
@@ -108,7 +146,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "animal-friendship",
@@ -136,7 +179,13 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "charmed"
+      }
     },
     {
       "id": "animal-messenger",
@@ -164,7 +213,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "animal-shapes",
@@ -189,7 +241,10 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "animate-dead",
@@ -214,7 +269,10 @@
         "cleric",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "animate-objects",
@@ -241,7 +299,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "antilife-shell",
@@ -266,7 +329,12 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "antimagic-field",
@@ -293,7 +361,12 @@
         "cleric",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "antipathysympathy",
@@ -321,7 +394,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "arcane-eye",
@@ -347,7 +423,12 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "arcane-gate",
@@ -374,7 +455,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "arcane-lock",
@@ -398,7 +484,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "arcane-vigor",
@@ -422,7 +511,20 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "2d6",
+          "addSpellMod": true
+        },
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "armor-of-agathys",
@@ -448,7 +550,21 @@
       "classes": [
         "warlock"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "buff",
+        "damage": [
+          {
+            "dice": "0d0",
+            "flatBonus": 5,
+            "type": "cold"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 5
+        }
+      }
     },
     {
       "id": "arms-of-hadar",
@@ -471,7 +587,24 @@
       "classes": [
         "warlock"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "STR",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "necrotic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "astral-projection",
@@ -497,7 +630,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "augury",
@@ -523,7 +659,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "aura-of-life",
@@ -549,7 +688,12 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "aura-of-purity",
@@ -575,7 +719,12 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "aura-of-vitality",
@@ -602,7 +751,16 @@
         "druid",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "2d6",
+          "addSpellMod": false
+        }
+      }
     },
     {
       "id": "awaken",
@@ -627,7 +785,10 @@
         "bard",
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "bane",
@@ -655,7 +816,12 @@
         "cleric",
         "warlock"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "banishing-smite",
@@ -680,7 +846,32 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "5d10",
+            "type": "force",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        },
+        "rider": {
+          "id": "spell-banishing-smite",
+          "name": "Banishing Smite (+5d10 Force)",
+          "dice": "5d10",
+          "damageType": "force",
+          "appliesTo": "melee_damage",
+          "consumesSlotLevel": 5
+        }
+      }
     },
     {
       "id": "banishment",
@@ -710,7 +901,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CHA",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "barkskin",
@@ -737,7 +933,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "beacon-of-hope",
@@ -762,7 +961,12 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "beast-sense",
@@ -788,7 +992,12 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "befuddlement",
@@ -815,7 +1024,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "bestow-curse",
@@ -842,7 +1054,23 @@
         "cleric",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "necrotic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "bigbys-hand",
@@ -869,7 +1097,25 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "4d8",
+            "type": "force",
+            "flatBonus": 0,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "2d8"
+        }
+      }
     },
     {
       "id": "blade-barrier",
@@ -894,7 +1140,24 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "6d10",
+            "type": "slashing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "blade-ward",
@@ -922,7 +1185,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "bless",
@@ -949,7 +1217,32 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "attack_roll_dice",
+            "valueString": "1d4",
+            "duration": "concentration"
+          },
+          {
+            "type": "bonus",
+            "target": "saving_throw_dice",
+            "valueString": "1d4",
+            "duration": "concentration"
+          }
+        ],
+        "rider": {
+          "id": "spell-bless",
+          "name": "Bless (+1d4 Hit/Save)",
+          "dice": "1d4",
+          "appliesTo": "attack_and_save"
+        }
+      }
     },
     {
       "id": "blight",
@@ -975,7 +1268,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "8d8",
+            "type": "necrotic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "blinding-smite",
@@ -990,17 +1300,43 @@
         "m": false
       },
       "duration": {
-        "type": "concentration",
+        "type": "timed",
         "value": 1,
         "unit": "minute"
       },
       "is_ritual": false,
-      "is_concentration": true,
+      "is_concentration": false,
       "description": "Next hit deals +3d8 Radiant damage and target is Blinded (Con save)",
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "3d8",
+            "type": "radiant",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        },
+        "rider": {
+          "id": "spell-blinding-smite",
+          "name": "Blinding Smite (+3d8 Radiant)",
+          "dice": "3d8",
+          "damageType": "radiant",
+          "appliesTo": "melee_damage",
+          "consumesSlotLevel": 3
+        }
+      }
     },
     {
       "id": "blindnessdeafness",
@@ -1028,7 +1364,13 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": false,
+        "appliesCondition": "blinded"
+      }
     },
     {
       "id": "blink",
@@ -1054,7 +1396,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "blur",
@@ -1080,7 +1425,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "burning-hands",
@@ -1104,7 +1454,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "3d6",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "call-lightning",
@@ -1129,7 +1496,24 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "3d10",
+            "type": "lightning"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "calm-emotions",
@@ -1155,7 +1539,13 @@
         "bard",
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "charmed"
+      }
     },
     {
       "id": "chain-lightning",
@@ -1180,7 +1570,20 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "10d8",
+            "type": "lightning"
+          }
+        ]
+      }
     },
     {
       "id": "charm-monster",
@@ -1209,7 +1612,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "charm-person",
@@ -1238,7 +1644,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "chill-touch",
@@ -1263,7 +1672,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d10",
+            "type": "necrotic"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d10",
+          "11": "3d10",
+          "17": "4d10"
+        }
+      }
     },
     {
       "id": "chromatic-orb",
@@ -1288,7 +1714,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "3d8",
+            "type": "elemental"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "circle-of-death",
@@ -1314,7 +1756,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "8d6",
+            "type": "necrotic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "circle-of-power",
@@ -1341,7 +1800,12 @@
         "paladin",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "clairvoyance",
@@ -1370,7 +1834,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "clone",
@@ -1394,7 +1863,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "cloud-kill",
@@ -1420,7 +1892,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "5d8",
+            "type": "poison"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "cloud-of-daggers",
@@ -1449,7 +1937,23 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "4d4",
+            "type": "slashing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d4"
+        }
+      }
     },
     {
       "id": "color-spray",
@@ -1475,7 +1979,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "command",
@@ -1500,7 +2007,12 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "commune",
@@ -1526,7 +2038,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "commune-with-nature",
@@ -1550,7 +2065,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "compelled-duel",
@@ -1575,7 +2093,12 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "comprehend-languages",
@@ -1604,7 +2127,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "compulsion",
@@ -1629,7 +2155,12 @@
       "classes": [
         "bard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "cone-of-cold",
@@ -1655,7 +2186,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "8d8",
+            "type": "cold"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "confusion",
@@ -1684,7 +2232,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "conjure-animals",
@@ -1710,7 +2263,24 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "3d10",
+            "type": "slashing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "conjure-barrage",
@@ -1734,7 +2304,22 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "5d8",
+            "type": "force"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "conjure-celestial",
@@ -1759,7 +2344,12 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "conjure-elemental",
@@ -1785,7 +2375,12 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "conjure-fey",
@@ -1810,7 +2405,12 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "conjure-minor-elementals",
@@ -1836,7 +2436,29 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "damage": [
+          {
+            "dice": "2d8",
+            "type": "elemental"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        },
+        "rider": {
+          "id": "spell-conjure-minor-elementals",
+          "name": "Conjure Minor Elementals (+2d8 Elemental)",
+          "dice": "2d8",
+          "damageType": "fire",
+          "appliesTo": "damage"
+        }
+      }
     },
     {
       "id": "conjure-volley",
@@ -1860,7 +2482,12 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "conjure-woodland-beings",
@@ -1886,7 +2513,12 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "contact-other-plane",
@@ -1912,7 +2544,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "INT",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "6d6",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "contagion",
@@ -1938,7 +2587,12 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "contingency",
@@ -1964,7 +2618,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "continual-flame",
@@ -1990,7 +2647,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "control-water",
@@ -2018,7 +2678,12 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "control-weather",
@@ -2046,7 +2711,12 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "cordon-of-arrows",
@@ -2072,7 +2742,23 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "piercing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "counterspell",
@@ -2097,7 +2783,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON"
+      },
+      "casting_time_trigger": "When you see a creature within 60 feet casting a spell with V, S, or M components"
     },
     {
       "id": "create-food-and-water",
@@ -2121,7 +2812,10 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "create-or-destroy-water",
@@ -2146,7 +2840,10 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "create-undead",
@@ -2172,7 +2869,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "creation",
@@ -2197,7 +2897,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "crown-of-madness",
@@ -2225,7 +2928,13 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "charmed"
+      }
     },
     {
       "id": "crusaders-mantle",
@@ -2250,7 +2959,31 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d4",
+            "type": "radiant",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d4"
+        },
+        "rider": {
+          "id": "spell-crusaders-mantle",
+          "name": "Crusader's Mantle (+1d4 Radiant)",
+          "dice": "1d4",
+          "damageType": "radiant",
+          "appliesTo": "weapon_damage"
+        }
+      }
     },
     {
       "id": "cure-wounds",
@@ -2277,7 +3010,20 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "2d8",
+          "addSpellMod": true
+        },
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "2d8"
+        }
+      }
     },
     {
       "id": "dancing-lights",
@@ -2305,7 +3051,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "darkness",
@@ -2333,7 +3084,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "darkvision",
@@ -2362,7 +3118,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "daylight",
@@ -2391,7 +3150,10 @@
         "ranger",
         "sorcerer"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "death-ward",
@@ -2417,7 +3179,10 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "delayed-blast-fireball",
@@ -2444,7 +3209,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "12d6",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "demiplane",
@@ -2471,7 +3252,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "destructive-wave",
@@ -2494,7 +3278,24 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "5d6",
+            "type": "thunder"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "detect-evil-and-good",
@@ -2520,7 +3321,12 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "detect-magic",
@@ -2552,7 +3358,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "detect-poison-and-disease",
@@ -2581,7 +3392,12 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "detect-thoughts",
@@ -2609,7 +3425,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "dimension-door",
@@ -2635,7 +3456,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "disguise-self",
@@ -2662,7 +3486,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "disintegrate",
@@ -2687,7 +3514,25 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "10d6",
+            "flatBonus": 40,
+            "type": "force"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "3d6"
+        }
+      }
     },
     {
       "id": "dispel-evil-and-good",
@@ -2714,7 +3559,12 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "dispel-magic",
@@ -2744,7 +3594,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "dissonant-whispers",
@@ -2767,7 +3620,24 @@
       "classes": [
         "bard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "3d6",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "divination",
@@ -2793,7 +3663,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "divine-favor",
@@ -2818,7 +3691,19 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "rider": {
+          "id": "spell-divine-favor",
+          "name": "Divine Favor (+1d4 Radiant)",
+          "dice": "1d4",
+          "damageType": "radiant",
+          "appliesTo": "damage"
+        }
+      }
     },
     {
       "id": "divine-smite",
@@ -2841,7 +3726,29 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "damage": [
+          {
+            "dice": "2d8",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        },
+        "rider": {
+          "id": "spell-divine-smite",
+          "name": "Divine Smite (+2d8 Radiant)",
+          "dice": "2d8",
+          "damageType": "radiant",
+          "appliesTo": "damage"
+        }
+      }
     },
     {
       "id": "divine-word",
@@ -2864,7 +3771,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "dominate-beast",
@@ -2891,7 +3801,12 @@
         "ranger",
         "sorcerer"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "dominate-monster",
@@ -2919,7 +3834,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "dominate-person",
@@ -2946,7 +3866,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "dragons-breath",
@@ -2973,7 +3898,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "drawmjis-instant-summons",
@@ -2997,7 +3927,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "dream",
@@ -3025,7 +3958,23 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "3d6",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "druidcraft",
@@ -3048,7 +3997,10 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "earthquake",
@@ -3076,7 +4028,12 @@
         "druid",
         "sorcerer"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "eldritch-blast",
@@ -3099,7 +4056,24 @@
       "classes": [
         "warlock"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d10",
+            "type": "force"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d10",
+          "11": "3d10",
+          "17": "4d10"
+        }
+      }
     },
     {
       "id": "elementalism",
@@ -3124,7 +4098,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "elemental-weapon",
@@ -3151,7 +4128,27 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "rider": {
+          "id": "spell-elemental-weapon",
+          "name": "Elemental Weapon (+1d4 Elemental)",
+          "dice": "1d4",
+          "damageType": "fire",
+          "appliesTo": "weapon_damage"
+        },
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "weapon_attack",
+            "value": 1,
+            "duration": "concentration"
+          }
+        ]
+      }
     },
     {
       "id": "enhance-ability",
@@ -3182,7 +4179,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "enlargereduce",
@@ -3211,7 +4213,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "ensnaring-strike",
@@ -3236,7 +4243,33 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "STR",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "piercing",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        },
+        "rider": {
+          "id": "spell-ensnaring-strike",
+          "name": "Ensnaring Strike (+1d6 Piercing)",
+          "dice": "1d6",
+          "damageType": "piercing",
+          "appliesTo": "weapon_damage",
+          "consumesSlotLevel": 1
+        }
+      }
     },
     {
       "id": "entangle",
@@ -3262,7 +4295,12 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "STR",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "enthrall",
@@ -3288,7 +4326,12 @@
         "bard",
         "warlock"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "etherealness",
@@ -3317,7 +4360,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "evards-black-tentacles",
@@ -3343,7 +4389,23 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "3d6",
+            "type": "bludgeoning"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "expeditious-retreat",
@@ -3370,7 +4432,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "eyebite",
@@ -3398,7 +4465,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "fabricate",
@@ -3421,7 +4493,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "faerie-fire",
@@ -3447,7 +4522,12 @@
         "bard",
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "false-life",
@@ -3472,7 +4552,19 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "buff",
+        "healing": {
+          "dice": "2d4",
+          "flatBonus": 4,
+          "addSpellMod": false
+        },
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 5
+        }
+      }
     },
     {
       "id": "fear",
@@ -3501,7 +4593,13 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "frightened"
+      }
     },
     {
       "id": "feather-fall",
@@ -3529,7 +4627,11 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      },
+      "casting_time_trigger": "When you or a creature within 60 feet falls"
     },
     {
       "id": "feign-death",
@@ -3558,7 +4660,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "find-familiar",
@@ -3582,7 +4687,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "find-steed",
@@ -3605,7 +4713,10 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "find-the-path",
@@ -3633,7 +4744,12 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "find-traps",
@@ -3658,7 +4774,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "finger-of-death",
@@ -3683,7 +4802,21 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "7d8",
+            "flatBonus": 30,
+            "type": "necrotic"
+          }
+        ]
+      }
     },
     {
       "id": "fireball",
@@ -3708,7 +4841,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "8d6",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "fire-bolt",
@@ -3732,7 +4882,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d10",
+            "type": "fire"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d10",
+          "11": "3d10",
+          "17": "4d10"
+        }
+      }
     },
     {
       "id": "fire-shield",
@@ -3760,7 +4927,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "fire-storm",
@@ -3785,7 +4955,24 @@
         "druid",
         "sorcerer"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "7d10",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "flame-blade",
@@ -3812,7 +4999,25 @@
         "druid",
         "sorcerer"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "3d6",
+            "type": "fire",
+            "flatBonus": 0,
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "flame-strike",
@@ -3836,7 +5041,28 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "5d6",
+            "type": "fire"
+          },
+          {
+            "dice": "5d6",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "flaming-sphere",
@@ -3864,7 +5090,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "flesh-to-stone",
@@ -3892,7 +5134,13 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": false,
+        "appliesCondition": "petrified"
+      }
     },
     {
       "id": "fly",
@@ -3920,7 +5168,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "fog-cloud",
@@ -3948,7 +5201,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "forbiddance",
@@ -3974,7 +5232,23 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "5d10",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "forcecage",
@@ -4002,7 +5276,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "foresight",
@@ -4031,7 +5310,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "fount-of-moonlight",
@@ -4057,7 +5339,31 @@
         "bard",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "radiant",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        },
+        "rider": {
+          "id": "spell-fount-of-moonlight",
+          "name": "Fount of Moonlight (+2d6 Radiant)",
+          "dice": "2d6",
+          "damageType": "radiant",
+          "appliesTo": "melee_damage"
+        }
+      }
     },
     {
       "id": "freedom-of-movement",
@@ -4086,7 +5392,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "friends",
@@ -4115,7 +5424,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "gaseous-form",
@@ -4143,7 +5457,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "gate",
@@ -4172,7 +5491,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "geas",
@@ -4201,7 +5525,23 @@
         "paladin",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "5d10",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "gentle-repose",
@@ -4229,7 +5569,10 @@
         "paladin",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "giant-insect",
@@ -4254,7 +5597,12 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "glibness",
@@ -4280,7 +5628,10 @@
         "bard",
         "warlock"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "globe-of-invulnerability",
@@ -4307,7 +5658,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "glyph-of-warding",
@@ -4333,7 +5689,10 @@
         "cleric",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "goodberry",
@@ -4360,7 +5719,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "grasping-vine",
@@ -4386,7 +5748,12 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "grease",
@@ -4413,7 +5780,13 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false,
+        "appliesCondition": "prone"
+      }
     },
     {
       "id": "greater-invisibility",
@@ -4440,7 +5813,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "greater-restoration",
@@ -4468,7 +5846,10 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "guardian-of-faith",
@@ -4493,7 +5874,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "guards-and-wards",
@@ -4520,7 +5904,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "guidance",
@@ -4546,7 +5933,26 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "skill_check_dice",
+            "valueString": "1d4",
+            "duration": "concentration"
+          }
+        ],
+        "rider": {
+          "id": "spell-guidance",
+          "name": "Guidance (+1d4 Skill)",
+          "dice": "1d4",
+          "appliesTo": "skill"
+        }
+      }
     },
     {
       "id": "guiding-bolt",
@@ -4571,7 +5977,23 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "4d6",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "gust-of-wind",
@@ -4600,7 +6022,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "hail-of-thorns",
@@ -4623,7 +6050,32 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d10",
+            "type": "piercing",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        },
+        "rider": {
+          "id": "spell-hail-of-thorns",
+          "name": "Hail of Thorns (+1d10 Piercing)",
+          "dice": "1d10",
+          "damageType": "piercing",
+          "appliesTo": "finesse_or_ranged_damage",
+          "consumesSlotLevel": 1
+        }
+      }
     },
     {
       "id": "hallow",
@@ -4647,7 +6099,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "hallucinatory-terrain",
@@ -4676,7 +6131,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "harm",
@@ -4699,7 +6157,24 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "14d6",
+            "type": "necrotic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "haste",
@@ -4726,7 +6201,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "heal",
@@ -4750,7 +6230,21 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "0d0",
+          "flatBonus": 70,
+          "addSpellMod": false
+        },
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 10
+        }
+      }
     },
     {
       "id": "healing-word",
@@ -4775,7 +6269,20 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "2d4",
+          "addSpellMod": true
+        },
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "2d4"
+        }
+      }
     },
     {
       "id": "heat-metal",
@@ -4802,7 +6309,23 @@
         "bard",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "2d8",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "hellish-rebuke",
@@ -4825,7 +6348,24 @@
       "classes": [
         "warlock"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "2d10",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "heroes-feast",
@@ -4851,7 +6391,10 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "heroism",
@@ -4877,7 +6420,12 @@
         "bard",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "hex",
@@ -4903,7 +6451,19 @@
       "classes": [
         "warlock"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "rider": {
+          "id": "spell-hex",
+          "name": "Hex (+1d6 Necrotic)",
+          "dice": "1d6",
+          "damageType": "necrotic",
+          "appliesTo": "damage"
+        }
+      }
     },
     {
       "id": "hold-monster",
@@ -4932,7 +6492,13 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "paralyzed"
+      }
     },
     {
       "id": "hold-person",
@@ -4963,7 +6529,13 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "paralyzed"
+      }
     },
     {
       "id": "holy-aura",
@@ -4989,7 +6561,12 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "hunger-of-hadar",
@@ -5015,7 +6592,23 @@
       "classes": [
         "warlock"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "cold"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "hunters-mark",
@@ -5040,7 +6633,19 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "rider": {
+          "id": "spell-hunters-mark",
+          "name": "Hunter's Mark (+1d6 Force)",
+          "dice": "1d6",
+          "damageType": "force",
+          "appliesTo": "damage"
+        }
+      }
     },
     {
       "id": "hypnotic-pattern",
@@ -5069,7 +6674,13 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "incapacitated"
+      }
     },
     {
       "id": "ice-knife",
@@ -5095,7 +6706,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "1d10",
+            "type": "piercing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "ice-storm",
@@ -5121,7 +6749,28 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "2d8",
+            "type": "bludgeoning"
+          },
+          {
+            "dice": "4d6",
+            "type": "cold"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "identify",
@@ -5146,7 +6795,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "illusory-script",
@@ -5174,7 +6826,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "imprisonment",
@@ -5199,7 +6854,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "incendiary-cloud",
@@ -5226,7 +6884,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "10d8",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "inflict-wounds",
@@ -5249,7 +6923,24 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "2d10",
+            "type": "necrotic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "insect-plague",
@@ -5277,7 +6968,23 @@
         "druid",
         "sorcerer"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "4d10",
+            "type": "piercing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "invisibility",
@@ -5306,7 +7013,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "jallarzis-storm-of-radiance",
@@ -5333,7 +7045,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "2d10",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "jump",
@@ -5362,7 +7091,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "knock",
@@ -5387,7 +7119,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "legend-lore",
@@ -5413,7 +7148,10 @@
         "cleric",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "leomunds-secret-chest",
@@ -5437,7 +7175,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "leomunds-tiny-hut",
@@ -5464,7 +7205,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "lesser-restoration",
@@ -5491,7 +7235,10 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "levitate",
@@ -5518,7 +7265,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "light",
@@ -5547,7 +7299,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "lightning-arrow",
@@ -5570,7 +7325,32 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "4d8",
+            "type": "lightning",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        },
+        "rider": {
+          "id": "spell-lightning-arrow",
+          "name": "Lightning Arrow (+4d8 Lightning)",
+          "dice": "4d8",
+          "damageType": "lightning",
+          "appliesTo": "finesse_or_ranged_damage",
+          "consumesSlotLevel": 3
+        }
+      }
     },
     {
       "id": "lightning-bolt",
@@ -5595,7 +7375,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "8d6",
+            "type": "lightning"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "locate-animals-or-plants",
@@ -5621,7 +7418,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "locate-creature",
@@ -5652,7 +7452,12 @@
         "ranger",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "locate-object",
@@ -5683,7 +7488,12 @@
         "ranger",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "longstrider",
@@ -5712,7 +7522,10 @@
         "ranger",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mage-armor",
@@ -5739,7 +7552,21 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "ac",
+            "value": 3,
+            "condition": "unarmored",
+            "duration": "long_rest"
+          }
+        ]
+      }
     },
     {
       "id": "mage-hand",
@@ -5767,7 +7594,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "magic-circle",
@@ -5796,7 +7626,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "magic-jar",
@@ -5820,7 +7653,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "magic-missile",
@@ -5844,7 +7680,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "auto_damage",
+        "damage": [
+          {
+            "dice": "3d4",
+            "flatBonus": 3,
+            "type": "force"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d4",
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "magic-mouth",
@@ -5869,7 +7722,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "magic-weapon",
@@ -5897,7 +7753,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "weapon_attack",
+            "value": 1,
+            "duration": "long_rest"
+          },
+          {
+            "type": "bonus",
+            "target": "weapon_damage",
+            "value": 1,
+            "duration": "long_rest"
+          }
+        ]
+      }
     },
     {
       "id": "major-image",
@@ -5926,7 +7799,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "mass-cure-wounds",
@@ -5951,7 +7829,20 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "5d8",
+          "addSpellMod": true
+        },
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "mass-heal",
@@ -5974,7 +7865,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mass-healing-word",
@@ -5998,7 +7892,20 @@
         "bard",
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "2d4",
+          "addSpellMod": true
+        },
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d4"
+        }
+      }
     },
     {
       "id": "mass-suggestion",
@@ -6026,7 +7933,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "maze",
@@ -6051,7 +7963,12 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "meld-into-stone",
@@ -6078,7 +7995,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "melfs-acid-arrow",
@@ -6102,7 +8022,23 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "4d4",
+            "type": "acid"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d4"
+        }
+      }
     },
     {
       "id": "mending",
@@ -6130,7 +8066,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "message",
@@ -6159,7 +8098,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "meteor-swarm",
@@ -6183,7 +8125,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "20d6",
+            "type": "fire"
+          },
+          {
+            "dice": "20d6",
+            "type": "bludgeoning"
+          }
+        ]
+      }
     },
     {
       "id": "mind-blank",
@@ -6209,7 +8168,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mind-sliver",
@@ -6236,7 +8198,25 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "INT",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "psychic"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d6",
+          "11": "3d6",
+          "17": "4d6"
+        }
+      }
     },
     {
       "id": "mind-spike",
@@ -6263,7 +8243,23 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "3d8",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "minor-illusion",
@@ -6292,7 +8288,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mirage-arcane",
@@ -6319,7 +8318,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mirror-image",
@@ -6347,7 +8349,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mislead",
@@ -6374,7 +8379,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "misty-step",
@@ -6399,7 +8409,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "modify-memory",
@@ -6425,7 +8438,12 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "moonbeam",
@@ -6451,7 +8469,23 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "2d10",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "mordenkainens-faithful-hound",
@@ -6477,7 +8511,23 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "4d8",
+            "type": "piercing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "mordenkainens-magnificent-mansion",
@@ -6504,7 +8554,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mordenkainens-private-sanctum",
@@ -6530,7 +8583,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "mordenkainens-sword",
@@ -6557,7 +8613,25 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "4d12",
+            "type": "force",
+            "flatBonus": 0,
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "move-earth",
@@ -6585,7 +8659,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "nondetection",
@@ -6613,7 +8692,10 @@
         "ranger",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "nystuls-magic-aura",
@@ -6639,7 +8721,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "otilukes-freezing-sphere",
@@ -6664,7 +8749,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "10d6",
+            "type": "cold"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "otilukes-resilient-sphere",
@@ -6690,7 +8792,12 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "ottos-irresistible-dance",
@@ -6716,7 +8823,12 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "passwall",
@@ -6742,7 +8854,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "pass-without-trace",
@@ -6769,7 +8884,12 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "phantasmal-force",
@@ -6797,7 +8917,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "phantasmal-killer",
@@ -6823,7 +8959,24 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "4d10",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "phantom-steed",
@@ -6848,7 +9001,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "planar-ally",
@@ -6871,7 +9027,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "planar-binding",
@@ -6901,7 +9060,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "plane-shift",
@@ -6929,7 +9093,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "plant-growth",
@@ -6954,7 +9121,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "poison-spray",
@@ -6980,7 +9150,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d12",
+            "type": "poison"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d12",
+          "11": "3d12",
+          "17": "4d12"
+        }
+      }
     },
     {
       "id": "polymorph",
@@ -7009,7 +9196,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "power-word-fortify",
@@ -7033,7 +9225,15 @@
         "bard",
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "buff",
+        "healing": {
+          "dice": "0d0",
+          "flatBonus": 120,
+          "addSpellMod": false
+        }
+      }
     },
     {
       "id": "power-word-heal",
@@ -7057,7 +9257,15 @@
         "bard",
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "0d0",
+          "flatBonus": 999,
+          "addSpellMod": false
+        }
+      }
     },
     {
       "id": "power-word-kill",
@@ -7083,7 +9291,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "power-word-stun",
@@ -7109,7 +9320,13 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": false,
+        "appliesCondition": "stunned"
+      }
     },
     {
       "id": "prayer-of-healing",
@@ -7133,7 +9350,17 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "2d8",
+          "addSpellMod": false
+        },
+        "upcast": null
+      }
     },
     {
       "id": "prestidigitation",
@@ -7161,7 +9388,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "prismatic-spray",
@@ -7186,7 +9416,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "10d6",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "prismatic-wall",
@@ -7212,7 +9458,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "produce-flame",
@@ -7237,7 +9486,24 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "fire"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d8",
+          "11": "3d8",
+          "17": "4d8"
+        }
+      }
     },
     {
       "id": "programmed-illusion",
@@ -7262,7 +9528,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "project-image",
@@ -7289,7 +9558,12 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "protection-from-energy",
@@ -7318,7 +9592,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "protection-from-evil-and-good",
@@ -7348,7 +9627,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "protection-from-poison",
@@ -7376,7 +9660,10 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "purify-food-and-drink",
@@ -7401,7 +9688,10 @@
         "druid",
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "raise-dead",
@@ -7427,7 +9717,10 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "rarys-telepathic-bond",
@@ -7454,7 +9747,10 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "ray-of-enfeeblement",
@@ -7480,7 +9776,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "ray-of-frost",
@@ -7504,7 +9805,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "cold"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d8",
+          "11": "3d8",
+          "17": "4d8"
+        }
+      }
     },
     {
       "id": "ray-of-sickness",
@@ -7528,7 +9846,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "2d8",
+            "type": "poison"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "regenerate",
@@ -7556,7 +9891,17 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "healing"
+      ],
+      "mechanics": {
+        "actionType": "heal",
+        "healing": {
+          "dice": "4d8",
+          "addSpellMod": false,
+          "flatBonus": 15
+        }
+      }
     },
     {
       "id": "reincarnate",
@@ -7580,7 +9925,10 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "remove-curse",
@@ -7606,7 +9954,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "resistance",
@@ -7632,7 +9983,26 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "saving_throw_dice",
+            "valueString": "1d4",
+            "duration": "concentration"
+          }
+        ],
+        "rider": {
+          "id": "spell-resistance",
+          "name": "Resistance (+1d4 Save)",
+          "dice": "1d4",
+          "appliesTo": "save"
+        }
+      }
     },
     {
       "id": "resurrection",
@@ -7657,7 +10027,10 @@
         "bard",
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "reverse-gravity",
@@ -7685,7 +10058,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "revivify",
@@ -7712,7 +10090,10 @@
         "paladin",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "rope-trick",
@@ -7738,7 +10119,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "sacred-flame",
@@ -7761,7 +10145,25 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "radiant"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d8",
+          "11": "3d8",
+          "17": "4d8"
+        }
+      }
     },
     {
       "id": "sanctuary",
@@ -7787,7 +10189,12 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "scorching-ray",
@@ -7811,7 +10218,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "6d6",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "2d6"
+        }
+      }
     },
     {
       "id": "scrying",
@@ -7841,7 +10264,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "searing-smite",
@@ -7856,17 +10284,42 @@
         "m": false
       },
       "duration": {
-        "type": "concentration",
+        "type": "timed",
         "value": 1,
         "unit": "minute"
       },
       "is_ritual": false,
-      "is_concentration": true,
+      "is_concentration": false,
       "description": "Next hit deals +1d6 Fire; target takes 1d6 Fire each turn until it passes save",
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "fire",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        },
+        "rider": {
+          "id": "spell-searing-smite",
+          "name": "Searing Smite (+1d6 Fire)",
+          "dice": "1d6",
+          "damageType": "fire",
+          "appliesTo": "melee_damage",
+          "consumesSlotLevel": 1
+        }
+      }
     },
     {
       "id": "see-invisibility",
@@ -7894,7 +10347,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "seeming",
@@ -7921,7 +10377,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "sending",
@@ -7947,7 +10406,10 @@
         "cleric",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "sequester",
@@ -7971,7 +10433,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "shapechange",
@@ -7998,7 +10463,12 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "shatter",
@@ -8024,7 +10494,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "3d8",
+            "type": "thunder"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "shield",
@@ -8050,7 +10537,21 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "ac",
+            "value": 5,
+            "duration": "manual_disable"
+          }
+        ]
+      },
+      "casting_time_trigger": "When hit by an attack roll or targeted by Magic Missile"
     },
     {
       "id": "shield-of-faith",
@@ -8077,7 +10578,20 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff",
+        "appliesModifiers": [
+          {
+            "type": "bonus",
+            "target": "ac",
+            "value": 2,
+            "duration": "concentration"
+          }
+        ]
+      }
     },
     {
       "id": "shillelagh",
@@ -8103,7 +10617,24 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "force",
+            "flatBonus": 0,
+            "addSpellMod": true
+          }
+        ],
+        "cantripScaling": {
+          "5": "1d10",
+          "11": "1d12",
+          "17": "2d6"
+        }
+      }
     },
     {
       "id": "shining-smite",
@@ -8128,7 +10659,32 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "radiant",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        },
+        "rider": {
+          "id": "spell-shining-smite",
+          "name": "Shining Smite (+2d6 Radiant)",
+          "dice": "2d6",
+          "damageType": "radiant",
+          "appliesTo": "melee_damage",
+          "consumesSlotLevel": 2
+        }
+      }
     },
     {
       "id": "shocking-grasp",
@@ -8152,7 +10708,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "lightning"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d8",
+          "11": "3d8",
+          "17": "4d8"
+        }
+      }
     },
     {
       "id": "silence",
@@ -8179,7 +10752,12 @@
         "cleric",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "silent-image",
@@ -8207,7 +10785,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "simulacrum",
@@ -8231,7 +10814,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "sleep",
@@ -8259,7 +10845,14 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "appliesCondition": "incapacitated"
+      }
     },
     {
       "id": "sleet-storm",
@@ -8287,7 +10880,13 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false,
+        "appliesCondition": "prone"
+      }
     },
     {
       "id": "slow",
@@ -8315,7 +10914,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "sorcerous-burst",
@@ -8338,7 +10942,24 @@
       "classes": [
         "sorcerer"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "fire"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d8",
+          "11": "3d8",
+          "17": "4d8"
+        }
+      }
     },
     {
       "id": "spare-the-dying",
@@ -8362,7 +10983,10 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "speak-with-animals",
@@ -8390,7 +11014,10 @@
         "ranger",
         "warlock"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "speak-with-dead",
@@ -8415,7 +11042,10 @@
         "cleric",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "speak-with-plants",
@@ -8442,7 +11072,10 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "spider-climb",
@@ -8470,7 +11103,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "spike-growth",
@@ -8496,7 +11134,23 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "2d4",
+            "type": "piercing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d4"
+        }
+      }
     },
     {
       "id": "spirit-guardians",
@@ -8522,7 +11176,24 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "3d8",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "spiritual-weapon",
@@ -8547,7 +11218,25 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "force",
+            "flatBonus": 0,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "staggering-smite",
@@ -8570,7 +11259,33 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "4d6",
+            "type": "psychic",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        },
+        "rider": {
+          "id": "spell-staggering-smite",
+          "name": "Staggering Smite (+4d6 Psychic)",
+          "dice": "4d6",
+          "damageType": "psychic",
+          "appliesTo": "melee_damage",
+          "consumesSlotLevel": 4
+        }
+      }
     },
     {
       "id": "starry-wisp",
@@ -8594,7 +11309,24 @@
         "bard",
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "radiant"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d8",
+          "11": "3d8",
+          "17": "4d8"
+        }
+      }
     },
     {
       "id": "steel-wind-strike",
@@ -8619,7 +11351,23 @@
         "ranger",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "6d10",
+            "type": "force"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "stinking-cloud",
@@ -8647,7 +11395,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "stone-shape",
@@ -8673,7 +11426,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "stone-skin",
@@ -8702,7 +11458,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "storm-of-vengeance",
@@ -8727,7 +11488,12 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "suggestion",
@@ -8756,7 +11522,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "summon-aberration",
@@ -8783,7 +11554,25 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "psychic",
+            "flatBonus": 3,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-beast",
@@ -8810,7 +11599,25 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "piercing",
+            "flatBonus": 4,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-celestial",
@@ -8837,7 +11644,25 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "radiant",
+            "flatBonus": 2,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-construct",
@@ -8863,7 +11688,25 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "bludgeoning",
+            "flatBonus": 4,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-dragon",
@@ -8889,7 +11732,25 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "3d6",
+            "type": "fire",
+            "flatBonus": 4,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-elemental",
@@ -8917,7 +11778,25 @@
         "ranger",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d10",
+            "type": "fire",
+            "flatBonus": 4,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-fey",
@@ -8946,7 +11825,25 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "force",
+            "flatBonus": 3,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-fiend",
@@ -8973,7 +11870,25 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d12",
+            "type": "fire",
+            "flatBonus": 3,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "summon-undead",
@@ -9000,7 +11915,25 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d8",
+            "type": "necrotic",
+            "flatBonus": 3,
+            "addSpellMod": true
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusFlat": 1
+        }
+      }
     },
     {
       "id": "sunbeam",
@@ -9029,7 +11962,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "6d8",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "sunburst",
@@ -9056,7 +12006,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "12d6",
+            "type": "radiant"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "swift-quiver",
@@ -9082,7 +12049,12 @@
       "classes": [
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "symbol",
@@ -9109,7 +12081,10 @@
         "druid",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "synaptic-static",
@@ -9135,7 +12110,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "INT",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "8d6",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "tashas-bubbling-cauldron",
@@ -9162,7 +12154,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "tashas-hideous-laughter",
@@ -9190,7 +12185,13 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "appliesCondition": "incapacitated"
+      }
     },
     {
       "id": "telekinesis",
@@ -9216,7 +12217,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "telepathy",
@@ -9242,7 +12248,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "teleport",
@@ -9267,7 +12276,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "teleportation-circle",
@@ -9296,7 +12308,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "tensers-floating-disk",
@@ -9322,7 +12337,10 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "thaumaturgy",
@@ -9347,7 +12365,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "thorn-whip",
@@ -9371,7 +12392,24 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "piercing"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d6",
+          "11": "3d6",
+          "17": "4d6"
+        }
+      }
     },
     {
       "id": "thunderclap",
@@ -9398,7 +12436,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "thunder"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d6",
+          "11": "3d6",
+          "17": "4d6"
+        }
+      }
     },
     {
       "id": "thunderous-smite",
@@ -9421,7 +12476,33 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "STR",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "2d6",
+            "type": "thunder",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        },
+        "rider": {
+          "id": "spell-thunderous-smite",
+          "name": "Thunderous Smite (+2d6 Thunder)",
+          "dice": "2d6",
+          "damageType": "thunder",
+          "appliesTo": "melee_damage",
+          "consumesSlotLevel": 1
+        }
+      }
     },
     {
       "id": "thunderwave",
@@ -9447,7 +12528,24 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "CON",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "2d8",
+            "type": "thunder"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "time-stop",
@@ -9471,7 +12569,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "toll-the-dead",
@@ -9496,7 +12597,25 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "1d12",
+            "type": "necrotic"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d12",
+          "11": "3d12",
+          "17": "4d12"
+        }
+      }
     },
     {
       "id": "tongues",
@@ -9526,7 +12645,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "transport-via-plants",
@@ -9551,7 +12673,10 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "tree-stride",
@@ -9577,7 +12702,12 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "true-polymorph",
@@ -9605,7 +12735,12 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "true-resurrection",
@@ -9630,7 +12765,10 @@
         "cleric",
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "true-seeing",
@@ -9660,7 +12798,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "true-strike",
@@ -9687,7 +12828,24 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "radiant",
+            "flatBonus": 0,
+            "addSpellMod": true
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d6",
+          "11": "3d6",
+          "17": "4d6"
+        }
+      }
     },
     {
       "id": "tsunami",
@@ -9712,7 +12870,23 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "6d10",
+            "type": "bludgeoning"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "unseen-servant",
@@ -9740,7 +12914,10 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "vampiric-touch",
@@ -9767,7 +12944,23 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "3d6",
+            "type": "necrotic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "vicious-mockery",
@@ -9790,7 +12983,25 @@
       "classes": [
         "bard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false,
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "psychic"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d6",
+          "11": "3d6",
+          "17": "4d6"
+        }
+      }
     },
     {
       "id": "vitriolic-sphere",
@@ -9815,7 +13026,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "10d4",
+            "type": "acid"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d4"
+        }
+      }
     },
     {
       "id": "wall-of-fire",
@@ -9843,7 +13070,23 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "5d8",
+            "type": "fire"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "wall-of-force",
@@ -9869,7 +13112,12 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "wall-of-ice",
@@ -9895,7 +13143,23 @@
       "classes": [
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "10d6",
+            "type": "cold"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "wall-of-stone",
@@ -9923,7 +13187,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "buff"
+      ],
+      "mechanics": {
+        "actionType": "buff"
+      }
     },
     {
       "id": "wall-of-thorns",
@@ -9949,7 +13218,23 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "7d8",
+            "type": "piercing"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "warding-bond",
@@ -9976,7 +13261,10 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "water-breathing",
@@ -10005,7 +13293,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "water-walk",
@@ -10034,7 +13325,10 @@
         "ranger",
         "sorcerer"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "web",
@@ -10061,7 +13355,12 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "DEX",
+        "saveHalfDamage": false
+      }
     },
     {
       "id": "weird",
@@ -10087,7 +13386,23 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "4d10",
+            "type": "psychic"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d10"
+        }
+      }
     },
     {
       "id": "wind-walk",
@@ -10113,7 +13428,10 @@
       "classes": [
         "druid"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "wind-wall",
@@ -10140,7 +13458,23 @@
         "druid",
         "ranger"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "3d8",
+            "type": "bludgeoning"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d8"
+        }
+      }
     },
     {
       "id": "wish",
@@ -10164,7 +13498,10 @@
         "sorcerer",
         "wizard"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "witch-bolt",
@@ -10192,7 +13529,23 @@
         "warlock",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "ranged_spell",
+        "damage": [
+          {
+            "dice": "2d12",
+            "type": "lightning"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d12"
+        }
+      }
     },
     {
       "id": "word-of-radiance",
@@ -10216,7 +13569,24 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "radiant"
+          }
+        ],
+        "cantripScaling": {
+          "5": "2d6",
+          "11": "3d6",
+          "17": "4d6"
+        }
+      }
     },
     {
       "id": "word-of-recall",
@@ -10239,7 +13609,10 @@
       "classes": [
         "cleric"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "utility"
+      }
     },
     {
       "id": "wrathful-smite",
@@ -10264,7 +13637,33 @@
       "classes": [
         "paladin"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": true,
+        "damage": [
+          {
+            "dice": "1d6",
+            "type": "psychic",
+            "addSpellMod": false
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        },
+        "rider": {
+          "id": "spell-wrathful-smite",
+          "name": "Wrathful Smite (+1d6 Psychic)",
+          "dice": "1d6",
+          "damageType": "psychic",
+          "appliesTo": "melee_damage",
+          "consumesSlotLevel": 1
+        }
+      }
     },
     {
       "id": "yolandes-regal-presence",
@@ -10291,7 +13690,23 @@
         "bard",
         "wizard"
       ],
-      "tags": []
+      "tags": [
+        "attack"
+      ],
+      "mechanics": {
+        "actionType": "attack",
+        "attackType": "melee_spell",
+        "damage": [
+          {
+            "dice": "4d6",
+            "type": "force"
+          }
+        ],
+        "upcast": {
+          "perSlotLevel": 1,
+          "bonusDice": "1d6"
+        }
+      }
     },
     {
       "id": "zone-of-truth",
@@ -10318,7 +13733,12 @@
         "cleric",
         "paladin"
       ],
-      "tags": []
+      "tags": [],
+      "mechanics": {
+        "actionType": "save",
+        "saveAbility": "WIS",
+        "saveHalfDamage": false
+      }
     }
   ]
 }

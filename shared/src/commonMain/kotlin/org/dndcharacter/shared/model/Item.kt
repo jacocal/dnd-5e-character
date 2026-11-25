@@ -19,6 +19,7 @@ data class Item(
     // Weight
     val weightAmount: Double = 0.0,
     val weightUnit: String = "lb",
+    val fixedWeight: Boolean = false,
     
     // Stats
     val category: String = "misc",
@@ -28,12 +29,11 @@ data class Item(
     val stealthDisadvantage: Boolean = false,
     
     val damageDice: String? = null,
+    val versatileDice: String? = null,
     val damageType: String? = null,
+    val weaponMastery: String? = null,
     val range: String? = null,
     
-    // Props
-    // Using Array<String> for JS interop, or generic List if serialization handles it.
-    // For raw JsExport, Array matches JS [] better than List.
     val properties: Array<String> = emptyArray(),
     val rarity: String = "common",
     val requiresAttunement: Boolean = false,
@@ -45,12 +45,14 @@ data class Item(
     val shownEffect: String? = null,
     val trueEffect: String? = null,
     
+    // Consumable
+    val uses: Int? = null,
+    val usesMax: Int? = null,
+    
     // Description
     val description: String? = null,
     val tags: Array<String> = emptyArray(),
     
     // Modifiers
     val modifiers: Array<Modifier> = emptyArray()
-) {
-    // Manual equals/hashCode removed to rely on data class implementation.
-}
+)

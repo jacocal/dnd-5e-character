@@ -77,12 +77,12 @@ export function CurrencyTracker() {
     // Local state for direct editing
     const [editValues, setEditValues] = useState({ cp, sp, ep, gp, pp });
 
-    // Sync edit values when open
-    useEffect(() => {
-        if (isOpen) {
+    const handleDialogOpenChange = (open: boolean) => {
+        if (open) {
             setEditValues({ cp, sp, ep, gp, pp });
         }
-    }, [isOpen, cp, sp, ep, gp, pp]);
+        setIsOpen(open);
+    };
 
     // Calculator state
     const [calcAmount, setCalcAmount] = useState("");
@@ -170,7 +170,7 @@ export function CurrencyTracker() {
                 </div>
             </div>
 
-            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <Dialog open={isOpen} onOpenChange={handleDialogOpenChange}>
                 <DialogTrigger asChild>
                     <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-slate-900 dark:hover:text-white" onClick={handleOpen}>
                         <Coins size={16} />

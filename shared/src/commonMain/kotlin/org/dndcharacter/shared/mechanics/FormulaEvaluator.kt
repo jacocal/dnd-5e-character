@@ -132,6 +132,16 @@ object FormulaEvaluator {
             
             // Proficiency bonus
             token == "proficiency" -> context.proficiencyBonus
+
+            // Barbarian Rage Damage bonus (+2 at Lv 1-8, +3 at Lv 9-15, +4 at Lv 16-20)
+            token == "rage_damage" -> {
+                val barbLvl = context.classLevels["barbarian"] ?: context.totalLevel
+                when {
+                    barbLvl >= 16 -> 4
+                    barbLvl >= 9 -> 3
+                    else -> 2
+                }
+            }
             
             // Class-specific level: class_level:classId
             token.startsWith("class_level:") -> {

@@ -3,12 +3,8 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from 
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function DMLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    const NavigationContent = () => (
+function NavigationContent() {
+    return (
         <div className="flex flex-col h-full">
             <div className="p-4 border-b border-zinc-700">
                 <h1 className="font-bold text-xl tracking-tight text-amber-500">DM Tools</h1>
@@ -55,6 +51,13 @@ export default function DMLayout({
             </div>
         </div>
     );
+}
+
+export default function DMLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
 
     return (
         <div className="flex h-screen bg-[#111111] text-zinc-100 overflow-hidden flex-col md:flex-row">

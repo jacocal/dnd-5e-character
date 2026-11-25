@@ -26,7 +26,11 @@ data class CharacterProficiencies(
     val tools: Array<String> = emptyArray(),
     @Serializable(with = SkillsMapSerializer::class)
     val skills: Map<String, String> = emptyMap(),
-    val savingThrows: Map<String, Boolean> = emptyMap()
+    val savingThrows: Map<String, Boolean> = emptyMap(),
+    val featureChoices: Map<String, String> = emptyMap(),
+    val masteredWeaponIds: Array<String> = emptyArray(),
+    val activeCompanionId: String? = null,
+    val companionHpCurrent: Int? = null
 ) {
     // Manual equals/hashCode removed
 }

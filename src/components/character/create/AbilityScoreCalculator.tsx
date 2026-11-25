@@ -167,24 +167,26 @@ export default function AbilityScoreCalculator({ abilityOptions }: Props) {
 
     const getModifier = (score: number) => Math.floor((score - 10) / 2);
 
-    // Reset when method changes
-    useEffect(() => {
-        if (method === "pointbuy") {
+    const handleMethodChange = (nextMethod: Method) => {
+        setMethod(nextMethod);
+        if (nextMethod === "pointbuy") {
             setScores({ str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8 });
-        } else if (method === "standard") {
+        } else if (nextMethod === "standard") {
             setStandardAssignments({ str: null, dex: null, con: null, int: null, wis: null, cha: null });
-        } else if (method === "roll") {
+        } else if (nextMethod === "roll") {
             setRolledValues([]);
             setRollAssignments({ str: null, dex: null, con: null, int: null, wis: null, cha: null });
         }
-    }, [method]);
+    };
 
-    // Reset bonus selections when abilityOptions changes (background changed)
-    useEffect(() => {
+    // Reset bonus selections during render when abilityOptions changes (background changed)
+    const [prevAbilityOptions, setPrevAbilityOptions] = useState(abilityOptions);
+    if (prevAbilityOptions !== abilityOptions) {
+        setPrevAbilityOptions(abilityOptions);
         setPrimaryBonus(null);
         setSecondaryBonus(null);
         setTripleBonus([]);
-    }, [abilityOptions]);
+    }
 
     return (
         <div className="space-y-6">
@@ -198,7 +200,7 @@ export default function AbilityScoreCalculator({ abilityOptions }: Props) {
                     <button
                         key={opt.id}
                         type="button"
-                        onClick={() => setMethod(opt.id as Method)}
+                        onClick={() => handleMethodChange(opt.id as Method)}
                         className={`flex-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${method === opt.id
                             ? "bg-white dark:bg-slate-700 text-red-600 shadow-sm"
                             : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
@@ -444,7 +446,7 @@ export default function AbilityScoreCalculator({ abilityOptions }: Props) {
             )}
             {method === "roll" && rolledValues.length === 0 && (
                 <p className="text-xs text-amber-600 text-center">
-                    Click "Roll" to generate your ability scores.
+                    Click &quot;Roll&quot; to generate your ability scores.
                 </p>
             )}
         </div>

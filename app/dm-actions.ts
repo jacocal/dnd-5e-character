@@ -104,6 +104,17 @@ export async function createGlobalItem(data: CreateItemInput) {
             tags: validated.tags || [],
         });
 
+        // Best-effort notify Ktor backend to invalidate its cached RulesCatalog immediately
+        try {
+            const ktorUrl = process.env.KTOR_ENGINE_URL || "http://127.0.0.1:8081";
+            await fetch(`${ktorUrl}/api/engine/rules/invalidate`, {
+                method: "POST",
+                signal: AbortSignal.timeout(1500),
+            });
+        } catch {
+            // Ktor may not be running in standalone Next.js mode; 30s TTL handles eventual consistency
+        }
+
         revalidatePath("/dm/items/create");
         return { success: true, itemId: uniqueId };
     } catch (error) {

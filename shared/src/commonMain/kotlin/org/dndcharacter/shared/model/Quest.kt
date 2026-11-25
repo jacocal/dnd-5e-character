@@ -14,6 +14,13 @@ data class Quest(
     val description: String?,
     val status: String,
     val isTracked: Boolean,
+    val category: String = "main", // "main" | "side" | "faction" | "personal" | "bounty"
+    val giver: String? = null,
+    val location: String? = null,
+    val rewardXp: Int = 0,
+    val rewardGp: Int = 0,
+    val rewardNotes: String? = null,
+    val rewardsClaimed: Boolean = false,
     val createdAt: String,
     val updatedAt: String,
     val objectives: Array<QuestObjective>,

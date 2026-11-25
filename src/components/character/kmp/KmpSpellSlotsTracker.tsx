@@ -20,8 +20,11 @@ export function KmpSpellSlotsTracker() {
     const pactSlotLevel = resolvedSlots.pactSlotLevel;
     const usedPactSlots = character.usedPactSlots;
 
-    const slotLevels = Object.keys(maxSpellSlots).map(Number).filter(lvl => lvl > 0).sort((a, b) => a - b);
-    const hasSpellSlots = slotLevels.length > 0 && slotLevels.some(lvl => (maxSpellSlots as any)[lvl] > 0);
+    const slotLevels = Object.keys(maxSpellSlots)
+        .map(Number)
+        .filter((lvl) => lvl > 0 && ((maxSpellSlots as any)[lvl] || 0) > 0)
+        .sort((a, b) => a - b);
+    const hasSpellSlots = slotLevels.length > 0;
     const hasPactSlots = pactSlotsCount > 0;
 
     if (!hasSpellSlots && !hasPactSlots) return null;

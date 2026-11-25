@@ -17,6 +17,7 @@ export function BioTab() {
     const size = character?.size || "Medium";
     const appearance = character?.appearance || "";
     const backstory = character?.backstory || "";
+    const notes = character?.notes || "";
     const languages = character?.languages || [];
     // Fix: Calculate Darkvision manually to handle modifiers correctly
     const calculateDarkvision = () => {
@@ -88,6 +89,7 @@ export function BioTab() {
 
     const [localApp, setLocalApp] = useState(appearance);
     const [localBack, setLocalBack] = useState(backstory);
+    const [localNotes, setLocalNotes] = useState(notes);
     const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false);
 
     useEffect(() => {
@@ -98,24 +100,34 @@ export function BioTab() {
         setLocalBack(backstory);
     }, [backstory]);
 
-    const handleUpdateBio = (newApp: string, newBack: string, newSize: string) => {
+    useEffect(() => {
+        setLocalNotes(notes);
+    }, [notes]);
+
+    const handleUpdateBio = (newApp: string, newBack: string, newSize: string, newNotes: string = localNotes) => {
         if (!viewModel) return;
-        viewModel.updateBio(newSize, newApp, newBack);
+        viewModel.updateBio(newSize, newApp, newBack, newNotes);
     };
 
     const handleSizeChange = (val: string) => {
-        handleUpdateBio(localApp, localBack, val);
+        handleUpdateBio(localApp, localBack, val, localNotes);
     };
 
     const handleAppBlur = () => {
         if (localApp !== appearance) {
-            handleUpdateBio(localApp, localBack, size);
+            handleUpdateBio(localApp, localBack, size, localNotes);
         }
     };
 
     const handleBackBlur = () => {
         if (localBack !== backstory) {
-            handleUpdateBio(localApp, localBack, size);
+            handleUpdateBio(localApp, localBack, size, localNotes);
+        }
+    };
+
+    const handleNotesBlur = () => {
+        if (localNotes !== notes) {
+            handleUpdateBio(localApp, localBack, size, localNotes);
         }
     };
 
@@ -252,6 +264,23 @@ export function BioTab() {
                         </div>
                     </div>
                 </div>
+            </section>
+
+            {/* Campaign & Session Notes Scratchpad */}
+            <section className="space-y-3">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+                    <h3 className="text-lg font-bold flex items-center gap-2">
+                        Campaign &amp; Session Scratchpad
+                    </h3>
+                    <span className="text-xs text-slate-400">Auto-saves on blur</span>
+                </div>
+                <Textarea
+                    value={localNotes}
+                    onChange={(e) => setLocalNotes(e.target.value)}
+                    onBlur={handleNotesBlur}
+                    placeholder="Jot down session notes, NPC names, faction contacts, puzzle clues, or party loot splits..."
+                    className="min-h-[180px] bg-slate-50 dark:bg-slate-900/50"
+                />
             </section>
 
             {/* Backstory Section */}

@@ -26,12 +26,22 @@ export async function getFeats() {
     });
 }
 
+export async function getLanguages() {
+    return await db.query.languages.findMany({
+        orderBy: (languages, { asc }) => [asc(languages.name)],
+    });
+}
+
 export async function getAllCharacters() {
+    noStore();
     return await db.query.characters.findMany({
         with: {
+            raceEntry: true,
+            background: true,
             classes: {
                 with: {
-                    class: true
+                    class: true,
+                    subclass: true
                 }
             }
         },

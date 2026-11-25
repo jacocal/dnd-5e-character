@@ -363,15 +363,11 @@ export function KmpInventoryList() {
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            if (entry.quantity > 1) {
-                                                                viewModel?.updateCharacterItemState(entry.instanceId, null, null, null, entry.quantity - 1);
-                                                            } else {
-                                                                viewModel?.removeCharacterItem(entry.instanceId);
-                                                            }
+                                                            viewModel?.useConsumableItem(entry.instanceId);
                                                         }}
                                                         className="text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wide font-bold transition-colors border bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900 dark:text-emerald-300 dark:border-emerald-800 hover:bg-emerald-200 dark:hover:bg-emerald-800"
                                                     >
-                                                        Use
+                                                        🧪 Use
                                                     </button>
                                                 ) : canEquip ? (
                                                     <button
@@ -395,37 +391,24 @@ export function KmpInventoryList() {
                                                 ) : null}
                                             </div>
 
-                                            <div className="flex items-center gap-0.5">
-                                                <Button
-                                                    variant="ghost"
-                                                    size="icon"
-                                                    className="h-6 w-6 text-slate-400 hover:text-red-500"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        if (entry.quantity > 1) {
-                                                            viewModel?.updateCharacterItemState(entry.instanceId, null, null, null, entry.quantity - 1);
-                                                        } else {
-                                                            viewModel?.removeCharacterItem(entry.instanceId);
-                                                        }
-                                                    }}
-                                                >
-                                                    {entry.quantity === 1 ? <Trash2 size={12} /> : <Minus size={12} />}
-                                                </Button>
-                                                <span className="text-xs font-mono w-5 text-center font-bold text-slate-600 dark:text-slate-400">
-                                                    {entry.quantity}
-                                                </span>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="icon"
-                                                    className="h-6 w-6 text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        viewModel?.updateCharacterItemState(entry.instanceId, null, null, null, entry.quantity + 1);
-                                                    }}
-                                                >
-                                                    <Plus size={12} />
-                                                </Button>
-                                            </div>
+                                            <ItemQuantityControl
+                                                instanceId={entry.instanceId}
+                                                quantity={entry.quantity}
+                                                onUpdateQuantity={(newQty) => {
+                                                    if (newQty <= 0) {
+                                                        viewModel?.removeCharacterItem(entry.instanceId);
+                                                    } else {
+                                                        viewModel?.updateCharacterItemState(
+                                                            entry.instanceId,
+                                                            null,
+                                                            null,
+                                                            null,
+                                                            newQty
+                                                        );
+                                                    }
+                                                }}
+                                                onRemove={() => viewModel?.removeCharacterItem(entry.instanceId)}
+                                            />
                                         </div>
                                     </div>
 
@@ -445,7 +428,7 @@ export function KmpInventoryList() {
 
                                             {isUnidentified && (
                                                 <p className="text-xs italic text-slate-500">
-                                                    This item's true nature is unknown. Identify it to reveal its properties.
+                                                    This item&apos;s true nature is unknown. Identify it to reveal its properties.
                                                 </p>
                                             )}
 
@@ -500,5 +483,131 @@ export function KmpInventoryList() {
                 </div>
             </div>
         </TooltipProvider>
+    );
+}
+
+/**
+ * Direct-editable + debounced 0ms quantity control so users can either type any exact amount
+ * (e.g. 20 arrows, 50 rations) or tap - / + rapidly without waiting for sequential roundtrips.
+ */
+function ItemQuantityControl({
+    instanceId,
+    quantity,
+    onUpdateQuantity,
+    onRemove
+}: {
+    instanceId: number;
+    quantity: number;
+    onUpdateQuantity: (newQty: number) => void;
+    onRemove: () => void;
+}) {
+    const [localQty, setLocalQty] = React.useState<string>(String(quantity));
+    const [isFocused, setIsFocused] = React.useState(false);
+    const debounceRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    React.useEffect(() => {
+        if (!isFocused) {
+            setLocalQty(String(quantity));
+        }
+    }, [quantity, isFocused, instanceId]);
+
+    React.useEffect(() => {
+        return () => {
+            if (debounceRef.current) clearTimeout(debounceRef.current);
+        };
+    }, []);
+
+    const scheduleCommit = (nextNum: number) => {
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(() => {
+            onUpdateQuantity(nextNum);
+        }, 180);
+    };
+
+    const handleStep = (delta: number) => {
+        const currentNum = parseInt(localQty, 10) || quantity || 1;
+        const nextNum = currentNum + delta;
+        if (nextNum <= 0) {
+            if (debounceRef.current) clearTimeout(debounceRef.current);
+            onRemove();
+            return;
+        }
+        setLocalQty(String(nextNum));
+        scheduleCommit(nextNum);
+    };
+
+    const commitDirectInput = () => {
+        setIsFocused(false);
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        const parsed = parseInt(localQty, 10);
+        if (isNaN(parsed) || parsed < 0) {
+            setLocalQty(String(quantity));
+            return;
+        }
+        if (parsed === 0) {
+            onRemove();
+            return;
+        }
+        if (parsed !== quantity) {
+            onUpdateQuantity(parsed);
+        }
+    };
+
+    const currentNumeric = parseInt(localQty, 10) || quantity;
+
+    return (
+        <div
+            className="flex items-center gap-1"
+            onClick={(e) => e.stopPropagation()}
+        >
+            <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7 text-slate-400 hover:text-red-500 bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700"
+                onClick={() => handleStep(-1)}
+                title={currentNumeric <= 1 ? "Remove item" : "Decrease quantity (-1)"}
+            >
+                {currentNumeric <= 1 ? <Trash2 size={12} /> : <Minus size={12} />}
+            </Button>
+
+            <input
+                type="number"
+                min={0}
+                max={9999}
+                value={localQty}
+                onFocus={(e) => {
+                    setIsFocused(true);
+                    e.currentTarget.select();
+                }}
+                onChange={(e) => {
+                    const val = e.target.value;
+                    setLocalQty(val);
+                    const parsed = parseInt(val, 10);
+                    if (!isNaN(parsed) && parsed > 0) {
+                        scheduleCommit(parsed);
+                    }
+                }}
+                onBlur={commitDirectInput}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        e.currentTarget.blur();
+                    }
+                }}
+                title="Click to type exact item quantity directly"
+                className="w-12 h-7 px-1 text-center text-xs font-mono font-bold rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+
+            <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7 text-slate-400 hover:text-slate-900 dark:hover:text-white bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700"
+                onClick={() => handleStep(1)}
+                title="Increase quantity (+1)"
+            >
+                <Plus size={12} />
+            </Button>
+        </div>
     );
 }

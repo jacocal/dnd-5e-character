@@ -89,6 +89,8 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
     const [hpMode, setHpMode] = useState<"average" | "manual">("average");
     const [hpIncrease, setHpIncrease] = useState<number>(0);
     const [rolledHp, setRolledHp] = useState<number | null>(null); // For roll display
+    const [rawHitDieRoll, setRawHitDieRoll] = useState<number | null>(null);
+    const [physicalDieInput, setPhysicalDieInput] = useState<string>("");
 
     const [hasAsi, setHasAsi] = useState(false);
     const [asiChoice, setAsiChoice] = useState<"asi" | "feat" | null>(null);
@@ -112,13 +114,33 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
     const needed = Math.max(0, nextXp - xp);
     const conMod = character ? Math.floor((character.con - 10) / 2) : 0;
 
-    // Available Classes Logic
+    // 2024 PHB Multiclass Primary Ability Prerequisites (13+ required to multiclass into a new class)
+    const getMulticlassRequirement = (classId: string): { met: boolean; label: string } => {
+        const str = character?.str ?? 10;
+        const dex = character?.dex ?? 10;
+        const int = character?.int ?? 10;
+        const wis = character?.wis ?? 10;
+        const cha = character?.cha ?? 10;
+        switch (classId.toLowerCase()) {
+            case "barbarian": return { met: str >= 13, label: "STR 13+" };
+            case "bard": return { met: cha >= 13, label: "CHA 13+" };
+            case "cleric": return { met: wis >= 13, label: "WIS 13+" };
+            case "druid": return { met: wis >= 13, label: "WIS 13+" };
+            case "fighter": return { met: str >= 13 || dex >= 13, label: "STR or DEX 13+" };
+            case "monk": return { met: dex >= 13 && wis >= 13, label: "DEX 13+ & WIS 13+" };
+            case "paladin": return { met: str >= 13 && cha >= 13, label: "STR 13+ & CHA 13+" };
+            case "ranger": return { met: dex >= 13 && wis >= 13, label: "DEX 13+ & WIS 13+" };
+            case "rogue": return { met: dex >= 13, label: "DEX 13+" };
+            case "sorcerer": return { met: cha >= 13, label: "CHA 13+" };
+            case "warlock": return { met: cha >= 13, label: "CHA 13+" };
+            case "wizard": return { met: int >= 13, label: "INT 13+" };
+            default: return { met: true, label: "" };
+        }
+    };
+
+    // Available Classes Logic (2024 PHB: no arbitrary 2-class cap; enforce 13+ primary ability prerequisite on new classes)
     const currentClassIds = new Set((character?.classes || []).map((c: any) => c.classId));
-    const numDistinctClasses = currentClassIds.size;
-    const availableClasses = classes.filter(cls => {
-        if (currentClassIds.has(cls.id)) return true;
-        return numDistinctClasses < 2; // Limit multi-class to 2 for now as per legacy logic
-    });
+    const availableClasses = classes;
 
     const selectedClassOption = classes.find(c => c.id === selectedClassId);
 
@@ -231,9 +253,24 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
         if (!selectedClassOption) return;
         const roll = Math.floor(Math.random() * selectedClassOption.hitDie) + 1;
         const total = Math.max(1, roll + conMod);
+        setRawHitDieRoll(roll);
         setRolledHp(total);
         setHpIncrease(total);
         setHpMode("manual");
+    };
+
+    const handlePhysicalDieChange = (valStr: string) => {
+        setPhysicalDieInput(valStr);
+        if (!selectedClassOption) return;
+        const parsed = parseInt(valStr);
+        if (!isNaN(parsed) && parsed >= 1) {
+            const clamped = Math.min(selectedClassOption.hitDie, Math.max(1, parsed));
+            const total = Math.max(1, clamped + conMod);
+            setRawHitDieRoll(clamped);
+            setRolledHp(total);
+            setHpIncrease(total);
+            setHpMode("manual");
+        }
     };
 
     const handleHpConfirm = () => {
@@ -376,6 +413,8 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                 {availableClasses.map(cls => {
                                     const isCurrent = currentClassIds.has(cls.id);
                                     const classLevel = (character?.classes || []).find((c: any) => c.classId === cls.id)?.level || 0;
+                                    const req = getMulticlassRequirement(cls.id);
+                                    const multiclassBlocked = !isCurrent && currentLevel > 0 && !req.met;
 
                                     return (
                                         <Button
@@ -383,10 +422,11 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                             variant="ghost"
                                             className={cn(
                                                 "justify-between h-auto py-3 px-4 border",
-                                                isCurrent ? "border-amber-200 bg-amber-50/50" : "border-slate-100"
+                                                isCurrent ? "border-amber-200 bg-amber-50/50" : "border-slate-100",
+                                                multiclassBlocked && "opacity-50"
                                             )}
                                             onClick={() => handleClassSelect(cls.id)}
-                                            disabled={!!loading}
+                                            disabled={!!loading || multiclassBlocked}
                                         >
                                             <div className="flex items-center gap-3">
                                                 <div className={cn("p-2 rounded-full", isCurrent ? "bg-amber-100 text-amber-600" : "bg-slate-100 text-slate-500")}>
@@ -397,7 +437,14 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                                         {cls.name}
                                                         {isCurrent && <span className="text-xs text-amber-600 ml-2">(Lvl {classLevel} → {classLevel + 1})</span>}
                                                     </div>
-                                                    <div className="text-xs text-muted-foreground">d{cls.hitDie} Hit Die</div>
+                                                    <div className="text-xs text-muted-foreground">
+                                                        d{cls.hitDie} Hit Die
+                                                        {!isCurrent && currentLevel > 0 && req.label && (
+                                                            <span className={cn("ml-2", req.met ? "text-emerald-600" : "text-red-500")}>
+                                                                • Req: {req.label}
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                             {isCurrent && <ChevronRight size={16} className="text-amber-400" />}
@@ -424,7 +471,7 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                         <div className="space-y-4">
                             <h3 className="font-bold text-lg text-center">Choose a Subclass</h3>
                             <p className="text-sm text-muted-foreground text-center">
-                                You reached Level 3! It's time to specialize.
+                                You reached Level 3! It&apos;s time to specialize.
                             </p>
 
                             {loading ? (
@@ -485,34 +532,65 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                     <div className="text-xs text-muted-foreground mt-1">Hit Die ({selectedClassOption.hitDie}) + CON ({conMod})</div>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-2 gap-3">
-                                    <Button
-                                        variant={hpMode === "average" ? "default" : "outline"}
-                                        className="h-auto py-6 flex-col gap-2"
-                                        onClick={() => {
-                                            const avg = Math.floor(selectedClassOption.hitDie / 2) + 1 + conMod;
-                                            setHpMode("average");
-                                            setHpIncrease(avg);
-                                        }}
-                                    >
-                                        <Calculator size={24} />
-                                        <div className="font-semibold">Take Average</div>
-                                        <div className="text-2xl font-bold">+{Math.floor(selectedClassOption.hitDie / 2) + 1 + conMod}</div>
-                                    </Button>
+                                <div className="space-y-3">
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <Button
+                                            variant={hpMode === "average" ? "default" : "outline"}
+                                            className="h-auto py-5 flex-col gap-1.5"
+                                            onClick={() => {
+                                                const avg = Math.floor(selectedClassOption.hitDie / 2) + 1 + conMod;
+                                                setHpMode("average");
+                                                setHpIncrease(avg);
+                                                setRawHitDieRoll(null);
+                                            }}
+                                        >
+                                            <Calculator size={22} />
+                                            <div className="font-semibold text-xs">Take Fixed Average</div>
+                                            <div className="text-2xl font-bold">+{Math.floor(selectedClassOption.hitDie / 2) + 1 + conMod} HP</div>
+                                            <div className="text-[10px] opacity-75">
+                                                ({Math.floor(selectedClassOption.hitDie / 2) + 1} + {conMod >= 0 ? `+${conMod}` : conMod} CON)
+                                            </div>
+                                        </Button>
 
-                                    <Button
-                                        variant={hpMode === "manual" ? "default" : "outline"}
-                                        className="h-auto py-6 flex-col gap-2 relative"
-                                        onClick={handleRollHp}
-                                    >
-                                        <Dices size={24} />
-                                        <div className="font-semibold">{rolledHp ? "Reroll" : "Roll"}</div>
-                                        {rolledHp !== null ? (
-                                            <div className="text-2xl font-bold">+{rolledHp}</div>
-                                        ) : (
-                                            <div className="text-sm opacity-50">1d{selectedClassOption.hitDie} + {conMod}</div>
-                                        )}
-                                    </Button>
+                                        <Button
+                                            variant={hpMode === "manual" ? "default" : "outline"}
+                                            className="h-auto py-5 flex-col gap-1.5 relative"
+                                            onClick={handleRollHp}
+                                        >
+                                            <Dices size={22} />
+                                            <div className="font-semibold text-xs">{rolledHp ? "Reroll Hit Die" : "Roll Hit Die"}</div>
+                                            {rolledHp !== null ? (
+                                                <>
+                                                    <div className="text-2xl font-bold">+{rolledHp} HP</div>
+                                                    <div className="text-[10px] opacity-80 font-mono">
+                                                        d{selectedClassOption.hitDie}[{rawHitDieRoll}] {conMod >= 0 ? `+ ${conMod}` : `- ${-conMod}`} CON
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <div className="text-sm opacity-60 font-mono">
+                                                    1d{selectedClassOption.hitDie} {conMod >= 0 ? `+ ${conMod}` : `- ${-conMod}`} CON
+                                                </div>
+                                            )}
+                                        </Button>
+                                    </div>
+
+                                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 text-xs">
+                                        <div>
+                                            <div className="font-semibold">Rolled a Physical d{selectedClassOption.hitDie} at the Table?</div>
+                                            <div className="text-[10px] text-slate-500">
+                                                Enter your die roll (1–{selectedClassOption.hitDie}) and we&apos;ll add CON ({conMod >= 0 ? `+${conMod}` : conMod}) automatically
+                                            </div>
+                                        </div>
+                                        <input
+                                            type="number"
+                                            min={1}
+                                            max={selectedClassOption.hitDie}
+                                            value={physicalDieInput}
+                                            onChange={(e) => handlePhysicalDieChange(e.target.value)}
+                                            placeholder={`1-${selectedClassOption.hitDie}`}
+                                            className="w-16 h-8 px-2 text-center rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 font-mono font-bold"
+                                        />
+                                    </div>
                                 </div>
                             )}
 
@@ -572,9 +650,21 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                         setAsiBonus({});
                                         setLoading("Loading Feats...");
                                         const feats = await getAvailableFeats();
-                                        // Filter feats logic (exclude existing)
+                                        // 2024 PHB Feat Filtering: respect category, repeatable flag, Lv 19 Epic Boons, and Martial Fighting Styles
                                         const existingIds = new Set((character?.feats || []).map((f: any) => f.id));
-                                        setAvailableFeats(feats.filter((f: any) => !existingIds.has(f.id)));
+                                        const nextTotalLevel = currentLevel + 1;
+                                        const hasFightingStyleClass = (character?.classes || []).some((c: any) =>
+                                            ["fighter", "paladin", "ranger"].includes((c.classId || "").toLowerCase())
+                                        ) || ["fighter", "paladin", "ranger"].includes((selectedClassId || "").toLowerCase());
+                                        setAvailableFeats(
+                                            feats.filter((f: any) => {
+                                                if (existingIds.has(f.id) && !f.repeatable) return false;
+                                                const cat = (f.category || "").toLowerCase();
+                                                if ((cat === "epic_boon" || f.id.startsWith("boon-")) && nextTotalLevel < 19) return false;
+                                                if ((cat === "fighting_style" || f.id.startsWith("fighting-style-")) && !hasFightingStyleClass) return false;
+                                                return true;
+                                            })
+                                        );
                                         setLoading(null);
                                     }}
                                     className="h-auto py-3 flex-col"
@@ -590,14 +680,15 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                     <div className="grid grid-cols-3 gap-2">
                                         {(["str", "dex", "con", "int", "wis", "cha"] as const).map(stat => {
                                             const bonus = asiBonus[stat] || 0;
+                                            const currentScore = (character?.[stat] || 10) + bonus;
                                             const usedPoints = Object.values(asiBonus).reduce((a, b) => a + b, 0);
                                             return (
                                                 <div key={stat} className="bg-slate-50 dark:bg-slate-800 p-2 rounded text-center">
                                                     <div className="text-xs font-bold uppercase">{stat}</div>
-                                                    <div className="font-bold">{(character?.[stat] || 10) + bonus}</div>
+                                                    <div className="font-bold">{currentScore}</div>
                                                     <div className="flex justify-center gap-1 mt-1">
                                                         <Button size="sm" variant="ghost" className="h-6 w-6 p-0" disabled={bonus <= 0} onClick={() => setAsiBonus(prev => ({ ...prev, [stat]: (prev[stat] || 0) - 1 }))}>-</Button>
-                                                        <Button size="sm" variant="ghost" className="h-6 w-6 p-0" disabled={usedPoints >= 2} onClick={() => setAsiBonus(prev => ({ ...prev, [stat]: (prev[stat] || 0) + 1 }))}>+</Button>
+                                                        <Button size="sm" variant="ghost" className="h-6 w-6 p-0" disabled={usedPoints >= 2 || currentScore >= 20} onClick={() => setAsiBonus(prev => ({ ...prev, [stat]: (prev[stat] || 0) + 1 }))}>+</Button>
                                                     </div>
                                                 </div>
                                             );
@@ -683,10 +774,13 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                                 if (isRestricted) return null;
 
                                                 const bonus = asiBonus[stat] || 0;
+                                                const currentScore = (character?.[stat] || 10) + bonus;
+                                                const isEpicBoon = selectedFeat?.category === "epic_boon" || selectedFeat?.id?.startsWith("boon-");
+                                                const cap = isEpicBoon ? 30 : 20;
                                                 return (
                                                     <div key={stat} className="bg-slate-50 dark:bg-slate-800 p-2 rounded text-center">
                                                         <div className="text-xs font-bold uppercase">{stat}</div>
-                                                        <div className="font-bold">{(character?.[stat] || 10) + bonus}</div>
+                                                        <div className="font-bold">{currentScore}</div>
                                                         <div className="flex justify-center gap-1 mt-1">
                                                             <Button
                                                                 size="sm" variant="ghost" className="h-6 w-6 p-0"
@@ -695,7 +789,7 @@ export function KmpLevelUpFlow({ classes }: { classes: ClassOption[] }) {
                                                             >-</Button>
                                                             <Button
                                                                 size="sm" variant="ghost" className="h-6 w-6 p-0"
-                                                                disabled={Object.values(asiBonus).reduce((a, b) => a + b, 0) >= pointsToAllocate}
+                                                                disabled={Object.values(asiBonus).reduce((a, b) => a + b, 0) >= pointsToAllocate || currentScore >= cap}
                                                                 onClick={() => setAsiBonus(prev => ({ ...prev, [stat]: (prev[stat] || 0) + 1 }))}
                                                             >+</Button>
                                                         </div>

@@ -12,7 +12,23 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated KMP / Gradle / worker / Next.js validator artifacts:
+    "shared/build/**",
+    "server/build/**",
+    "kotlin-js-store/**",
+    "types/**",
+    "public/worker.js",
+    "public/sqlite.worker.js",
+    ".gitnexus/**",
+    "bundle-worker.js",
+    "zod-check.ts",
   ]),
+  {
+    rules: {
+      // KMP-exported JS interop objects frequently cross TS boundaries dynamically; surface as warnings
+      "@typescript-eslint/no-explicit-any": "warn",
+    },
+  },
 ]);
 
 export default eslintConfig;

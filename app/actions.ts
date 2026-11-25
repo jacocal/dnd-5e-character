@@ -124,7 +124,7 @@ export async function updateCharacterVitality(characterId: number, data: Vitalit
 
 export async function performLongRest(characterId: number) {
     try {
-        const { classResources, characterResources } = await import("@/db/schema");
+        const { classResources, characterResources, characterClasses } = await import("@/db/schema");
         const { inArray } = await import("drizzle-orm");
 
         const char = await db.query.characters.findFirst({
@@ -133,7 +133,9 @@ export async function performLongRest(characterId: number) {
                 hpMax: true,
                 hitDiceMax: true,
                 hitDiceCurrent: true,
-                exhaustion: true // We don't need resourceModifiers here as we just overwrite it with []
+                exhaustion: true,
+                race: true,
+                inspiration: true,
             },
             with: {
                 classes: true
@@ -146,19 +148,29 @@ export async function performLongRest(characterId: number) {
         const newHitDice = char.hitDiceMax;
 
         const newExhaustion = Math.max(0, char.exhaustion - 1);
+        const isHumanResourceful = char.race.toLowerCase().startsWith("human");
 
         await db.update(characters)
             .set({
                 hpCurrent: char.hpMax,
                 tempHp: 0,
                 hitDiceCurrent: newHitDice,
+                deathSaveSuccess: 0,
+                deathSaveFailure: 0,
                 exhaustion: newExhaustion,
+                inspiration: isHumanResourceful ? true : char.inspiration,
                 usedSpellSlots: {}, // Reset all used spell slots
                 usedPactSlots: 0,   // Reset pact magic slots
                 updatedAt: new Date(),
-                resourceModifiers: [] // Explicitly clear all active effects/modifiers on Long Rest
+                resourceModifiers: [],
+                activeModifiers: [],
             })
             .where(eq(characters.id, characterId));
+
+        // Reset per-class spent Hit Dice (2024 rules: all Hit Dice recover on Long Rest)
+        await db.update(characterClasses)
+            .set({ hitDiceUsed: 0 })
+            .where(eq(characterClasses.characterId, characterId));
 
         // Reset ALL class resources on the SERVER side (both short and long rest)
         // This prevents race condition with revalidatePath
@@ -291,11 +303,15 @@ export async function createCharacter(formData: FormData) {
     const hpMode = formData.get("hpMode") as string;
     const manualHp = parseInt(formData.get("manualHp") as string) || 0;
 
-    // New fields for character creation
+    // New fields for character creation (including 2024 species/language choices)
     const classSkillProficiencies = JSON.parse(formData.get("classSkillProficiencies") as string || "[]") as string[];
     const toolProficiencyChoice = formData.get("toolProficiency") as string;
     const classEquipmentOption = (formData.get("classEquipmentOption") as string) || "A";
     const backgroundEquipmentOption = (formData.get("backgroundEquipmentOption") as string) || "A";
+    const chosenSize = (formData.get("size") as string) || "";
+    const humanOriginFeatId = (formData.get("humanOriginFeatId") as string) || "";
+    const humanSkillProficiency = (formData.get("humanSkillProficiency") as string) || "";
+    const chosenLanguages = JSON.parse(formData.get("languages") as string || "[]") as string[];
 
     // Stats (already include background bonuses from the form)
     const str = parseInt(formData.get("str") as string) || 10;
@@ -321,33 +337,40 @@ export async function createCharacter(formData: FormData) {
             where: (backgrounds, { eq }) => eq(backgrounds.id, backgroundId),
         });
 
-        // Extract skill proficiencies from background modifiers
-        const backgroundSkillProficiencies: Record<string, boolean> = {};
+        // Extract skill proficiencies from background modifiers (canonical "proficient" string format)
+        const backgroundSkillProficiencies: Record<string, string> = {};
         if (backgroundData?.modifiers && Array.isArray(backgroundData.modifiers)) {
             for (const mod of backgroundData.modifiers as { type: string; target: string; value: boolean }[]) {
                 if (mod.type === "skill_proficiency" && mod.value === true) {
-                    // Convert to display format (e.g., "animal_handling" -> "Animal Handling")
                     const capitalizedSkill = mod.target
                         .split('_')
                         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                         .join(' ');
-                    backgroundSkillProficiencies[capitalizedSkill] = true;
+                    backgroundSkillProficiencies[capitalizedSkill] = "proficient";
                 }
             }
         }
 
         // Add class skill proficiencies chosen by user
-        const classSkillProfObj: Record<string, boolean> = {};
+        const classSkillProfObj: Record<string, string> = {};
         for (const skill of classSkillProficiencies) {
             const capitalizedSkill = skill
                 .split('_')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                 .join(' ');
-            classSkillProfObj[capitalizedSkill] = true;
+            classSkillProfObj[capitalizedSkill] = "proficient";
         }
 
-        // Merge all skill proficiencies
-        const allSkillProficiencies = { ...backgroundSkillProficiencies, ...classSkillProfObj };
+        // Merge all skill proficiencies (Background + Class + Human Skillful)
+        const humanSkillObj: Record<string, string> = {};
+        if (humanSkillProficiency) {
+            const capitalizedSkill = humanSkillProficiency
+                .split('_')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
+            humanSkillObj[capitalizedSkill] = "proficient";
+        }
+        const allSkillProficiencies = { ...backgroundSkillProficiencies, ...classSkillProfObj, ...humanSkillObj };
 
         // Build tool proficiencies array
         const toolProficiencies: string[] = [];
@@ -397,13 +420,39 @@ export async function createCharacter(formData: FormData) {
         }
         hp = Math.max(hp, 1);
 
-        // 5. Fetch origin feat
+        // 5. Fetch origin feat(s) (Background Origin Feat + optional Human Versatile 2nd Origin Feat)
         let originFeat = null;
         if (backgroundData?.originFeatId) {
             originFeat = await db.query.feats.findFirst({
                 where: eq(feats.id, backgroundData.originFeatId)
             });
         }
+        let humanBonusFeat = null;
+        if (race.toLowerCase().startsWith("human") && humanOriginFeatId) {
+            humanBonusFeat = await db.query.feats.findFirst({
+                where: eq(feats.id, humanOriginFeatId)
+            });
+        }
+
+        const initialFeatsList = [
+            ...(originFeat ? [{
+                id: originFeat.id,
+                name: originFeat.name,
+                description: originFeat.description,
+                modifiers: originFeat.modifiers || [],
+                ...(backgroundData?.originFeatClass ? { originClass: backgroundData.originFeatClass } : {})
+            }] : []),
+            ...(humanBonusFeat ? [{
+                id: humanBonusFeat.id,
+                name: humanBonusFeat.name,
+                description: humanBonusFeat.description,
+                modifiers: humanBonusFeat.modifiers || [],
+            }] : []),
+        ];
+
+        const initialHpRolls = hpMode === "manual" && manualHp > 0 && classId
+            ? [{ classId, level: 1, rolled: Math.max(1, manualHp - conMod) }]
+            : [];
 
         // 6. Create Character
         const [newChar] = await db.insert(characters).values({
@@ -412,9 +461,11 @@ export async function createCharacter(formData: FormData) {
             backgroundId,
             alignment,
             imageUrl: imageUrl || null,
+            size: chosenSize || "Medium",
             str, dex, con, int, wis, cha,
             hpCurrent: hp,
             hpMax: hp,
+            hpRolls: initialHpRolls,
             level: 1,
             xp: 0,
             gp: startingGp,
@@ -424,14 +475,7 @@ export async function createCharacter(formData: FormData) {
                 skills: allSkillProficiencies,
                 tools: toolProficiencies
             },
-            feats: originFeat ? [{
-                id: originFeat.id,
-                name: originFeat.name,
-                description: originFeat.description,
-                modifiers: originFeat.modifiers || [],
-                // Store origin feat class for Magic Initiate variants
-                ...(backgroundData?.originFeatClass ? { originClass: backgroundData.originFeatClass } : {})
-            }] : [],
+            feats: initialFeatsList,
         }).returning();
 
         // 7. Link Class
@@ -465,35 +509,78 @@ export async function createCharacter(formData: FormData) {
             equipmentItems.push(toolProficiencyChoice);
         }
 
-        // Insert equipment into inventory (grouping duplicates)
+        // Insert equipment into inventory (grouping duplicates and auto-equipping primary gear)
+        const { items: itemsTable } = await import("@/db/schema");
         const itemCounts = new Map<string, number>();
         for (const itemId of equipmentItems) {
             itemCounts.set(itemId, (itemCounts.get(itemId) || 0) + 1);
         }
 
+        let equippedArmor = false;
+        let equippedShield = false;
+        let equippedWeapons = 0;
+
         for (const [itemId, quantity] of itemCounts) {
             try {
+                const itemDef = await db.query.items.findFirst({
+                    where: eq(itemsTable.id, itemId)
+                });
+                const cat = (itemDef?.category || "").toLowerCase();
+                const typ = (itemDef?.type || "").toLowerCase();
+                let shouldEquip = false;
+                if (typ.includes("shield") && !equippedShield) {
+                    shouldEquip = true;
+                    equippedShield = true;
+                } else if ((cat === "armor" || typ.includes("armor")) && !typ.includes("shield") && !equippedArmor) {
+                    shouldEquip = true;
+                    equippedArmor = true;
+                } else if ((cat === "weapon" || typ.includes("weapon")) && equippedWeapons < 2) {
+                    shouldEquip = true;
+                    equippedWeapons++;
+                }
+
                 await db.insert(characterInventory).values({
                     characterId: newChar.id,
                     itemId,
                     quantity,
-                    equipped: false,
+                    equipped: shouldEquip,
                     isIdentified: true,
                     isAttuned: false
                 });
             } catch (itemError) {
                 console.warn(`Failed to add item ${itemId} to inventory:`, itemError);
-                // Continue with other items if one fails
             }
         }
 
-        // 9. Starter Spells (Hardcoded for MVP)
-        const { characterSpells } = await import("@/db/schema");
+        // 9. Starter Spells for Spellcasting Classes + 2024 Languages (Common + 2 chosen Standard languages)
+        const { characterSpells, characterLanguages } = await import("@/db/schema");
+        const initialLangIds = Array.from(new Set(["common", ...chosenLanguages.slice(0, 2)]));
+        for (const langId of initialLangIds) {
+            try {
+                await db.insert(characterLanguages).values({
+                    characterId: newChar.id,
+                    languageId: langId
+                }).onConflictDoNothing();
+            } catch {
+                // ignore unknown language ID
+            }
+        }
 
-        if (classId === 'wizard') {
+        const starterSpellNamesByClass: Record<string, string[]> = {
+            wizard: ["Fire Bolt", "Mage Hand", "Shield", "Magic Missile"],
+            sorcerer: ["Fire Bolt", "Mage Hand", "Shield", "Magic Missile"],
+            warlock: ["Eldritch Blast", "Mage Hand", "Hex", "Hellish Rebuke"],
+            cleric: ["Sacred Flame", "Guidance", "Cure Wounds", "Bless"],
+            druid: ["Produce Flame", "Guidance", "Cure Wounds", "Entangle"],
+            bard: ["Vicious Mockery", "Mage Hand", "Healing Word", "Dissonant Whispers"],
+            paladin: ["Bless", "Cure Wounds", "Heroism"],
+            ranger: ["Hunter's Mark", "Cure Wounds", "Goodberry"]
+        };
+
+        const starterNames = starterSpellNamesByClass[classId];
+        if (starterNames && starterNames.length > 0) {
             const starterSpells = await db.query.spells.findMany({
-                where: (spells, { inArray }) => inArray(spells.name, ["Fire Bolt", "Mage Hand", "Shield", "Magic Missile"]),
-                limit: 4
+                where: (spells, { inArray }) => inArray(spells.name, starterNames)
             });
             if (starterSpells.length > 0) {
                 const spellInserts = starterSpells.map(sp => ({
@@ -501,22 +588,7 @@ export async function createCharacter(formData: FormData) {
                     spellId: sp.id,
                     prepared: true
                 }));
-                await db.insert(characterSpells).values(spellInserts);
-            }
-        }
-
-        if (classId === 'cleric') {
-            const starterSpells = await db.query.spells.findMany({
-                where: (spells, { inArray }) => inArray(spells.name, ["Sacred Flame", "Cure Wounds", "Bless"]),
-                limit: 3
-            });
-            if (starterSpells.length > 0) {
-                const spellInserts = starterSpells.map(sp => ({
-                    characterId: newChar.id,
-                    spellId: sp.id,
-                    prepared: true
-                }));
-                await db.insert(characterSpells).values(spellInserts);
+                await db.insert(characterSpells).values(spellInserts).onConflictDoNothing();
             }
         }
 

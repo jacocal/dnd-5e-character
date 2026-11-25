@@ -14,4 +14,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "dnd-5e-character"
-include(":shared")
+include(":shared", ":server")
